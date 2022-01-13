@@ -1,0 +1,62 @@
+version: "3.9"
+services:
+  influxdb:
+    image: influxdb:2.1.1
+    hostname: influxdb
+    container_name: auto_detection_influxdb
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb-config:/etc/influxdb2
+      - influxdb-data:/var/lib/influxdb2
+      - influxdb-scripts:/docker-entrypoint-initdb.d
+    restart: always
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: ldrobot
+      DOCKER_INFLUXDB_INIT_PASSWORD: ldrobot@2022
+      DOCKER_INFLUXDB_INIT_ORG: www.ldrobot.com
+      DOCKER_INFLUXDB_INIT_BUCKET: example-bucket
+      DOCKER_INFLUXDB_INIT_RETENTION: 1w
+    networks:
+      - auto-detection-network
+  telegraf:
+    image: telegraf:latest
+    hostname: telegraf
+    container_name: auto_detection_telegraf
+    networks:
+      - auto-detection-network
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+    depends_on:
+      - influxdb
+  grafana:
+    image: grafana/grafana:8.3.3
+    hostname: grafana
+    container_name: auto_detection_grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - auto-detection-network
+    volumes:
+      - grafana-config:/etc/grafana
+      - grafana-data:/var/lib/grafana
+      - grafana-home:/usr/share/grafana
+      - grafana-log:/var/log/grafana
+      - grafana-plugins:/var/lib/grafana/plugins
+    depends_on:
+      - influxdb
+
+volumes:
+  influxdb-config:
+  influxdb-data:
+  influxdb-scripts:
+  grafana-config:
+  grafana-data:
+  grafana-home:
+  grafana-log:
+  grafana-plugins:
+
+networks:
+  auto-detection-network:
+    external: true
