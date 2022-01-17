@@ -1,0 +1,91 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor       用户 as user
+participant Jenkins as jenkins
+participant 自动化后端服务 as backend_svc
+participant 自动化调度服务 as schedule_svc
+participant 测试用例 as test_case
+database Minio as minio
+database MySQL as mysql
+queue RabbitMQ as mq
+database Redis as redis
+queue EMQ as emq
+participant 设备或设备模拟器 as device
+
+autonumber
+
+
+device --> emq: 设备连接EMQ
+schedule_svc --> mq: 监听队列
+backend_svc --> mq: 监听队列
+
+user -> backend_svc: 注册登录接口
+return 登录成功
+
+user -> backend_svc: 上传测试用例文件接口
+backend_svc -> minio: 存储文件
+backend_svc <-- minio: 文件路径
+backend_svc -> mysql: 保存文件路径
+return 上传成功
+
+user -> backend_svc: 新建测试计划接口
+backend_svc -> mysql: 存储测试计划
+return 新建成功
+
+user -> backend_svc: 获取测试计划列表接口
+return 计划列表
+
+user -> backend_svc: 获取设备列表在线状态接口
+return 测试设备在线状态
+
+group Jenkins触发执行计划
+    user -> jenkins: 打包固件
+    jenkins -> backend_svc: 执行测试计划接口
+end
+group 前端触发执行计划
+    user -> backend_svc: 执行测试计划接口
+
+    alt#Gold #LightBlue 测试设备在线
+        backend_svc -> mq: 发送执行计划命令消息
+        mq --> schedule_svc: 接收执行计划命令消息
+        schedule_svc -> schedule_svc: 解析命令消息
+        schedule_svc -> mysql: 根据命令获取用例脚本路径
+        return 用例路径
+        schedule_svc -> minio: 下载用例文件
+        return 用例文件
+        schedule_svc -> schedule_svc: 解析命令依赖，启动子进程执行用例脚本
+        schedule_svc -> test_case: 执行用例脚本
+        test_case -> emq: 发送执行指令
+        emq -> device: 转发指令
+        emq <-- device: 发送响应指令
+        test_case <-- emq: 转发指令
+        test_case -> test_case: 判断结果用例
+        alt#Gold #LightBlue 用例执行成功
+            test_case ->  test_case: 脚本正常退出
+        else #Pink 用例执行失败
+            test_case ->  test_case: 抛出异常
+        end
+        schedule_svc <-- test_case: 脚本执行返回值
+        schedule_svc -> schedule_svc: 判断用例执行返回值
+        alt#Gold #LightBlue 脚本执行返回值 == 0
+            schedule_svc ->  schedule_svc: 用例结果 = True
+        else #Pink 脚本执行返回值 != 0
+            schedule_svc ->  schedule_svc: 用例结果 = False
+        end
+        schedule_svc -> mysql: 保存用例执行结果
+        schedule_svc -> redis: 保存用例执行结果
+
+    end
+
+    loop 每隔3秒轮询执行状态
+        user -> backend_svc: 测试计划状态查询接口
+        backend_svc -> redis: 获取测试计划执行状态
+        user <-- redis: 测试计划执行状态
+    end
+end
+backend_svc -> mysql: 获取邮件模板
+return 邮件模板
+user <-- backend_svc: 发送邮件给用户
+
+@enduml
