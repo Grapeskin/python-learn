@@ -4,11 +4,21 @@
 @Author  : JiaYou
 @Time    : 2022/1/16 22:36
 """
+import time
 from typing import Optional, List
 
 import uvicorn
-from fastapi import FastAPI, Query, Path, Body, Cookie, Header
+from fastapi import FastAPI, Query, Path, Body, Cookie, Header, Form, File, UploadFile
+from fastapi.exception_handlers import (
+    http_exception_handler,
+    request_validation_exception_handler,
+)
+from fastapi.exceptions import RequestValidationError
 from pydantic import BaseModel, Field, HttpUrl
+from starlette import status
+from starlette.exceptions import HTTPException as StarletteHTTPException, HTTPException
+from starlette.requests import Request
+from starlette.responses import JSONResponse
 
 app = FastAPI()
 
@@ -64,13 +74,15 @@ def read_items(x_token: Optional[List[str]] = Header(None)):
     return {"X-Token values": x_token}
 
 
-@app.get("/items/{item_id}")
+@app.get("/items/{item_id}", deprecated=True)
 def read_item(item_id: int = Path(..., title='this is item id'),
               q: Optional[List[str]] = Query(default=['abc', 'def', 'fff'], min_length=3, max_length=5)):
+    if item_id not in [1, 2]:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Item not found', headers={'k': 'v'})
     return {"item_id": item_id, "q": q}
 
 
-@app.put("/items/{item_id}")
+@app.put("/items/{item_id}", tags=['items'])
 def update_item(
         item_id: int, item: Item, user: User, importance: int = Body(...)
 ):
@@ -78,8 +90,20 @@ def update_item(
     return results
 
 
-@app.post("/items/{item_id}")
+@app.post("/items/{item_id}", tags=['items'],
+          summary="Create an item",
+          response_description='test response message'
+          )
 def update_item(item_id: int, item: Item):
+    """
+    Create an item with all the information:
+
+    - **name**: each item must have a name
+    - **description**: a long description
+    - **price**: required
+    - **tax**: if the item doesn't have tax, you can omit this
+    - **tags**: a set of unique tag strings for this item
+    """
     return {"item": item, "item_id": item_id}
 
 
@@ -114,10 +138,89 @@ def fake_save_user(user_in: UserIn):
     return user_in_db
 
 
-@app.post("/user/", response_model=UserOut)
+@app.post("/user/", response_model=UserOut, status_code=status.HTTP_200_OK)
 def create_user(user: UserIn):
     user_saved = fake_save_user(user)
     return user_saved
+
+
+@app.post("/login/")
+def login(username: str = Form(...), password: str = Form(...)):
+    return {"username": username, "password": password}
+
+
+@app.post("/files/")
+def create_file(file: List[bytes] = File(...)):
+    return [{"file_size": len(file)} for item in file]
+
+
+@app.post("/uploadfile/")
+def create_upload_file(file: List[UploadFile] = File(...)):
+    return [{"filename": item.filename, "content_type": item.content_type} for item in file]
+
+
+@app.post("/files/form")
+def create_file(
+        file: bytes = File(...), fileb: UploadFile = File(...), token: str = Form(...)
+):
+    return {
+        "file_size": len(file),
+        "token": token,
+        "fileb_content_type": fileb.content_type,
+    }
+
+
+class UnicornException(Exception):
+    def __init__(self, name: str):
+        self.name = name
+
+
+@app.exception_handler(UnicornException)
+def unicorn_exception_handler(request: Request, exc: UnicornException):
+    return JSONResponse(
+        status_code=418,
+        content={"message": f"Oops! {exc.name} did something. There goes a rainbow... {str(exc)}"},
+    )
+
+
+"""该异常必须要是异步操作"""
+
+
+@app.exception_handler(StarletteHTTPException)
+async def custom_http_exception_handler(request, exc):
+    print(f"OMG! An HTTP error!: {repr(exc)}")
+    return await http_exception_handler(request, exc)
+
+
+"""该异常必须要是异步操作"""
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request, exc):
+    print(f"OMG! The client sent invalid data!: {exc}")
+    return await request_validation_exception_handler(request, exc)
+
+
+@app.get("/unicorns/{name}")
+def read_unicorn(name: str):
+    if name == "yolo":
+        raise UnicornException(name=name)
+    if name == "youge":
+        # will raise ValidationError on code. but on user is Internal Server Error response
+        temp = 1 / 0
+    if name == "hello":
+        raise HTTPException(status_code=418, detail="Nope! I don't like 3.")
+    return {"unicorn_name": name}
+
+
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    start_time = time.time()
+    response = await call_next(request)
+    print(response)
+    process_time = time.time() - start_time
+    response.headers["X-Process-Time"] = str(process_time)
+    return response
 
 
 if __name__ == '__main__':
