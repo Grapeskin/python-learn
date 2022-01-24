@@ -20,52 +20,93 @@ device --> emq: 设备连接EMQ
 schedule_svc --> mq: 监听队列
 backend_svc --> mq: 监听队列
 
-user -> backend_svc: 注册登录接口
-return 登录成功
+device -> emq: 设备上下线
+emq --> backend_svc: 请求设备上下线接口
+backend_svc -> redis: 修改设备在线状态
 
-user -> backend_svc: 上传测试用例文件接口
+user -> backend_svc: 请求注册接口
+backend_svc -> mysql: 注册用户
+user <-- backend_svc: 注册成功
+
+user -> backend_svc: 请求登录接口
+backend_svc -> mysql: 校验
+user <-- backend_svc: 登录成功
+
+user -> backend_svc: 请求创建项目接口
+backend_svc -> mysql: 新建项目记录
+user <-- backend_svc: 创建成功
+
+user -> backend_svc: 请求创建设备接口
+backend_svc -> mysql: 新建设备记录
+user <-- backend_svc: 创建成功
+
+user -> backend_svc: 请求创建用例接口
+user -> backend_svc: 请求上传测试用例文件接口
 backend_svc -> minio: 存储文件
 backend_svc <-- minio: 文件路径
-backend_svc -> mysql: 保存文件路径
-return 上传成功
+backend_svc -> mysql: 保存用例记录
+user <-- backend_svc: 创建成功
 
-user -> backend_svc: 新建测试计划接口
+user -> backend_svc: 请求项目列表接口
+backend_svc -> mysql: 获取列表
+user <-- backend_svc: 项目列表
+
+user -> backend_svc: 请求设备列表接口
+backend_svc -> mysql: 获取列表
+user <-- backend_svc: 设备列表
+
+user -> backend_svc: 请求用例列表接口
+backend_svc -> mysql: 获取列表
+user <-- backend_svc: 用例列表
+
+user -> backend_svc: 请求新建测试计划接口
 backend_svc -> mysql: 存储测试计划
-return 新建成功
+user <-- backend_svc: 新建成功
 
-user -> backend_svc: 获取测试计划列表接口
-return 计划列表
+user -> backend_svc: 请求获取测试计划列表接口
+backend_svc -> mysql: 获取列表
+user <-- backend_svc: 测试计划列表
 
-user -> backend_svc: 获取设备列表在线状态接口
-return 测试设备在线状态
+user -> backend_svc: 请求获取设备列表在线状态接口
+backend_svc -> redis: 获取设备在线状态
+user <-- backend_svc: 测试设备在线状态
 
-group Jenkins触发执行计划
-    user -> jenkins: 打包固件
-    jenkins -> backend_svc: 执行测试计划接口
-end
-group 前端触发执行计划
-    user -> backend_svc: 执行测试计划接口
+group 触发执行计划
+    group 前端
+        user -> backend_svc: 请求执行测试计划接口
+    end
+    group Jenkins
+        user -> jenkins: 打包固件
+        jenkins -> backend_svc: 请求执行测试计划接口
+    end
 
     alt#Gold #LightBlue 测试设备在线
-        backend_svc -> mq: 发送执行计划命令消息
+        backend_svc -> mq: 发送执行计划命令消息(计划ID)
         mq --> schedule_svc: 接收执行计划命令消息
         schedule_svc -> schedule_svc: 解析命令消息
-        schedule_svc -> mysql: 根据命令获取用例脚本路径
-        return 用例路径
-        schedule_svc -> minio: 下载用例文件
-        return 用例文件
+        schedule_svc -> mysql: 获取计划ID下所有测试用例信息
+        schedule_svc <-- mysql: 测试用例列表
+
+        loop 测试用例列表
+            schedule_svc -> minio: 请求用例URL
+            schedule_svc <-- minio: 用例文件
+        end
         schedule_svc -> schedule_svc: 解析命令依赖，启动子进程执行用例脚本
         schedule_svc -> test_case: 执行用例脚本
+
         test_case -> emq: 发送执行指令
         emq -> device: 转发指令
         emq <-- device: 发送响应指令
         test_case <-- emq: 转发指令
-        test_case -> test_case: 判断结果用例
+
+        test_case -> test_case: 判断请求与响应结果
+
         alt#Gold #LightBlue 用例执行成功
             test_case ->  test_case: 脚本正常退出
-        else #Pink 用例执行失败
+        else #Pink 代码异常或校验失败
             test_case ->  test_case: 抛出异常
         end
+
         schedule_svc <-- test_case: 脚本执行返回值
         schedule_svc -> schedule_svc: 判断用例执行返回值
         alt#Gold #LightBlue 脚本执行返回值 == 0
@@ -73,19 +114,23 @@ group 前端触发执行计划
         else #Pink 脚本执行返回值 != 0
             schedule_svc ->  schedule_svc: 用例结果 = False
         end
-        schedule_svc -> mysql: 保存用例执行结果
-        schedule_svc -> redis: 保存用例执行结果
-
+        schedule_svc -> mysql: 保存测试用例执行记录
+        schedule_svc -> redis: 保存测试用例执行结果
+        schedule_svc -> mysql: 保存测试计划执行记录
+        schedule_svc -> redis: 保存测试计划执行记录
     end
-
-    loop 每隔3秒轮询执行状态
-        user -> backend_svc: 测试计划状态查询接口
-        backend_svc -> redis: 获取测试计划执行状态
-        user <-- redis: 测试计划执行状态
-    end
+    backend_svc -> mysql: 获取邮件填充数据
+    backend_svc -> backend_svc: 组装邮件模板
+    user <-- backend_svc: 发送邮件给用户
 end
-backend_svc -> mysql: 获取邮件模板
-return 邮件模板
-user <-- backend_svc: 发送邮件给用户
 
+user -> backend_svc: 请求测试计划状态记录查询接口
+backend_svc -> redis: 获取测试计划执行记录
+alt#Gold #LightBlue redis有记录
+    user <-- redis: 测试计划执行记录
+else #Linen redis无记录
+    backend_svc -> mysql: 获取测试计划执行记录
+    backend_svc -> redis: 保存测试计划执行记录
+    user <-- backend_svc: 测试计划执行记录
+end
 @enduml

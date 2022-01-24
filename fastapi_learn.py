@@ -5,6 +5,7 @@
 @Time    : 2022/1/16 22:36
 """
 import time
+from enum import Enum, unique
 from typing import Optional, List
 
 import uvicorn
@@ -18,7 +19,7 @@ from pydantic import BaseModel, Field, HttpUrl
 from starlette import status
 from starlette.exceptions import HTTPException as StarletteHTTPException, HTTPException
 from starlette.requests import Request
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, Response
 
 app = FastAPI()
 
@@ -210,19 +211,68 @@ def read_unicorn(name: str):
         temp = 1 / 0
     if name == "hello":
         raise HTTPException(status_code=418, detail="Nope! I don't like 3.")
-    return {"unicorn_name": name}
+    return {"unicorn_name11223344": name}
 
 
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
     start_time = time.time()
     response = await call_next(request)
-    print(response)
+    print(response.body_iterator)
     process_time = time.time() - start_time
     response.headers["X-Process-Time"] = str(process_time)
     return response
 
 
+@unique
+class ResponseEnum(Enum):
+    SUCCESS = (0, "success")
+    PARAMETER_ERROR = (1000, "parameter_error")
+
+
+class HttpResponse:
+    def __init__(self, response_enum: ResponseEnum = ResponseEnum.SUCCESS, data=None, code=None, msg=None):
+        if code and msg:
+            self.code = code
+            self.msg = msg
+        else:
+            self.code = response_enum.value[0]
+            self.msg = response_enum.value[1]
+        self.data = data
+
+
+class CustomException(Exception):
+    def __init__(self, response_enum: ResponseEnum, *args, **kwargs):
+        super().__init__(args, kwargs)
+        self.response_enum = response_enum
+        self.code = response_enum.value[0]
+        self.msg = response_enum.value[1]
+
+    def to_api_response(self) -> dict:
+        return HttpResponse(response_enum=self.response_enum).__dict__
+
+
+@app.exception_handler(CustomException)
+def unicorn_exception_handler(request: Request, exc: CustomException):
+    return JSONResponse(exc.to_api_response())
+
+
+@app.get("/test/{id}")
+def test(id):
+    if id == 'ex':
+        raise CustomException(ResponseEnum.PARAMETER_ERROR, (id,))
+    return HttpResponse({'k': 'v'})
+
+
+"""
+front <- 
+        {
+            code
+            msg
+            data
+        }
+        
+"""
 if __name__ == '__main__':
     """fast api 使用
     1. 
