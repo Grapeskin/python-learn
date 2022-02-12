@@ -223,6 +223,13 @@ async def add_process_time_header(request: Request, call_next):
     return response
 
 
+@app.get("/notify")
+def read_unicorn():
+    return {
+        'k': 'v'
+    }
+
+
 if __name__ == '__main__':
     """fast api 使用
     1. 
