@@ -16,9 +16,10 @@ def put_file():
         print(f"Bucket '{bucket_name}' already exists")
     # Upload '/home/user/Photos/asiaphotos.zip' as object name
     # 'asiaphotos-2015.zip' to bucket 'asiatrip'.
-    client.fput_object(
+    res = client.fput_object(
         bucket_name, upload_obj_path, local_file_path,
     )
+    print(res.__dict__)
     print(
         f"'{local_file_path}' is successfully uploaded as object '{upload_obj_path}' to bucket '{bucket_name}'."
     )
@@ -26,6 +27,11 @@ def put_file():
 
 def download_file():
     res = client.fget_object(bucket_name, upload_obj_path, download_file_path)
+    print(res.__dict__)
+
+
+def get_url():
+    res = client.get_object(bucket_name, upload_obj_path)
     print(res.__dict__)
 
 
@@ -43,3 +49,4 @@ if __name__ == '__main__':
                    secure=False)
     put_file()
     download_file()
+    get_url()
