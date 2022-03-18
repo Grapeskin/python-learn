@@ -6,7 +6,7 @@
 """
 import abc
 
-from mqtt_sdk.protocol import MessageCallback, RequestProtocol, CallbackProtocol, SyncStatus
+from mqtt_v1.protocol import MessageCallback, RequestProtocol, CallbackProtocol, SyncStatus
 
 
 class SubInterface:

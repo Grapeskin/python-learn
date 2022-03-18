@@ -8,13 +8,13 @@ import time
 
 from paho.mqtt.client import Client, MQTTMessageInfo
 
-from mqtt_sdk.enums import Platform
-from mqtt_sdk.exception import ParamError, SyncTimeoutError
-from mqtt_sdk.interface import SubInterface, AsyncPubInterface, SyncPubInterface
-from mqtt_sdk.logger import logger
-from mqtt_sdk.protocol import CallbackProtocol, RequestProtocol, MsgProtocol, MessageCallback, RobotRequestProtocol, \
+from mqtt_v1.enums import Platform
+from mqtt_v1.exception import ParamError, SyncTimeoutError
+from mqtt_v1.interface import SubInterface, AsyncPubInterface, SyncPubInterface
+from mqtt_v1.logger import logger
+from mqtt_v1.protocol import CallbackProtocol, RequestProtocol, MsgProtocol, MessageCallback, RobotRequestProtocol, \
     RobotCallbackProtocol, RequestMsgProtocol, SyncMessageCallback
-from mqtt_sdk.utils import generate_client_id, generate_msg_id
+from mqtt_v1.utils import generate_client_id, generate_msg_id
 
 
 def on_connect(client: Client, userdata, flags, rc):

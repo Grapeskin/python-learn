@@ -9,8 +9,8 @@ from json import JSONDecodeError
 
 from paho.mqtt.client import MQTTMessage
 
-from mqtt_sdk.exception import DataFormatError
-from mqtt_sdk.logger import logger
+from mqtt_v1.exception import DataFormatError
+from mqtt_v1.logger import logger
 
 
 class MsgProtocol:
