@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 """
 @Time    :   2022/1/14 16:36
 @Author  :   JiaYou
@@ -11,11 +11,11 @@ Base = declarative_base()
 
 
 class Address(Base):
-    __tablename__ = 'address'
+    __tablename__ = "address"
     id = Column(Integer, primary_key=True)
     street_name = Column(String(64))
     post_code = Column(String(10))
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey("user.id"))
 
     user = relationship("User", back_populates="address")
 
@@ -25,7 +25,7 @@ class Address(Base):
 
 class User(Base):
     # 表的名字:
-    __tablename__ = 'user'
+    __tablename__ = "user"
 
     # 表的结构:
     id = Column(Integer, primary_key=True)
@@ -38,13 +38,15 @@ class User(Base):
         return f"<User(id={self.id}, name='{self.name}', age={self.age}, address={self.address})>"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # echo=True 打印生成执行SQL中日志
-    engine = create_engine('mysql+pymysql://ldrobot:ldrobot2022@localhost:3306/auto_detection', echo=True)
+    engine = create_engine(
+        "mysql+pymysql://ldrobot:ldrobot2022@localhost:3306/auto_detection", echo=True
+    )
     # 创建表，不存在则创建，存在则跳过
     User.metadata.create_all(engine)
     # 未指定的属性为None，egg: id=None
-    user = User(name='jiayou1', age=32)
+    user = User(name="jiayou1", age=32)
     """
     References: https://docs.sqlalchemy.org/en/14/orm/tutorial.html#creating-a-session
     1. 创建Engine对象
@@ -63,8 +65,10 @@ if __name__ == '__main__':
     Session.configure(bind=engine)
     session = Session()
     # 每次add都会生成一个自增ID，若没有提交该次add，依然会按序号自增
-    user.address = [Address(street_name='test street', post_code='123333'),
-                    Address(street_name='test street 2', post_code='123443')]
+    user.address = [
+        Address(street_name="test street", post_code="123333"),
+        Address(street_name="test street 2", post_code="123443"),
+    ]
     session.add(user)
     # print(session.query(User).filter(User.name == 'zhangsan').all())
     # print(session.query(Address).filter(Address.id.in_([1, 2])).all())
@@ -75,12 +79,17 @@ if __name__ == '__main__':
     #     print(a)
     connection = session.connection()
     # 使用原生SQL
-    print([dict(zip(result.keys(), result)) for result in connection.execute("select * from user").fetchall()])
+    print(
+        [
+            dict(zip(result.keys(), result))
+            for result in connection.execute("select * from user").fetchall()
+        ]
+    )
     # for item in session.query(Address).select_from(Address).join(User, User.id == Address.user_id).all():
     #     print(item)
 
     # u = session.get(User, 3)
-    u = session.query(User.age.label('l_age'), User.name).filter(User.id == 4).all()
+    u = session.query(User.age.label("l_age"), User.name).filter(User.id == 4).all()
     print([dict(zip(result.keys(), result)) for result in u])
     # u.delete()
     # session.commit()

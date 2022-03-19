@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 """
 @Time    :   2022/3/16 15:55
 @Author  :   JiaYou
@@ -12,9 +12,13 @@ from mqtt_v1.enums import Platform
 from mqtt_v1.exception import ParamError, SyncTimeoutError
 from mqtt_v1.interface import SubInterface, AsyncPubInterface, SyncPubInterface
 from mqtt_v1.logger import logger
-from mqtt_v1.protocol import CallbackProtocol, RequestProtocol, MsgProtocol, MessageCallback, RobotRequestProtocol, \
-    RobotCallbackProtocol, RequestMsgProtocol, SyncMessageCallback
-from mqtt_v1.utils import generate_client_id, generate_msg_id
+from mqtt_v1.protocol import (
+    CallbackProtocol,
+    RequestProtocol,
+    MsgProtocol,
+    MessageCallback,
+)
+from mqtt_v1.utils import generate_client_id
 
 
 def on_connect(client: Client, userdata, flags, rc):
@@ -56,14 +60,24 @@ class MqttClientV1(SubInterface, AsyncPubInterface, SyncPubInterface):
     V1 version mqtt client sdk
     """
 
-    def __init__(self, platform: Platform, client_id: str, host: str, port: int = 1883, keepalive: int = 60,
-                 username: str = None, password: str = None):
+    def __init__(
+        self,
+        platform: Platform,
+        host: str,
+        client_id: str = "",
+        port: int = 1883,
+        keepalive: int = 60,
+        username: str = None,
+        password: str = None,
+    ):
         if not all([platform, host]):
             raise ParamError()
         if not client_id:
             client_id = generate_client_id(platform)
 
-        self._client = Client(client_id=client_id, clean_session=True, userdata=client_id)
+        self._client = Client(
+            client_id=client_id, clean_session=True, userdata=client_id
+        )
 
         self._client.on_connect = on_connect
         self._client.on_disconnect = on_disconnect
@@ -79,30 +93,47 @@ class MqttClientV1(SubInterface, AsyncPubInterface, SyncPubInterface):
         if not all([callback_protocol.topic, callback_protocol.callback_class]):
             raise ParamError()
         self._client.subscribe(callback_protocol.topic, callback_protocol.qos)
-        self._client.message_callback_add(callback_protocol.topic, callback_protocol.callback_class.on_message)
+        self._client.message_callback_add(
+            callback_protocol.topic, callback_protocol.callback_class.on_message
+        )
 
-    def sync_pub(self, request_protocol: RequestProtocol, callback_protocol: CallbackProtocol, timeout: int = 2) -> str:
+    def sync_pub(
+        self,
+        request_protocol: RequestProtocol,
+        callback_protocol: CallbackProtocol,
+        timeout: int = 2,
+    ) -> str:
 
         if not request_protocol.topic:
             raise ParamError()
-        if not isinstance(request_protocol.request_msg, MsgProtocol):
+        if not isinstance(request_protocol.payload, MsgProtocol):
             raise ParamError()
         start = time.time()
-        msg_id = request_protocol.request_msg.msg_id
+        msg_id = request_protocol.payload.msg_id
         self._REQ_STATUS[msg_id] = None
-        pub_res: MQTTMessageInfo = self._client.publish(request_protocol.topic,
-                                                        request_protocol.request_msg.to_json(),
-                                                        request_protocol.qos, request_protocol.retain)
-        logger.info(f'Publish message. req_info=[msg_id={msg_id}],res_info=[rc={pub_res.rc}, mid={pub_res.mid}]')
         self._client.subscribe(callback_protocol.topic, callback_protocol.qos)
-        self._client.message_callback_add(callback_protocol.topic, callback_protocol.callback_class.on_message)
+        self._client.message_callback_add(
+            callback_protocol.topic, callback_protocol.callback_class.on_message
+        )
+        pub_res: MQTTMessageInfo = self._client.publish(
+            request_protocol.topic,
+            request_protocol.payload.to_json(),
+            request_protocol.qos,
+            request_protocol.retain,
+        )
+        logger.info(
+            f"Publish message. req_info=[msg_id={msg_id}],res_info=[rc={pub_res.rc}, mid={pub_res.mid}]"
+        )
         while time.time() - start <= timeout and self._REQ_STATUS.get(msg_id) is None:
             time.sleep(0.1)
         if msg_id in self._REQ_STATUS.keys() and self._REQ_STATUS.get(msg_id) is None:
             raise SyncTimeoutError()
+        self._client.unsubscribe(callback_protocol.topic)
         return self._REQ_STATUS.pop(msg_id)
 
-    def async_pub(self, request_protocol: RequestProtocol, callback_protocol: CallbackProtocol):
+    def async_pub(
+        self, request_protocol: RequestProtocol, callback_protocol: CallbackProtocol
+    ):
 
         if not request_protocol.topic:
             raise ParamError()
@@ -111,45 +142,16 @@ class MqttClientV1(SubInterface, AsyncPubInterface, SyncPubInterface):
 
         if callback_protocol.callback_class:
             self._client.subscribe(callback_protocol.topic, callback_protocol.qos)
-            self._client.message_callback_add(callback_protocol.topic, callback_protocol.callback_class.on_message)
-        pub_res = self._client.publish(request_protocol.topic,
-                                       request_protocol.request_msg.to_json(),
-                                       request_protocol.qos,
-                                       request_protocol.retain)
+            self._client.message_callback_add(
+                callback_protocol.topic, callback_protocol.callback_class.on_message
+            )
+        pub_res: MQTTMessageInfo = self._client.publish(
+            request_protocol.topic,
+            request_protocol.payload.to_json(),
+            request_protocol.qos,
+            request_protocol.retain,
+        )
         logger.info(
-            f'Publish message. req_info=[msg_id={request_protocol.request_msg.msg_id}],res_info=[rc={pub_res.rc}, mid={pub_res.mid}]')
-
-
-if __name__ == '__main__':
-    mqtt_client = MqttClientV1(platform=Platform.DETECTION_NODE, client_id='', host='192.168.160.45', port=2883,
-                               username='debug', password='12345678')
-
-    # test sub
-    mqtt_client.sub(RobotCallbackProtocol('/dev/robot/123/service/response'))
-
-    payload = {
-        "msg_id": generate_msg_id(),
-        "type": "service",
-        "id": "Carrier.SetPWM",
-        "timestamp": int(time.time()),
-        "data": "{\"PwmL\":-4000,\"PwmR\":-4000}"
-    }
-    # test async pub
-    # mqtt_client.async_pub(
-    #     RobotRequestProtocol(topic='/dev/robot/123/service/request', request_msg=RequestMsgProtocol(payload)),
-    #     RobotCallbackProtocol(topic='/dev/robot/123/service/response')
-    # )
-
-    # test sync pub
-    # res = mqtt_client.sync_pub(
-    #     RobotRequestProtocol(
-    #         '/dev/robot/123/service/request', RequestMsgProtocol(payload))
-    #     ,
-    #     RobotCallbackProtocol(
-    #         '/dev/robot/123/service/response', SyncMessageCallback()
-    #     ),
-    #     timeout=10
-    # )
-    # logger.info(f'Sync request result. [result={res}]')
-    while 1:
-        time.sleep(1)
+            f"Publish message. req_info=[msg_id={request_protocol.payload.msg_id}],res_info=[rc={pub_res.rc}, "
+            f"mid={pub_res.mid}]"
+        )

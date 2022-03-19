@@ -26,7 +26,7 @@ def log(description=None, print_args=print_arg, print_cost_time=True):
             if print_args:
                 print(f"return: {res}")
             if print_cost_time:
-                print(f'cost: {end_time - start_time} ms')
+                print(f"cost: {end_time - start_time} ms")
 
         return wrapper
 
@@ -188,7 +188,7 @@ def merge_sort(arr: List[int]):
     return merge_sort_fun(arr, 0, len(arr) - 1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     """算法数据结构学习
     算法可视化理解：
     1. https://www.cs.usfca.edu/~galles/visualization/Algorithms.html

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 """
 @Time    :   2022/1/14 10:34
 @Author  :   JiaYou
@@ -43,12 +43,13 @@ class ConnectConfig:
             "write_timeout": self.write_timeout,
             "connect_timeout": self.connect_timeout,
             "cursorclass": DictCursor,
-            "autocommit": self.autocommit
+            "autocommit": self.autocommit,
         }
 
 
 class ConnectionPool:
     """数据库连接池"""
+
     _pool = None
 
     def __init__(self, connect_config: dict = None):
@@ -65,8 +66,15 @@ class ConnectionPool:
             """
             References: https://webwareforpython.github.io/DBUtils/main.html
             """
-            pool = PooledDB(creator=pymysql, mincached=2, maxcached=10, maxshared=10, maxconnections=40, blocking=False,
-                            **self._connect_config)
+            pool = PooledDB(
+                creator=pymysql,
+                mincached=2,
+                maxcached=10,
+                maxshared=10,
+                maxconnections=40,
+                blocking=False,
+                **self._connect_config
+            )
 
             ConnectionPool._pool = pool
         return ConnectionPool._pool.connection()
@@ -75,5 +83,5 @@ class ConnectionPool:
         return self._get_conn().cursor()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pool = ConnectionPool(ConnectConfig().to_dict())

@@ -1,12 +1,17 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 """
 @Time    :   2022/3/18 11:21
 @Author  :   JiaYou
 """
 import abc
 
-from mqtt_v1.protocol import MessageCallback, RequestProtocol, CallbackProtocol, SyncStatus
+from mqtt_v1.protocol import (
+    MessageCallback,
+    RequestProtocol,
+    CallbackProtocol,
+    SyncStatus,
+)
 
 
 class SubInterface:
@@ -27,7 +32,9 @@ class SubInterface:
 
 class AsyncPubInterface:
     @abc.abstractmethod
-    def async_pub(self, request_protocol: RequestProtocol, callback_protocol: CallbackProtocol):
+    def async_pub(
+        self, request_protocol: RequestProtocol, callback_protocol: CallbackProtocol
+    ):
         """Async request and wait response
 
         Args:
@@ -42,7 +49,12 @@ class AsyncPubInterface:
 
 class SyncPubInterface(SyncStatus):
     @abc.abstractmethod
-    def sync_pub(self, request_protocol: RequestProtocol, callback_protocol: CallbackProtocol, timeout: int = 2):
+    def sync_pub(
+        self,
+        request_protocol: RequestProtocol,
+        callback_protocol: CallbackProtocol,
+        timeout: int = 2,
+    ):
         """Sync request and wait response until timeout raise Exception
 
         Args:
@@ -53,6 +65,7 @@ class SyncPubInterface(SyncStatus):
         Raises:
             ParamError: param error exception.
             SyncTimeoutError: wait timeout exception.
+            DataFormatError：response data format error.
         Returns:
             response payload
         """

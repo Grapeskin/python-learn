@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 """
 @Time    :   2022/3/17 15:32
 @Author  :   JiaYou
@@ -15,4 +15,4 @@ def generate_client_id(platform: Platform):
 
 def generate_msg_id() -> str:
     # TODO 唯一ID算法实现
-    return str(uuid.uuid4()).replace('-', '')
+    return str(uuid.uuid4()).replace("-", "")

@@ -30,9 +30,7 @@ class Image(BaseModel):
 
 
 class Item(BaseModel):
-    name: str = Field(
-        None, title="The description of the item", max_length=5
-    )
+    name: str = Field(None, title="The description of the item", max_length=5)
     price: float = Field(..., gt=0, description="The price must be greater than zero")
     is_offer: Optional[bool] = None
     images: Optional[List[Image]] = None
@@ -44,7 +42,7 @@ class Item(BaseModel):
                 "name": "Foo",
                 "description": "A very nice Item",
                 "is_offer": False,
-                "price": 1.5
+                "price": 1.5,
             }
         }
 
@@ -76,25 +74,33 @@ def read_items(x_token: Optional[List[str]] = Header(None)):
 
 
 @app.get("/items/{item_id}", deprecated=True)
-def read_item(item_id: int = Path(..., title='this is item id'),
-              q: Optional[List[str]] = Query(default=['abc', 'def', 'fff'], min_length=3, max_length=5)):
+def read_item(
+    item_id: int = Path(..., title="this is item id"),
+    q: Optional[List[str]] = Query(
+        default=["abc", "def", "fff"], min_length=3, max_length=5
+    ),
+):
     if item_id not in [1, 2]:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Item not found', headers={'k': 'v'})
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Item not found",
+            headers={"k": "v"},
+        )
     return {"item_id": item_id, "q": q}
 
 
-@app.put("/items/{item_id}", tags=['items'])
-def update_item(
-        item_id: int, item: Item, user: User, importance: int = Body(...)
-):
+@app.put("/items/{item_id}", tags=["items"])
+def update_item(item_id: int, item: Item, user: User, importance: int = Body(...)):
     results = {"item_id": item_id, "item": item, "user": user, "importance": importance}
     return results
 
 
-@app.post("/items/{item_id}", tags=['items'],
-          summary="Create an item",
-          response_description='test response message'
-          )
+@app.post(
+    "/items/{item_id}",
+    tags=["items"],
+    summary="Create an item",
+    response_description="test response message",
+)
 def update_item(item_id: int, item: Item):
     """
     Create an item with all the information:
@@ -157,12 +163,14 @@ def create_file(file: List[bytes] = File(...)):
 
 @app.post("/uploadfile/")
 def create_upload_file(file: List[UploadFile] = File(...)):
-    return [{"filename": item.filename, "content_type": item.content_type} for item in file]
+    return [
+        {"filename": item.filename, "content_type": item.content_type} for item in file
+    ]
 
 
 @app.post("/files/form")
 def create_file(
-        file: bytes = File(...), fileb: UploadFile = File(...), token: str = Form(...)
+    file: bytes = File(...), fileb: UploadFile = File(...), token: str = Form(...)
 ):
     return {
         "file_size": len(file),
@@ -180,7 +188,9 @@ class UnicornException(Exception):
 def unicorn_exception_handler(request: Request, exc: UnicornException):
     return JSONResponse(
         status_code=418,
-        content={"message": f"Oops! {exc.name} did something. There goes a rainbow... {str(exc)}"},
+        content={
+            "message": f"Oops! {exc.name} did something. There goes a rainbow... {str(exc)}"
+        },
     )
 
 
@@ -231,7 +241,13 @@ class ResponseEnum(Enum):
 
 
 class HttpResponse:
-    def __init__(self, response_enum: ResponseEnum = ResponseEnum.SUCCESS, data=None, code=None, msg=None):
+    def __init__(
+        self,
+        response_enum: ResponseEnum = ResponseEnum.SUCCESS,
+        data=None,
+        code=None,
+        msg=None,
+    ):
         if code and msg:
             self.code = code
             self.msg = msg
@@ -259,22 +275,22 @@ def unicorn_exception_handler(request: Request, exc: CustomException):
 
 @app.get("/test/{id}")
 def test(id):
-    if id == 'ex':
+    if id == "ex":
         raise CustomException(ResponseEnum.PARAMETER_ERROR, (id,))
-    return HttpResponse({'k': 'v'})
+    return HttpResponse({"k": "v"})
 
 
 """
-front <- 
+front <-
         {
             code
             msg
             data
         }
-        
+
 """
-if __name__ == '__main__':
+if __name__ == "__main__":
     """fast api 使用
-    1. 
+    1.
     """
     uvicorn.run(app, host="0.0.0.0", port=8000)
