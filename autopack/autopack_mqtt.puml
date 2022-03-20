@@ -13,7 +13,7 @@ abstract class MessageCallback{
     response_msg_protocol: MsgProtocol
     on_message(client, userdata, message: MQTTMessage)
 }
-MessageCallback o-- MsgProtocol
+MessageCallback::response_msg_protocol o-- MsgProtocol
 
 class SimpleMessageCallback extends MessageCallback{
     on_message(client, userdata, message: MQTTMessage)
@@ -41,7 +41,7 @@ abstract class RequestProtocol{
 }
 class RobotRequestProtocol extends RequestProtocol
 
-RequestProtocol o-- MsgProtocol
+RequestProtocol::payload o-- MsgProtocol
 
 '回调协议
 abstract class CallbackProtocol{
@@ -51,7 +51,7 @@ abstract class CallbackProtocol{
 }
 class RobotCallbackProtocol extends CallbackProtocol
 
-CallbackProtocol o-- MessageCallback
+CallbackProtocol::callback_class o-- MessageCallback
 
 '订阅接口
 abstract class SubInterface {
@@ -81,7 +81,7 @@ class MqttClientV1 implements SubInterface, AsyncPubInterface, SyncPubInterface{
     sync_pub(request_protocol,callback_protocol, timeout) -> str
 }
 
-MqttClientV1 *-> Client
+MqttClientV1::client *-- Client
 MqttClientV1 --> Platform
 MqttClientV1 --> EventId
 MqttClientV1 --> EventType
