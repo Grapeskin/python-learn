@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="752px" preserveAspectRatio="none" style="width:1033px;height:752px;background:#FFFFFF;" version="1.1" viewBox="0 0 1033 752" width="1033px" zoomAndPan="magnify"><defs><filter height="300%" id="f1rk1wn946v3du" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[99b8db98afdc2c8404e39242ef4c1e65]
+class Platform--><rect codeLine="3" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="48" id="Platform" style="stroke:#A80036;stroke-width:1.5;" width="80" x="413" y="301"/><ellipse cx="428" cy="317" fill="#EB937F" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M431.6143,323.5 L423.8945,323.5 L423.8945,311.1069 L431.6143,311.1069 L431.6143,313.2651 L426.3433,313.2651 L426.3433,315.938 L431.1162,315.938 L431.1162,318.0962 L426.3433,318.0962 L426.3433,321.3418 L431.6143,321.3418 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="48" x="442" y="321.5352">Platform</text><line style="stroke:#A80036;stroke-width:1.5;" x1="414" x2="492" y1="333" y2="333"/><line style="stroke:#A80036;stroke-width:1.5;" x1="414" x2="492" y1="341" y2="341"/><!--MD5=[75c3ed32ed5e16d70c19839950ea16ba]
+class EventId--><rect codeLine="4" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="48" id="EventId" style="stroke:#A80036;stroke-width:1.5;" width="74" x="528" y="301"/><ellipse cx="543" cy="317" fill="#EB937F" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M546.6143,323.5 L538.8945,323.5 L538.8945,311.1069 L546.6143,311.1069 L546.6143,313.2651 L541.3433,313.2651 L541.3433,315.938 L546.1162,315.938 L546.1162,318.0962 L541.3433,318.0962 L541.3433,321.3418 L546.6143,321.3418 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="42" x="557" y="321.5352">EventId</text><line style="stroke:#A80036;stroke-width:1.5;" x1="529" x2="601" y1="333" y2="333"/><line style="stroke:#A80036;stroke-width:1.5;" x1="529" x2="601" y1="341" y2="341"/><!--MD5=[51255159981deef4d2967e1585ccf960]
+class EventType--><rect codeLine="5" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="48" id="EventType" style="stroke:#A80036;stroke-width:1.5;" width="92" x="637" y="301"/><ellipse cx="652" cy="317" fill="#EB937F" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M655.6143,323.5 L647.8945,323.5 L647.8945,311.1069 L655.6143,311.1069 L655.6143,313.2651 L650.3433,313.2651 L650.3433,315.938 L655.1162,315.938 L655.1162,318.0962 L650.3433,318.0962 L650.3433,321.3418 L655.6143,321.3418 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="60" x="666" y="321.5352">EventType</text><line style="stroke:#A80036;stroke-width:1.5;" x1="638" x2="728" y1="333" y2="333"/><line style="stroke:#A80036;stroke-width:1.5;" x1="638" x2="728" y1="341" y2="341"/><!--MD5=[dc737fa3c17f3862ff5af1a4871df7c4]
+class MessageCallback--><rect codeLine="8" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="73.9102" id="MessageCallback" style="stroke:#A80036;stroke-width:1.5;" width="306" x="348" y="435"/><ellipse cx="447.25" cy="451" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M447.1133,446.3481 L445.9595,451.4199 L448.2754,451.4199 Z M445.6191,444.1069 L448.6157,444.1069 L451.9609,456.5 L449.5122,456.5 L448.7485,453.437 L445.4697,453.437 L444.7227,456.5 L442.2739,456.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="99" x="467.75" y="455.5352">MessageCallback</text><line style="stroke:#A80036;stroke-width:1.5;" x1="349" x2="653" y1="467" y2="467"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="204" x="354" y="481.6348">response_msg_protocol: MsgProtocol</text><line style="stroke:#A80036;stroke-width:1.5;" x1="349" x2="653" y1="487.9551" y2="487.9551"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="294" x="354" y="502.5898">on_message(client, userdata, message: MQTTMessage)</text><!--MD5=[66d690e9a3e247374ee1ea14fa19536b]
+class MsgProtocol--><rect codeLine="23" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="60.9551" id="MsgProtocol" style="stroke:#A80036;stroke-width:1.5;" width="101" x="689.5" y="569"/><ellipse cx="704.5" cy="585" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M704.3633,580.3481 L703.2095,585.4199 L705.5254,585.4199 Z M702.8691,578.1069 L705.8657,578.1069 L709.2109,590.5 L706.7622,590.5 L705.9985,587.437 L702.7197,587.437 L701.9727,590.5 L699.5239,590.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="69" x="718.5" y="589.5352">MsgProtocol</text><line style="stroke:#A80036;stroke-width:1.5;" x1="690.5" x2="789.5" y1="601" y2="601"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="74" x="695.5" y="615.6348">String msg_id</text><line style="stroke:#A80036;stroke-width:1.5;" x1="690.5" x2="789.5" y1="621.9551" y2="621.9551"/><!--MD5=[7569d81bf4f7fc861d39df93101d5787]
+class SimpleMessageCallback--><rect codeLine="14" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="60.9551" id="SimpleMessageCallback" style="stroke:#A80036;stroke-width:1.5;" width="306" x="7" y="569"/><ellipse cx="87.25" cy="585" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M89.7231,591.1431 Q89.1421,591.4419 88.5029,591.5913 Q87.8638,591.7407 87.1582,591.7407 Q84.6514,591.7407 83.3315,590.0889 Q82.0117,588.437 82.0117,585.3159 Q82.0117,582.1865 83.3315,580.5347 Q84.6514,578.8828 87.1582,578.8828 Q87.8638,578.8828 88.5112,579.0322 Q89.1587,579.1816 89.7231,579.4805 L89.7231,582.2031 Q89.0923,581.6221 88.4988,581.3523 Q87.9053,581.0825 87.2744,581.0825 Q85.9297,581.0825 85.2449,582.1492 Q84.5601,583.2158 84.5601,585.3159 Q84.5601,587.4077 85.2449,588.4744 Q85.9297,589.541 87.2744,589.541 Q87.9053,589.541 88.4988,589.2712 Q89.0923,589.0015 89.7231,588.4204 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="137" x="107.75" y="589.5352">SimpleMessageCallback</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="312" y1="601" y2="601"/><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="312" y1="609" y2="609"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="294" x="13" y="623.6348">on_message(client, userdata, message: MQTTMessage)</text><!--MD5=[b81a5340824238a94a4505bd6a7cbcad]
+class SyncMessageCallback--><rect codeLine="18" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="60.9551" id="SyncMessageCallback" style="stroke:#A80036;stroke-width:1.5;" width="306" x="348" y="569"/><ellipse cx="434.75" cy="585" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M437.2231,591.1431 Q436.6421,591.4419 436.0029,591.5913 Q435.3638,591.7407 434.6582,591.7407 Q432.1514,591.7407 430.8315,590.0889 Q429.5117,588.437 429.5117,585.3159 Q429.5117,582.1865 430.8315,580.5347 Q432.1514,578.8828 434.6582,578.8828 Q435.3638,578.8828 436.0112,579.0322 Q436.6587,579.1816 437.2231,579.4805 L437.2231,582.2031 Q436.5923,581.6221 435.9988,581.3523 Q435.4053,581.0825 434.7744,581.0825 Q433.4297,581.0825 432.7449,582.1492 Q432.0601,583.2158 432.0601,585.3159 Q432.0601,587.4077 432.7449,588.4744 Q433.4297,589.541 434.7744,589.541 Q435.4053,589.541 435.9988,589.2712 Q436.5923,589.0015 437.2231,588.4204 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="124" x="455.25" y="589.5352">SyncMessageCallback</text><line style="stroke:#A80036;stroke-width:1.5;" x1="349" x2="653" y1="601" y2="601"/><line style="stroke:#A80036;stroke-width:1.5;" x1="349" x2="653" y1="609" y2="609"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="294" x="354" y="623.6348">on_message(client, userdata, message: MQTTMessage)</text><!--MD5=[54e926448ad8df9948307e9c3b6e24d1]
+class RequestMsgProtocol--><rect codeLine="27" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="48" id="RequestMsgProtocol" style="stroke:#A80036;stroke-width:1.5;" width="148" x="572" y="690"/><ellipse cx="587" cy="706" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M589.4731,712.1431 Q588.8921,712.4419 588.2529,712.5913 Q587.6138,712.7407 586.9082,712.7407 Q584.4014,712.7407 583.0815,711.0889 Q581.7617,709.437 581.7617,706.3159 Q581.7617,703.1865 583.0815,701.5347 Q584.4014,699.8828 586.9082,699.8828 Q587.6138,699.8828 588.2612,700.0322 Q588.9087,700.1816 589.4731,700.4805 L589.4731,703.2031 Q588.8423,702.6221 588.2488,702.3523 Q587.6553,702.0825 587.0244,702.0825 Q585.6797,702.0825 584.9949,703.1492 Q584.3101,704.2158 584.3101,706.3159 Q584.3101,708.4077 584.9949,709.4744 Q585.6797,710.541 587.0244,710.541 Q587.6553,710.541 588.2488,710.2712 Q588.8423,710.0015 589.4731,709.4204 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="116" x="601" y="710.5352">RequestMsgProtocol</text><line style="stroke:#A80036;stroke-width:1.5;" x1="573" x2="719" y1="722" y2="722"/><line style="stroke:#A80036;stroke-width:1.5;" x1="573" x2="719" y1="730" y2="730"/><!--MD5=[501650e310d05191f306340ff273d96b]
+class ResponseMsgProtocol--><rect codeLine="29" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="48" id="ResponseMsgProtocol" style="stroke:#A80036;stroke-width:1.5;" width="157" x="755.5" y="690"/><ellipse cx="770.5" cy="706" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M772.9731,712.1431 Q772.3921,712.4419 771.7529,712.5913 Q771.1138,712.7407 770.4082,712.7407 Q767.9014,712.7407 766.5815,711.0889 Q765.2617,709.437 765.2617,706.3159 Q765.2617,703.1865 766.5815,701.5347 Q767.9014,699.8828 770.4082,699.8828 Q771.1138,699.8828 771.7612,700.0322 Q772.4087,700.1816 772.9731,700.4805 L772.9731,703.2031 Q772.3423,702.6221 771.7488,702.3523 Q771.1553,702.0825 770.5244,702.0825 Q769.1797,702.0825 768.4949,703.1492 Q767.8101,704.2158 767.8101,706.3159 Q767.8101,708.4077 768.4949,709.4744 Q769.1797,710.541 770.5244,710.541 Q771.1553,710.541 771.7488,710.2712 Q772.3423,710.0015 772.9731,709.4204 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="125" x="784.5" y="710.5352">ResponseMsgProtocol</text><line style="stroke:#A80036;stroke-width:1.5;" x1="756.5" x2="911.5" y1="722" y2="722"/><line style="stroke:#A80036;stroke-width:1.5;" x1="756.5" x2="911.5" y1="730" y2="730"/><!--MD5=[8e7bee16906abf4d51814b9ca5886f87]
+class RequestProtocol--><rect codeLine="32" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="99.8203" id="RequestProtocol" style="stroke:#A80036;stroke-width:1.5;" width="127" x="764.5" y="275"/><ellipse cx="780.4" cy="291" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M780.2633,286.3481 L779.1095,291.4199 L781.4254,291.4199 Z M778.7691,284.1069 L781.7657,284.1069 L785.1109,296.5 L782.6622,296.5 L781.8985,293.437 L778.6197,293.437 L777.8727,296.5 L775.4239,296.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="93" x="794.6" y="295.5352">RequestProtocol</text><line style="stroke:#A80036;stroke-width:1.5;" x1="765.5" x2="890.5" y1="307" y2="307"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="770.5" y="321.6348">topic: str</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="115" x="770.5" y="334.5898">payload: MsgProtocol</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="40" x="770.5" y="347.5449">qos: int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="61" x="770.5" y="360.5">retain: bool</text><line style="stroke:#A80036;stroke-width:1.5;" x1="765.5" x2="890.5" y1="366.8203" y2="366.8203"/><!--MD5=[08a5931c6e2f04aefeda067b62615489]
+class RobotRequestProtocol--><rect codeLine="38" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="48" id="RobotRequestProtocol" style="stroke:#A80036;stroke-width:1.5;" width="159" x="793.5" y="448"/><ellipse cx="808.5" cy="464" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M810.9731,470.1431 Q810.3921,470.4419 809.7529,470.5913 Q809.1138,470.7407 808.4082,470.7407 Q805.9014,470.7407 804.5815,469.0889 Q803.2617,467.437 803.2617,464.3159 Q803.2617,461.1865 804.5815,459.5347 Q805.9014,457.8828 808.4082,457.8828 Q809.1138,457.8828 809.7612,458.0322 Q810.4087,458.1816 810.9731,458.4805 L810.9731,461.2031 Q810.3423,460.6221 809.7488,460.3523 Q809.1553,460.0825 808.5244,460.0825 Q807.1797,460.0825 806.4949,461.1492 Q805.8101,462.2158 805.8101,464.3159 Q805.8101,466.4077 806.4949,467.4744 Q807.1797,468.541 808.5244,468.541 Q809.1553,468.541 809.7488,468.2712 Q810.3423,468.0015 810.9731,467.4204 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="127" x="822.5" y="468.5352">RobotRequestProtocol</text><line style="stroke:#A80036;stroke-width:1.5;" x1="794.5" x2="951.5" y1="480" y2="480"/><line style="stroke:#A80036;stroke-width:1.5;" x1="794.5" x2="951.5" y1="488" y2="488"/><!--MD5=[df68f386bb4694ae075794624fa858d4]
+class CallbackProtocol--><rect codeLine="43" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="86.8652" id="CallbackProtocol" style="stroke:#A80036;stroke-width:1.5;" width="185" x="188.5" y="281.5"/><ellipse cx="229.6" cy="297.5" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M229.4633,292.8481 L228.3095,297.9199 L230.6254,297.9199 Z M227.9691,290.6069 L230.9657,290.6069 L234.3109,303 L231.8622,303 L231.0985,299.937 L227.8197,299.937 L227.0727,303 L224.6239,303 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="95" x="249.4" y="302.0352">CallbackProtocol</text><line style="stroke:#A80036;stroke-width:1.5;" x1="189.5" x2="372.5" y1="313.5" y2="313.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="194.5" y="328.1348">topic: str</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="173" x="194.5" y="341.0898">callback_class: MessageCallback</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="40" x="194.5" y="354.0449">qos: int</text><line style="stroke:#A80036;stroke-width:1.5;" x1="189.5" x2="372.5" y1="360.3652" y2="360.3652"/><!--MD5=[e00599bc12c72b17a9d785457bffce05]
+class RobotCallbackProtocol--><rect codeLine="48" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="48" id="RobotCallbackProtocol" style="stroke:#A80036;stroke-width:1.5;" width="161" x="151.5" y="448"/><ellipse cx="166.5" cy="464" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M168.9731,470.1431 Q168.3921,470.4419 167.7529,470.5913 Q167.1138,470.7407 166.4082,470.7407 Q163.9014,470.7407 162.5815,469.0889 Q161.2617,467.437 161.2617,464.3159 Q161.2617,461.1865 162.5815,459.5347 Q163.9014,457.8828 166.4082,457.8828 Q167.1138,457.8828 167.7612,458.0322 Q168.4087,458.1816 168.9731,458.4805 L168.9731,461.2031 Q168.3423,460.6221 167.7488,460.3523 Q167.1553,460.0825 166.5244,460.0825 Q165.1797,460.0825 164.4949,461.1492 Q163.8101,462.2158 163.8101,464.3159 Q163.8101,466.4077 164.4949,467.4744 Q165.1797,468.541 166.5244,468.541 Q167.1553,468.541 167.7488,468.2712 Q168.3423,468.0015 168.9731,467.4204 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="129" x="180.5" y="468.5352">RobotCallbackProtocol</text><line style="stroke:#A80036;stroke-width:1.5;" x1="152.5" x2="311.5" y1="480" y2="480"/><line style="stroke:#A80036;stroke-width:1.5;" x1="152.5" x2="311.5" y1="488" y2="488"/><!--MD5=[4c454e663102570c6d5b86957ebc12c1]
+class SubInterface--><rect codeLine="53" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="60.9551" id="SubInterface" style="stroke:#A80036;stroke-width:1.5;" width="135" x="175.5" y="7"/><ellipse cx="204.9" cy="23" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M204.7633,18.3481 L203.6095,23.4199 L205.9254,23.4199 Z M203.2691,16.1069 L206.2657,16.1069 L209.6109,28.5 L207.1622,28.5 L206.3985,25.437 L203.1197,25.437 L202.3727,28.5 L199.9239,28.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="71" x="222.1" y="27.5352">SubInterface</text><line style="stroke:#A80036;stroke-width:1.5;" x1="176.5" x2="309.5" y1="39" y2="39"/><line style="stroke:#A80036;stroke-width:1.5;" x1="176.5" x2="309.5" y1="47" y2="47"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="123" x="181.5" y="61.6348">sub(callback_protocol)</text><!--MD5=[14d467d8e8ff0114e656d1ce9bf43889]
+class AsyncPubInterface--><rect codeLine="59" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="60.9551" id="AsyncPubInterface" style="stroke:#A80036;stroke-width:1.5;" width="272" x="366" y="7"/><ellipse cx="445.25" cy="23" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M445.1133,18.3481 L443.9595,23.4199 L446.2754,23.4199 Z M443.6191,16.1069 L446.6157,16.1069 L449.9609,28.5 L447.5122,28.5 L446.7485,25.437 L443.4697,25.437 L442.7227,28.5 L440.2739,28.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="105" x="465.75" y="27.5352">AsyncPubInterface</text><line style="stroke:#A80036;stroke-width:1.5;" x1="367" x2="637" y1="39" y2="39"/><line style="stroke:#A80036;stroke-width:1.5;" x1="367" x2="637" y1="47" y2="47"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="260" x="372" y="61.6348">async_pub(request_protocol, callback_protocol)</text><!--MD5=[f8c63459f98cb61e17c4af90d53fdd07]
+class SyncPubInterface--><rect codeLine="66" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="60.9551" id="SyncPubInterface" style="stroke:#A80036;stroke-width:1.5;" width="346" x="673" y="7"/><ellipse cx="793.25" cy="23" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M793.1133,18.3481 L791.9595,23.4199 L794.2754,23.4199 Z M791.6191,16.1069 L794.6157,16.1069 L797.9609,28.5 L795.5122,28.5 L794.7485,25.437 L791.4697,25.437 L790.7227,28.5 L788.2739,28.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="97" x="813.75" y="27.5352">SyncPubInterface</text><line style="stroke:#A80036;stroke-width:1.5;" x1="674" x2="1018" y1="39" y2="39"/><line style="stroke:#A80036;stroke-width:1.5;" x1="674" x2="1018" y1="47" y2="47"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="334" x="679" y="61.6348">sync_pub(request_protocol,callback_protocol, timeout) -&gt; str</text><!--MD5=[0ca1291e7e05819b08ea60e28ea074be]
+class MqttClientV1--><rect codeLine="73" fill="#FEFECE" filter="url(#f1rk1wn946v3du)" height="86.8652" id="MqttClientV1" style="stroke:#A80036;stroke-width:1.5;" width="346" x="397" y="128"/><ellipse cx="528.75" cy="144" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M531.2231,150.1431 Q530.6421,150.4419 530.0029,150.5913 Q529.3638,150.7407 528.6582,150.7407 Q526.1514,150.7407 524.8315,149.0889 Q523.5117,147.437 523.5117,144.3159 Q523.5117,141.1865 524.8315,139.5347 Q526.1514,137.8828 528.6582,137.8828 Q529.3638,137.8828 530.0112,138.0322 Q530.6587,138.1816 531.2231,138.4805 L531.2231,141.2031 Q530.5923,140.6221 529.9988,140.3523 Q529.4053,140.0825 528.7744,140.0825 Q527.4297,140.0825 526.7449,141.1492 Q526.0601,142.2158 526.0601,144.3159 Q526.0601,146.4077 526.7449,147.4744 Q527.4297,148.541 528.7744,148.541 Q529.4053,148.541 529.9988,148.2712 Q530.5923,148.0015 531.2231,147.4204 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="74" x="549.25" y="148.5352">MqttClientV1</text><line style="stroke:#A80036;stroke-width:1.5;" x1="398" x2="742" y1="160" y2="160"/><line style="stroke:#A80036;stroke-width:1.5;" x1="398" x2="742" y1="168" y2="168"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="123" x="403" y="182.6348">sub(callback_protocol)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="260" x="403" y="195.5898">async_pub(request_protocol, callback_protocol)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="334" x="403" y="208.5449">sync_pub(request_protocol,callback_protocol, timeout) -&gt; str</text><!--MD5=[d775c9bfce6b6e089645b1b271009726]
+reverse link MessageCallback to MsgProtocol--><path codeLine="12" d="M581.69,515.37 C617.37,534.1 658.22,555.56 689.49,571.98 " fill="none" id="MessageCallback-backto-MsgProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="569.81,509.13,573.2607,515.4619,580.4327,514.7119,576.982,508.38,569.81,509.13" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[35850917f9b824a752a8572a99042f89]
+reverse link MessageCallback to SimpleMessageCallback--><path d="M383.98,516.07 C336.61,533.5 283.11,553.19 240.27,568.96 " fill="none" id="MessageCallback-backto-SimpleMessageCallback" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="381.64,509.47,402.83,509.13,386.47,522.61,381.64,509.47" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ae19f4cac6a0daf9597fb2b3ec1a9b30]
+reverse link MessageCallback to SyncMessageCallback--><path d="M501,529.73 C501,543.15 501,556.95 501,568.62 " fill="none" id="MessageCallback-backto-SyncMessageCallback" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="494,529.3,501,509.3,508,529.3,494,529.3" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[af7cb1ed21d055199bab586b3ae6fd50]
+reverse link MsgProtocol to RequestMsgProtocol--><path d="M702.19,645.75 C689.6,660.81 676.11,676.97 665.49,689.67 " fill="none" id="MsgProtocol-backto-RequestMsgProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="697.11,640.92,715.3,630.06,707.85,649.89,697.11,640.92" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[67e96deb7f30ecd3609d72b2cc91638b]
+reverse link MsgProtocol to ResponseMsgProtocol--><path d="M777.81,645.75 C790.4,660.81 803.89,676.97 814.51,689.67 " fill="none" id="MsgProtocol-backto-ResponseMsgProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="772.15,649.89,764.7,630.06,782.89,640.92,772.15,649.89" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[84755d181ecbe9bdae05f7f32c2fa4e1]
+reverse link RequestProtocol to RobotRequestProtocol--><path d="M849.24,394.43 C855.22,413.72 861.33,433.39 865.85,447.96 " fill="none" id="RequestProtocol-backto-RobotRequestProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="842.48,396.27,843.23,375.09,855.85,392.12,842.48,396.27" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[944633779246c877cb2677da7c82c8a1]
+reverse link RequestProtocol to MsgProtocol--><path codeLine="40" d="M795.81,387.17 C788.59,402.51 781.46,419.12 776,435 C760.37,480.49 749.9,535.5 744.46,568.7 " fill="none" id="RequestProtocol-backto-MsgProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="801.6,375.19,795.387,378.8505,796.3764,385.9934,802.5893,382.3329,801.6,375.19" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ee1c8365ce74df778d7e9f2440d7dafc]
+reverse link CallbackProtocol to RobotCallbackProtocol--><path d="M260.14,387.72 C252.94,409.04 245.3,431.63 239.81,447.89 " fill="none" id="CallbackProtocol-backto-RobotCallbackProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="253.53,385.43,266.56,368.72,266.79,389.91,253.53,385.43" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a2229efa62bba7ac00ce892a175eac76]
+reverse link CallbackProtocol to MessageCallback--><path codeLine="50" d="M356.6,375.83 C386.02,395.22 419.09,417.02 446.16,434.85 " fill="none" id="CallbackProtocol-backto-MessageCallback" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="345.52,368.53,348.3279,375.1719,355.5389,375.1346,352.731,368.4926,345.52,368.53" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[98cec828f68ef49c939a6aaa4483cd90]
+link SubInterface to CallbackProtocol--><path codeLine="56" d="M241.17,68.09 C239.56,103.34 238.62,163.88 247,215 C250.36,235.47 256.65,257.42 262.92,276.22 " fill="none" id="SubInterface-to-CallbackProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="264.69,281.44,265.5943,271.6327,263.0874,276.7038,258.0164,274.1969,264.69,281.44" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[eb733f52280d117782f732f36864c1e8]
+link AsyncPubInterface to RequestProtocol--><path codeLine="62" d="M618.86,68.08 C677.27,84.93 739.93,106.86 761,128 C798.89,166.01 815.37,226.32 822.53,270.01 " fill="none" id="AsyncPubInterface-to-RequestProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="823.32,274.98,825.8532,265.4625,822.5328,270.0424,817.953,266.722,823.32,274.98" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[57f9cdae2e93d19a3ae45beba8e208e5]
+link AsyncPubInterface to CallbackProtocol--><path codeLine="63" d="M400,68.14 C369.43,81.74 338.59,101.04 318,128 C285.48,170.57 278.75,233.27 278.52,276.23 " fill="none" id="AsyncPubInterface-to-CallbackProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="278.52,281.36,282.52,272.36,278.52,276.36,274.52,272.36,278.52,281.36" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[1b965c328b38e59561032f667148fe50]
+link SyncPubInterface to RequestProtocol--><path codeLine="69" d="M844.12,68.25 C841.13,115.8 835.21,209.66 831.44,269.49 " fill="none" id="SyncPubInterface-to-RequestProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="831.1,274.81,835.6583,266.0795,831.4146,269.8199,827.6741,265.5762,831.1,274.81" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f72a2ca6ce5c707b30caa9d303da0fa7]
+link SyncPubInterface to CallbackProtocol--><path codeLine="70" d="M672.96,67.98 C545.1,90.35 391.16,118.79 379,128 C353.66,147.19 319.64,224.85 299.08,276.46 " fill="none" id="SyncPubInterface-to-CallbackProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="297.13,281.37,304.1682,274.4806,298.9746,276.7227,296.7325,271.5292,297.13,281.37" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ed94640f5d260ef85aa20fa20ddd6e27]
+reverse link SubInterface to MqttClientV1--><path d="M329.45,73.4 C370.93,90.14 420.98,110.35 464.66,127.98 " fill="none" id="SubInterface-backto-MqttClientV1" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="326.68,79.83,310.75,65.85,331.92,66.85,326.68,79.83" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a3fcc4fa9bf07fdd7088c7490d9a21b0]
+reverse link AsyncPubInterface to MqttClientV1--><path d="M526.65,86.35 C533.66,99.96 541.25,114.69 548.08,127.96 " fill="none" id="AsyncPubInterface-backto-MqttClientV1" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="520.2,89.11,517.26,68.12,532.64,82.7,520.2,89.11" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[802cb91d3bd849f983d6b2c9f2ead4ec]
+reverse link SyncPubInterface to MqttClientV1--><path d="M765.6,76.95 C732.17,92.94 693.24,111.56 658.95,127.96 " fill="none" id="SyncPubInterface-backto-MqttClientV1" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="763,70.44,784.06,68.12,769.04,83.07,763,70.44" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ac889fa27261100909bb675f5d82b8ed]
+link MqttClientV1 to Platform--><path codeLine="79" d="M537.1,215.1 C516.86,241.3 491.54,274.1 474,296.81 " fill="none" id="MqttClientV1-to-Platform" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="470.81,300.93,479.4671,296.2337,473.8579,296.9663,473.1252,291.3571,470.81,300.93" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[8f1d15cfe95675b20d35dca0a93251aa]
+link MqttClientV1 to EventId--><path codeLine="80" d="M568.59,215.1 C567.74,240.87 566.68,273.01 565.93,295.67 " fill="none" id="MqttClientV1-to-EventId" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="565.76,300.93,570.0407,292.0601,565.9171,295.9325,562.0447,291.8088,565.76,300.93" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[52f4de7d4673d8f4c7f3786eb0e36c7b]
+link MqttClientV1 to EventType--><path codeLine="81" d="M601.78,215.1 C621.32,241.3 645.78,274.1 662.72,296.81 " fill="none" id="MqttClientV1-to-EventType" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="665.79,300.93,663.6284,291.3213,662.806,296.918,657.2093,296.0957,665.79,300.93" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d8fa23d69fb82d2fcc3a586bb61c73c4]
+link MqttClientV1 to RequestProtocol--><path codeLine="82" d="M644.25,215.07 C675.98,233.38 713.39,255.1 747,275 C751.24,277.51 755.6,280.11 760,282.73 " fill="none" id="MqttClientV1-to-RequestProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="764.4,285.37,758.7405,277.3096,760.1125,282.7975,754.6246,284.1695,764.4,285.37" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[3c5568896940ff5594b66961ba906c03]
+link MqttClientV1 to CallbackProtocol--><path codeLine="83" d="M488.73,215.1 C450.71,235.04 405.41,258.78 366.83,279 " fill="none" id="MqttClientV1-to-CallbackProtocol" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="362.16,281.45,371.9891,280.8267,366.5914,279.1342,368.2839,273.7365,362.16,281.45" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[84bc315edd05b5d0ff0504b671831615]
+@startuml
+'https://plantuml.com/class-diagram
+'枚举
+enum Platform
+enum EventId
+enum EventType
+
+'回调
+abstract class MessageCallback{
+    response_msg_protocol: MsgProtocol
+    on_message(client, userdata, message: MQTTMessage)
+}
+MessageCallback o- - MsgProtocol
+
+class SimpleMessageCallback extends MessageCallback{
+    on_message(client, userdata, message: MQTTMessage)
+}
+
+class SyncMessageCallback extends MessageCallback{
+    on_message(client, userdata, message: MQTTMessage)
+}
+
+'消息
+abstract class MsgProtocol{
+    String msg_id
+}
+
+class RequestMsgProtocol extends MsgProtocol
+
+class ResponseMsgProtocol extends MsgProtocol
+
+'请求协议
+abstract class RequestProtocol{
+    topic: str
+    payload: MsgProtocol
+    qos: int
+    retain: bool
+}
+class RobotRequestProtocol extends RequestProtocol
+
+RequestProtocol o- - MsgProtocol
+
+'回调协议
+abstract class CallbackProtocol{
+    topic: str
+    callback_class: MessageCallback
+    qos: int
+}
+class RobotCallbackProtocol extends CallbackProtocol
+
+CallbackProtocol o- - MessageCallback
+
+'订阅接口
+abstract class SubInterface {
+    sub(callback_protocol)
+}
+SubInterface - -> CallbackProtocol
+
+'异步请求接口
+abstract class  AsyncPubInterface{
+    async_pub(request_protocol, callback_protocol)
+}
+AsyncPubInterface - -> RequestProtocol
+AsyncPubInterface - -> CallbackProtocol
+
+'同步请求接口
+abstract class SyncPubInterface {
+    sync_pub(request_protocol,callback_protocol, timeout) -> str
+}
+SyncPubInterface - -> RequestProtocol
+SyncPubInterface - -> CallbackProtocol
+
+'客户端实例
+class MqttClientV1 implements SubInterface, AsyncPubInterface, SyncPubInterface{
+    sub(callback_protocol)
+    async_pub(request_protocol, callback_protocol)
+    sync_pub(request_protocol,callback_protocol, timeout) -> str
+}
+
+MqttClientV1 - -> Platform
+MqttClientV1 - -> EventId
+MqttClientV1 - -> EventType
+MqttClientV1 - -> RequestProtocol
+MqttClientV1 - -> CallbackProtocol
+
+
+@enduml
+
+@startuml
+enum Platform
+enum EventId
+enum EventType
+
+abstract class MessageCallback{
+    response_msg_protocol: MsgProtocol
+    on_message(client, userdata, message: MQTTMessage)
+}
+MessageCallback o- - MsgProtocol
+
+class SimpleMessageCallback extends MessageCallback{
+    on_message(client, userdata, message: MQTTMessage)
+}
+
+class SyncMessageCallback extends MessageCallback{
+    on_message(client, userdata, message: MQTTMessage)
+}
+
+abstract class MsgProtocol{
+    String msg_id
+}
+
+class RequestMsgProtocol extends MsgProtocol
+
+class ResponseMsgProtocol extends MsgProtocol
+
+abstract class RequestProtocol{
+    topic: str
+    payload: MsgProtocol
+    qos: int
+    retain: bool
+}
+class RobotRequestProtocol extends RequestProtocol
+
+RequestProtocol o- - MsgProtocol
+
+abstract class CallbackProtocol{
+    topic: str
+    callback_class: MessageCallback
+    qos: int
+}
+class RobotCallbackProtocol extends CallbackProtocol
+
+CallbackProtocol o- - MessageCallback
+
+abstract class SubInterface {
+    sub(callback_protocol)
+}
+SubInterface - -> CallbackProtocol
+
+abstract class  AsyncPubInterface{
+    async_pub(request_protocol, callback_protocol)
+}
+AsyncPubInterface - -> RequestProtocol
+AsyncPubInterface - -> CallbackProtocol
+
+abstract class SyncPubInterface {
+    sync_pub(request_protocol,callback_protocol, timeout) -> str
+}
+SyncPubInterface - -> RequestProtocol
+SyncPubInterface - -> CallbackProtocol
+
+class MqttClientV1 implements SubInterface, AsyncPubInterface, SyncPubInterface{
+    sub(callback_protocol)
+    async_pub(request_protocol, callback_protocol)
+    sync_pub(request_protocol,callback_protocol, timeout) -> str
+}
+
+MqttClientV1 - -> Platform
+MqttClientV1 - -> EventId
+MqttClientV1 - -> EventType
+MqttClientV1 - -> RequestProtocol
+MqttClientV1 - -> CallbackProtocol
+
+
+@enduml
+
+PlantUML version 1.2022.1(Wed Feb 02 02:19:58 CST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: zh
+Country: CN
+--></g></svg>

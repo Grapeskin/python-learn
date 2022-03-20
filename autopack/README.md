@@ -53,7 +53,7 @@ autopack
 
 ## Quick Start
 
-[接口设计详细文档](autopack_mqtt.puml)
+[接口设计详细文档](autopack_mqtt.svg)
 
 创建 mqtt client 连接及导入相关依赖文件：
 ```
