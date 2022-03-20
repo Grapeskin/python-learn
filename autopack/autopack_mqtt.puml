@@ -5,6 +5,9 @@ enum Platform
 enum EventId
 enum EventType
 
+'mqtt连接对象
+class Client
+
 '回调
 abstract class MessageCallback{
     response_msg_protocol: MsgProtocol
@@ -72,11 +75,13 @@ SyncPubInterface --> CallbackProtocol
 
 '客户端实例
 class MqttClientV1 implements SubInterface, AsyncPubInterface, SyncPubInterface{
+    client: paho.mqtt.client.Client
     sub(callback_protocol)
     async_pub(request_protocol, callback_protocol)
     sync_pub(request_protocol,callback_protocol, timeout) -> str
 }
 
+MqttClientV1 *-> Client
 MqttClientV1 --> Platform
 MqttClientV1 --> EventId
 MqttClientV1 --> EventType
