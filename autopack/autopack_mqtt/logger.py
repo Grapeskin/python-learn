@@ -11,7 +11,7 @@ _formatter = logging.Formatter(
     "%(levelname)s %(asctime)s %(filename)s[line:%(lineno)d] %(message)s"
 )
 logger = logging.root
-logger.name = "mqtt-sdk"
+logger.name = "autopack_mqtt"
 logger.setLevel(logging.INFO)
 stdout_handler = logging.StreamHandler(stdout)
 stdout_handler.setFormatter(_formatter)

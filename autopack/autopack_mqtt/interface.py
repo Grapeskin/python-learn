@@ -6,8 +6,7 @@
 """
 import abc
 
-from mqtt_v1.protocol import (
-    MessageCallback,
+from .protocol import (
     RequestProtocol,
     CallbackProtocol,
     SyncStatus,
@@ -16,11 +15,11 @@ from mqtt_v1.protocol import (
 
 class SubInterface:
     @abc.abstractmethod
-    def sub(self, message_callback: MessageCallback):
+    def sub(self, callback_protocol: CallbackProtocol):
         """Sub wait callback message
 
         Args:
-            message_callback: callback protocol after sending the sync request
+            callback_protocol: callback protocol after sending the sync request
 
         Raises:
             ParamError: param error exception.
@@ -53,8 +52,8 @@ class SyncPubInterface(SyncStatus):
         self,
         request_protocol: RequestProtocol,
         callback_protocol: CallbackProtocol,
-        timeout: int = 2,
-    ):
+        timeout: int,
+    ) -> str:
         """Sync request and wait response until timeout raise Exception
 
         Args:

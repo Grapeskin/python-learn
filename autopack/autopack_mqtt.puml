@@ -1,0 +1,87 @@
+@startuml
+'https://plantuml.com/class-diagram
+'枚举
+enum Platform
+enum EventId
+enum EventType
+
+'回调
+abstract class MessageCallback{
+    response_msg_protocol: MsgProtocol
+    on_message(client, userdata, message: MQTTMessage)
+}
+MessageCallback o-- MsgProtocol
+
+class SimpleMessageCallback extends MessageCallback{
+    on_message(client, userdata, message: MQTTMessage)
+}
+
+class SyncMessageCallback extends MessageCallback{
+    on_message(client, userdata, message: MQTTMessage)
+}
+
+'消息
+abstract class MsgProtocol{
+    String msg_id
+}
+
+class RequestMsgProtocol extends MsgProtocol
+
+class ResponseMsgProtocol extends MsgProtocol
+
+'请求协议
+abstract class RequestProtocol{
+    topic: str
+    payload: MsgProtocol
+    qos: int
+    retain: bool
+}
+class RobotRequestProtocol extends RequestProtocol
+
+RequestProtocol o-- MsgProtocol
+
+'回调协议
+abstract class CallbackProtocol{
+    topic: str
+    callback_class: MessageCallback
+    qos: int
+}
+class RobotCallbackProtocol extends CallbackProtocol
+
+CallbackProtocol o-- MessageCallback
+
+'订阅接口
+abstract class SubInterface {
+    sub(callback_protocol)
+}
+SubInterface --> CallbackProtocol
+
+'异步请求接口
+abstract class  AsyncPubInterface{
+    async_pub(request_protocol, callback_protocol)
+}
+AsyncPubInterface --> RequestProtocol
+AsyncPubInterface --> CallbackProtocol
+
+'同步请求接口
+abstract class SyncPubInterface {
+    sync_pub(request_protocol,callback_protocol, timeout) -> str
+}
+SyncPubInterface --> RequestProtocol
+SyncPubInterface --> CallbackProtocol
+
+'客户端实例
+class MqttClientV1 implements SubInterface, AsyncPubInterface, SyncPubInterface{
+    sub(callback_protocol)
+    async_pub(request_protocol, callback_protocol)
+    sync_pub(request_protocol,callback_protocol, timeout) -> str
+}
+
+MqttClientV1 --> Platform
+MqttClientV1 --> EventId
+MqttClientV1 --> EventType
+MqttClientV1 --> RequestProtocol
+MqttClientV1 --> CallbackProtocol
+
+
+@enduml

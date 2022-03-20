@@ -5,15 +5,17 @@
 @Time    : 2022/3/19 17:02
 """
 import time
-from multiprocessing import Process
 
-from mqtt_v1 import (
+from autopack_mqtt import (
     MqttClientV1,
     Platform,
+    EventType,
+    EventId,
     RobotCallbackProtocol,
     logger,
     RobotRequestProtocol,
     RequestMsgProtocol,
+    ResponseMsgProtocol,
     SyncMessageCallback,
     SimpleMessageCallback,
     generate_msg_id,
@@ -35,7 +37,8 @@ def test_async_sub_on_single_thread(
                 RequestMsgProtocol(payload),
             ),
             RobotCallbackProtocol(
-                callback_topic, SimpleMessageCallback(debug_mode=debug_mode)
+                callback_topic,
+                SimpleMessageCallback(ResponseMsgProtocol(), debug_mode=debug_mode),
             ),
         )
         max_concurrency = max_concurrency - 1
@@ -54,17 +57,6 @@ def async_pub(client, request_topic, callback_topic, debug_mode=False):
     )
 
 
-def test_async_sub_on_multi_process(
-    request_topic, callback_topic, max_concurrency=10, debug_mode=False
-):
-    while max_concurrency > 0:
-        Process(
-            target=async_pub,
-            args=(mqtt_client, request_topic, callback_topic, debug_mode),
-        ).run()
-        max_concurrency = max_concurrency - 1
-
-
 def test_sync_pub_on_single_thread(
     request_topic, callback_topic, timeout, max_concurrency=10, debug_mode=False
 ):
@@ -73,7 +65,8 @@ def test_sync_pub_on_single_thread(
         res = mqtt_client.sync_pub(
             RobotRequestProtocol(request_topic, RequestMsgProtocol(payload)),
             RobotCallbackProtocol(
-                callback_topic, SyncMessageCallback(debug_mode=debug_mode)
+                callback_topic,
+                SyncMessageCallback(ResponseMsgProtocol(), debug_mode=debug_mode),
             ),
             timeout=timeout,
         )
@@ -96,23 +89,12 @@ def sync_pub(client, request_topic, callback_topic, timeout, debug_mode):
 def get_payload():
     payload = {
         "msg_id": generate_msg_id(),
-        "type": "service",
-        "id": "Carrier.SetPWM",
+        "type": EventType.SERVICE.value,
+        "id": EventId.GetDeviceInfo.value,
         "timestamp": int(time.time()),
-        "data": '{"PwmL":-4000,"PwmR":-4000}',
+        "data": "{}",
     }
     return payload
-
-
-def test_sync_pub_on_multi_process(
-    request_topic, callback_topic, timeout, max_concurrency=10, debug_mode=False
-):
-    while max_concurrency > 0:
-        Process(
-            target=sync_pub,
-            args=(mqtt_client, request_topic, callback_topic, timeout, debug_mode),
-        ).run()
-        max_concurrency = max_concurrency - 1
 
 
 def block_main_thread():
@@ -155,7 +137,7 @@ if __name__ == "__main__":
     req_topic = "/dev/robot/123/service/request"
     call_topic = "/dev/robot/123/service/response"
     timeout_sec = 2
-    concurrency = 500
+    concurrency = 10
     debug = True
 
     # test sub
@@ -163,10 +145,8 @@ if __name__ == "__main__":
 
     # test async pub
     test_async_sub_on_single_thread(req_topic, call_topic, concurrency, debug)
-    # test_async_sub_on_multi_process(req_topic, call_topic, concurrency, debug)
 
     # test sync pub
     # test_sync_pub_on_single_thread(req_topic, call_topic, timeout_sec, concurrency, debug)
-    # test_sync_pub_on_multi_process(req_topic, call_topic, timeout_sec, concurrency, debug)
 
     block_main_thread()

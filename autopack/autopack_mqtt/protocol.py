@@ -9,8 +9,8 @@ from json import JSONDecodeError
 
 from paho.mqtt.client import MQTTMessage
 
-from mqtt_v1.exception import DataFormatError
-from mqtt_v1.logger import logger
+from .exception import DataFormatError
+from .logger import logger
 
 
 class MsgProtocol:
@@ -81,13 +81,13 @@ class MessageCallback:
         raise NotImplementedError
 
     @staticmethod
-    def log_message(message: MQTTMessage):
+    def _log_message(message: MQTTMessage):
         logger.info(
             f"Receive message {message.topic} {message.payload.decode('utf-8')}"
         )
 
     @staticmethod
-    def count_receive_msg():
+    def _count_receive_msg():
         MessageCallback.receive_count = MessageCallback.receive_count + 1
         logger.info(f"Receive msg count={MessageCallback.receive_count}")
 
@@ -104,9 +104,9 @@ class SimpleMessageCallback(MessageCallback):
     def on_message(self, client, userdata, message: MQTTMessage):
         """It's a simple on message callback."""
 
-        self.log_message(message)
+        self._log_message(message)
         if self.debug_mode:
-            self.count_receive_msg()
+            self._count_receive_msg()
 
 
 class SyncMessageCallback(MessageCallback, SyncStatus):
@@ -119,7 +119,7 @@ class SyncMessageCallback(MessageCallback, SyncStatus):
         self.debug_mode = debug_mode
 
     def on_message(self, client, userdata, message: MQTTMessage):
-        self.log_message(message)
+        self._log_message(message)
         payload = message.payload.decode("utf-8")
         try:
             self.msg_protocol.__init__(json.loads(payload))
@@ -128,14 +128,14 @@ class SyncMessageCallback(MessageCallback, SyncStatus):
         if self._REQ_STATUS.get(self.msg_protocol.msg_id) is None:
             self._REQ_STATUS[self.msg_protocol.msg_id] = self.msg_protocol.to_json()
             if self.debug_mode:
-                self.count_receive_msg()
+                self._count_receive_msg()
 
 
 class RequestProtocol:
     def __init__(
         self,
         topic: str,
-        payload: MsgProtocol = RequestMsgProtocol(),
+        payload: MsgProtocol,
         qos: int = 0,
         retain: bool = False,
     ):
@@ -143,18 +143,6 @@ class RequestProtocol:
         self.payload = payload
         self.qos = qos
         self.retain = retain
-
-
-class CallbackProtocol:
-    def __init__(
-        self,
-        topic: str,
-        callback_class: MessageCallback = SimpleMessageCallback(),
-        qos: int = 0,
-    ):
-        self.topic = topic
-        self.callback_class = callback_class
-        self.qos = qos
 
 
 class RobotRequestProtocol(RequestProtocol):
@@ -166,6 +154,18 @@ class RobotRequestProtocol(RequestProtocol):
         retain: bool = False,
     ):
         super().__init__(topic, payload, qos, retain)
+
+
+class CallbackProtocol:
+    def __init__(
+        self,
+        topic: str,
+        callback_class: MessageCallback,
+        qos: int = 0,
+    ):
+        self.topic = topic
+        self.callback_class = callback_class
+        self.qos = qos
 
 
 class RobotCallbackProtocol(CallbackProtocol):

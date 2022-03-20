@@ -6,7 +6,7 @@
 """
 import uuid
 
-from mqtt_v1.enums import Platform
+from .enums import Platform
 
 
 def generate_client_id(platform: Platform):

@@ -8,17 +8,17 @@ import time
 
 from paho.mqtt.client import Client, MQTTMessageInfo
 
-from mqtt_v1.enums import Platform
-from mqtt_v1.exception import ParamError, SyncTimeoutError
-from mqtt_v1.interface import SubInterface, AsyncPubInterface, SyncPubInterface
-from mqtt_v1.logger import logger
-from mqtt_v1.protocol import (
+from .enums import Platform
+from .exception import ParamError, SyncTimeoutError
+from .interface import SubInterface, AsyncPubInterface, SyncPubInterface
+from .logger import logger
+from .protocol import (
     CallbackProtocol,
     RequestProtocol,
     MsgProtocol,
     MessageCallback,
 )
-from mqtt_v1.utils import generate_client_id
+from .utils import generate_client_id
 
 
 def on_connect(client: Client, userdata, flags, rc):
@@ -52,7 +52,7 @@ def on_disconnect(client: Client, userdata, rc):
             other: might be caused by a network error.
     """
 
-    logger.info(msg=f"Connection disconnect. [client_id = {userdata}, rc={rc}.")
+    logger.info(msg=f"Connection disconnected. [client_id = {userdata}, rc={rc}.")
 
 
 class MqttClientV1(SubInterface, AsyncPubInterface, SyncPubInterface):
@@ -89,7 +89,6 @@ class MqttClientV1(SubInterface, AsyncPubInterface, SyncPubInterface):
         self._client.loop_start()
 
     def sub(self, callback_protocol: CallbackProtocol):
-
         if not all([callback_protocol.topic, callback_protocol.callback_class]):
             raise ParamError()
         self._client.subscribe(callback_protocol.topic, callback_protocol.qos)
@@ -103,7 +102,6 @@ class MqttClientV1(SubInterface, AsyncPubInterface, SyncPubInterface):
         callback_protocol: CallbackProtocol,
         timeout: int = 2,
     ) -> str:
-
         if not request_protocol.topic:
             raise ParamError()
         if not isinstance(request_protocol.payload, MsgProtocol):
@@ -134,7 +132,6 @@ class MqttClientV1(SubInterface, AsyncPubInterface, SyncPubInterface):
     def async_pub(
         self, request_protocol: RequestProtocol, callback_protocol: CallbackProtocol
     ):
-
         if not request_protocol.topic:
             raise ParamError()
         if not isinstance(callback_protocol.callback_class, MessageCallback):
@@ -151,7 +148,7 @@ class MqttClientV1(SubInterface, AsyncPubInterface, SyncPubInterface):
             request_protocol.qos,
             request_protocol.retain,
         )
+        msg_id = request_protocol.payload.msg_id
         logger.info(
-            f"Publish message. req_info=[msg_id={request_protocol.payload.msg_id}],res_info=[rc={pub_res.rc}, "
-            f"mid={pub_res.mid}]"
+            f"Publish message. req_info=[msg_id={msg_id}],res_info=[rc={pub_res.rc}, mid={pub_res.mid}]"
         )
