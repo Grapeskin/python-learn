@@ -21,7 +21,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    package_dir={"": "autopack_mqtt"},
-    packages=setuptools.find_packages(where="autopack_mqtt"),
+    package_dir={"": "."},
+    packages=setuptools.find_packages(where="example_package"),
     python_requires=">=3.6",
 )
