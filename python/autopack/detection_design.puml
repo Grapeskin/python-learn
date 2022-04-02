@@ -1,0 +1,199 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+
+' 节点
+abstract class Node extends AbstractDetection {
+    init(List[Condition] conditions)
+
+    pre_handle()
+    on_handle()
+    post_handle()
+}
+
+'实际检测节点
+class AlongTheWallNode extends Node {
+    init(List[Condition] conditions)
+
+    pre_handle()
+    on_handle()
+    post_handle()
+}
+class ButtonNode extends Node {
+    init(List[Condition] conditions)
+
+    pre_handle()
+    on_handle()
+    post_handle()
+}
+
+
+' 检测执行器
+interface DetectionActuator {
+    #List[Condition] detect(List[Condition] conditions)
+}
+DetectionActuator --> Condition
+
+'检测校验器
+'abstract class DetectionValidator {
+'    #List[DetectionResult] validate(List[Condition] conditions)
+'}
+'DetectionValidator --> ValidateResult
+'DetectionValidator --> DetectionResult
+'DetectionValidator *-- ValidateRule
+
+abstract class AbstractDetection implements DetectionActuator {
+    mqtt_client: MqttClient
+    status_recorder: StatusRecorder
+    +init(List[Condition] conditions)
+    +List[Condition] handle()
+    +pre_handle()
+    +on_handle()
+    +post_handle()
+    -on_idle()
+    -on_check()
+    -on_done()
+}
+AbstractDetection --> Condition
+AbstractDetection::mqtt_client *-- MqttClient
+AbstractDetection::status_recorder *-- StatusRecorder
+
+abstract class ValidateRule {
+    validate()
+}
+
+class RequestServiceDataValidator extends ValidateRule {
+    config: Configuration
+    validate()
+}
+RequestServiceDataValidator *-- Configuration
+class PostEventDataValidator extends ValidateRule {
+    config: Configuration
+    validate()
+}
+PostEventDataValidator *-- Configuration
+class ExecScriptDataValidator extends ValidateRule {
+    validate()
+}
+
+
+abstract class Condition {
+    identifier: str
+    type: ConditionType
+    condition_param: ConditionParam
+    condition_result: dict
+    validate_rule: ValidateRule
+    validate_result: bool
+    +init(type: ConditionType, ConditionParam condition_param, validate_rule: ValidateRule)
+    +validate()
+    +execute()
+}
+'Condition --> ConditionType
+Condition::condition_param o-- ConditionParam
+'Condition::condition_result o-- ConditionResult
+Condition::validate_rule o-- ValidateRule
+'Condition::validate_result o-- ValidateResult
+
+'
+'class ConditionResult {
+'    data: dict
+'    result: bool
+'}
+
+class WaitEventPostCondition extends Condition {
+    type: ConditionType.WAIT_EVENT_POST
+    init(WaitEventPostParam param)
+'    client: DeviceCommunication
+    +validate()
+    +execute()
+}
+'WaitEventPostCondition::type --> ConditionType
+'WaitEventPostCondition::init --> WaitEventPostParam
+'WaitEventPostCondition::client o-- DeviceCommunication
+class ServiceRequestCondition extends Condition {
+    type: ConditionType.REQUEST_SERVICE
+'    client: DeviceCommunication
+    init(ServiceRequestParam param, mqtt_client: MqttClient)
+    +validate()
+    +execute()
+}
+'ServiceRequestCondition::client o-- DeviceCommunication
+'ServiceRequestCondition::type --> ConditionType
+'ServiceRequestCondition::init --> ServiceRequestParam
+
+class ExecScriptCondition extends Condition {
+    type: ConditionType.EXEC_SCRIPT
+    init(ExecScriptParam param)
+    +validate()
+    +execute()
+}
+'ExecScriptCondition::type --> ConditionType
+'ExecScriptCondition::init --> ExecScriptParam
+
+abstract class ConditionParam {
+
+}
+'abstract class DeviceCommunication {
+'    mqtt_client: MqttClient
+'}
+'DeviceCommunication::mqtt_client *-- MqttClient
+
+class WaitEventPostParam extends ConditionParam {
+    init(type DeviceType, ...)
+}
+class ServiceRequestParam extends ConditionParam {
+    init(type DeviceType, ...)
+}
+'ServiceRequestParam::init --> DeviceType
+class ExecScriptParam extends ConditionParam {
+    init(...)
+}
+
+'class ValidateResult {
+'    identifier: str
+'    data: dict
+'    validate_rule: ValidateRule
+'}
+'ValidateResult::validate_rule o-- ValidateRule
+'class DetectionResult {
+'    identifier: str
+'    result: bool
+'}
+enum ConditionType {
+    WAIT_EVENT_POST = "wait_event_post"
+    REQUEST_SERVICE = "request_service"
+    EXEC_SCRIPT = "exec_script"
+}
+
+enum DeviceType {
+    ROBOT = "robot"
+    JIG = "jig"
+}
+
+'abstract EngineManager {
+'
+'}
+
+
+
+class MqttClient {
+    subscribe()
+    post_event()
+    request_service()
+}
+
+class Configuration {
+
+}
+
+class StatusRecorder {
+    start_time: int
+    end_time: int
+    timeout: int
+    status: int
+    result: bool
+}
+
+
+@enduml

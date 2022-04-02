@@ -6,7 +6,7 @@
 """
 import time
 
-from autopack_mqtt import (
+from ..autopack_mqtt import (
     MqttClientV1,
     Platform,
     EventType,
