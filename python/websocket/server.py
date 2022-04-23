@@ -7,14 +7,14 @@ import websockets
 
 async def hello(websocket):
     async for message in websocket:
-        print(f'receive_time={time.time()}')
+        print(f"receive_time={time.time()}")
         print(message)
-        websocket.send(json.dumps({'pong': "test"}))
+        # websocket.send(json.dumps({'pong': "test"}))
 
 
 async def main():
     async with websockets.serve(hello, "localhost", 8765):
-        await asyncio.sleep(100)  # run forever
+        await asyncio.Future()  # run forever
 
 
 if __name__ == "__main__":
