@@ -10,11 +10,13 @@ from websockets.legacy.client import WebSocketClientProtocol
 def hello():
     uri = "ws://localhost:8765"
     i = 0
-    print(f'start_time={time.time()}')
-    client = websockets.connect(uri,)
+    print(f"start_time={time.time()}")
+    client = websockets.connect(
+        uri,
+    )
     while True:
-        print(f'send_time={time.time()}')
-        client.send(json.dumps({'ping': "test"}))
+        print(f"send_time={time.time()}")
+        client.send(json.dumps({"ping": "test"}))
         # receive = client.recv()
         # print(receive)
         time.sleep(1)
