@@ -197,12 +197,18 @@ def download_ks_user_all(user_id: str, cookies: str):
 def download_pdd_share_urls():
     """下载拼多多视频链接"""
     for video in get_pdd_videos():
-        print(
-            common.any_download(
-                url=video.get("url"), output_dir=os.path.join(os.getcwd(), "pdd")
+        try:
+            print(
+                common.any_download(
+                    url=video.get("url"), output_dir=os.path.join(os.getcwd(), "pdd")
+                )
             )
-        )
-        cursor.execute(f"update pdd_video set status = 1 where id = {video.get('id')}")
+            cursor.execute(
+                f"update pdd_video set status = 1 where id = {video.get('id')}"
+            )
+            db.commit()
+        except Exception as e:
+            db.rollback()
 
 
 def get_pdd_videos():
@@ -226,8 +232,4 @@ if __name__ == "__main__":
         host="localhost", port=3306, user="root", password="123456", database="test"
     )
     cursor = db.cursor(cursor=SSDictCursor)
-    try:
-        download_pdd_share_urls()
-        db.commit()
-    except Exception as e:
-        db.rollback()
+    download_pdd_share_urls()
