@@ -6,7 +6,9 @@
 """
 import json
 import logging
+import random
 import re
+import time
 
 import requests
 import uvicorn
@@ -51,7 +53,7 @@ class AuthorInfo(Base):
     avatar = Column(String(512), nullable=False, comment="大头像")
     vipType = Column(Integer, nullable=True, comment="VIP类型")
     fansJumpUrl = Column(String(128), nullable=False, comment="粉丝地址")
-    sharePageUrl = Column(Text, nullable=False, comment="分享主页地址")
+    # sharePageUrl = Column(Text, nullable=False, comment="分享主页地址")
 
     createTime = Column(TIMESTAMP(True), nullable=False, server_default=text("NOW()"))
     updateTime = Column(
@@ -143,13 +145,13 @@ app = FastAPI()
 class Params(BaseModel):
     user_agent: str
     cookie: str
-    share_page_urls: list
+    target_uid_list: list
 
 
 class AuthorInfoBO:
     """作者信息业务对象"""
 
-    def __init__(self, share_page_url, **kwargs):
+    def __init__(self, target_uid, **kwargs):
         self.uid = str(kwargs.get("uid"))
         self.uin = str(kwargs.get("uin"))
         self.nickname = kwargs.get("nickname")
@@ -162,7 +164,7 @@ class AuthorInfoBO:
         self.avatar = kwargs.get("avatar")
         self.vipType = int(kwargs.get("vipType", -1))
         self.fansJumpUrl = kwargs.get("headTabs", [])[0].get("jumpUrl")
-        self.sharePageUrl = share_page_url
+        # self.sharePageUrl = target_uid
 
     def to_json(self):
         """返回对象序列化字典"""
@@ -231,10 +233,11 @@ class ProductAnalysisBO:
 def invoke(params: Params = Body(...)):
     """触发数据抓取"""
     print(params)
-    for share_page_url in params.share_page_urls:
-        store = get_origin_data(share_page_url, params.user_agent, params.cookie)
+    for target_uid in params.target_uid_list:
+        time.sleep(random.randint(0, 5))
+        store = get_origin_data(target_uid, params.user_agent, params.cookie)
 
-        author_info_bo = AuthorInfoBO(share_page_url=share_page_url, **store)
+        author_info_bo = AuthorInfoBO(target_uid=target_uid, **store)
 
         print(author_info_bo.to_json())
         print(author_info_bo.uid)
@@ -270,11 +273,11 @@ def invoke(params: Params = Body(...)):
     return {"result": "ok"}
 
 
-def get_origin_data(share_page_url, user_agent, cookie):
+def get_origin_data(target_uid, user_agent, cookie):
     """获取原始数据"""
-
+    url = f"https://mobile.yangkeduo.com/svideo_personal.html?target_uid={target_uid}"
     res = requests.get(
-        url=share_page_url,
+        url=url,
         headers={
             "User-Agent": user_agent,
             "Cookie": cookie,
