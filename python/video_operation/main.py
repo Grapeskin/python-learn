@@ -188,10 +188,10 @@ def download_ks_user_all(user_id: str, cookies: str):
 
         print(url)
         common.any_download(url=url, output_dir=os.path.join(os.getcwd(), "ks"))
-        os.rename(
-            os.path.join(current_dir, src_file_name),
-            os.path.join(current_dir, dst_file_name),
-        )
+        # os.rename(
+        #     os.path.join(current_dir, src_file_name),
+        #     os.path.join(current_dir, dst_file_name),
+        # )
 
 
 def download_pdd_share_urls():
@@ -220,11 +220,12 @@ def get_pdd_videos():
 
 if __name__ == "__main__":
     # download_ks_share_urls(
-    #     cookies="did=web_cbf2e4e8bc694e56a30fd5295ce28ea8; didv=1652011511000; clientid=3; client_key=65890b29; userId=1680869379",
-    #     urls=["https://v.kuaishou.com/k0BAhi", "https://v.kuaishou.com/jzcuGY"]
+    #     cookies="did=web_cbf2e4e8bc694e56a30fd5295ce28ea8; didv=1652011511000; kpf=PC_WEB; kpn=KUAISHOU_VISION; clientid=3; client_key=65890b29; userId=1680869379; kuaishou.server.web_st=ChZrdWFpc2hvdS5zZXJ2ZXIud2ViLnN0EqABsoTiDhvcdyJEK-Ut0gGV-MYiO8foEeADFKbmVryHQw3FhF0xNiQ7DwcPWD_unKxUMxuLJp-fFrz9bWefkZWpOn4rIemVz8rgG8MAjUBmSrmsFJzgTOmvXHCtrAryRDfP_E52EAwe99tyrnep1cn8G_3Fjk0oyH8--FTz3kBwDggzMfK7S5CILII4I3bOYUspFZ_3rZ386ou9f2JExB0DKRoSsmhEcimAl3NtJGybSc8y6sdlIiATKk7DGHFyGY3egCOWusSI5ku6U7yuZLLxBHYkx2sRnigFMAE; kuaishou.server.web_ph=99d48baa0b24c33e459ac187b55ee698389b",
+    #     urls=["https://v.kuaishou.com/jFpS2n"]
     # )
-    # download_ks_user_all(user_id='3x27q2f82gnxn4e',
-    #                      cookies='did=web_cbf2e4e8bc694e56a30fd5295ce28ea8; didv=1652011511000; kpf=PC_WEB; kpn=KUAISHOU_VISION; clientid=3; client_key=65890b29; userId=1680869379; kuaishou.server.web_st=ChZrdWFpc2hvdS5zZXJ2ZXIud2ViLnN0EqABGqjH4Zoode2cqHDOgkOVTI0thsHle8sbkhbxvWIYKDyLXwKYQR_V7ZhrKqEGw8hxQ_G5GdI_rqM9leZ7qtmlVRpc0ngJuiQr7IU0ZBitBDM0FsUY00iHFir9JvsgVbfJsbOyhglx1rSAkjUw0es06yxRQznGdM5xRFa9v6m8JHEp8vGlG1X8qTMXWR_LRlEau_rKPfJEJd5JQneqSqolIRoSf061Kc3w5Nem7YdpVBmH39ceIiDRS2IjqOnmroiJUIqSM5fz008E82LBx95QhLVvNukJWygFMAE; kuaishou.server.web_ph=e97f70cd95a53fa09bdce7dada843f19936f')
+    # 'https://v.kuaishou.com/jFpS2n @阿浩好物分享 发了一个快手作品，一起来看！复制此消息，打开【快手】直接观看！'
+    # download_ks_user_all(user_id='3xvw6xmjeqat32s',
+    #                      cookies='did=web_cbf2e4e8bc694e56a30fd5295ce28ea8; didv=1652011511000; kpf=PC_WEB; kpn=KUAISHOU_VISION; clientid=3; client_key=65890b29; userId=1680869379; kuaishou.server.web_st=ChZrdWFpc2hvdS5zZXJ2ZXIud2ViLnN0EqABsoTiDhvcdyJEK-Ut0gGV-MYiO8foEeADFKbmVryHQw3FhF0xNiQ7DwcPWD_unKxUMxuLJp-fFrz9bWefkZWpOn4rIemVz8rgG8MAjUBmSrmsFJzgTOmvXHCtrAryRDfP_E52EAwe99tyrnep1cn8G_3Fjk0oyH8--FTz3kBwDggzMfK7S5CILII4I3bOYUspFZ_3rZ386ou9f2JExB0DKRoSsmhEcimAl3NtJGybSc8y6sdlIiATKk7DGHFyGY3egCOWusSI5ku6U7yuZLLxBHYkx2sRnigFMAE; kuaishou.server.web_ph=99d48baa0b24c33e459ac187b55ee698389b; clientid=3; did=web_43c22563da6c2789e316930f5aeb3891; kpf=PC_WEB; kpn=KUAISHOU_VISION')
     # download_pdd_share_urls([
     #     'https://mobile.yangkeduo.com/fyxmkief.html?refer_share_id=fcHutf63jqxPyRKjWRYkDLUBdGYMJMnf&refer_share_channel=message&refer_share_uid=8647772212739&_x_share_id=fWZTaXA566E5XsdIT9wA2SUbCVIOXyDr&_wvx=10&_x_source_feed_id=4569916880722973607&share_uid=8647772212739&share_uin=3LS2542HF32COXS3ZR5VDK5EJA_GEXDA&page_from=602100&feed_id=4628849246568566060&refer_share_uin=3LS2542HF32COXS3ZR5VDK5EJA_GEXDA&needs_login=1&shared_time=1653311024255&shared_sign=a653b53db3e2f8a1353d58effac76d42&_wv=41729&goods_id=330659862161'
     # ])

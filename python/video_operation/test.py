@@ -6,6 +6,7 @@
 """
 import json
 import logging
+import os
 import random
 import re
 import time
@@ -26,6 +27,7 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.orm import declarative_base, sessionmaker
+from you_get import common
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -148,6 +150,10 @@ class Params(BaseModel):
     target_uid_list: list
 
 
+class UrlParams(BaseModel):
+    urls: list
+
+
 class AuthorInfoBO:
     """作者信息业务对象"""
 
@@ -233,7 +239,8 @@ class ProductAnalysisBO:
 def invoke(params: Params = Body(...)):
     """触发数据抓取"""
     print(params)
-    for target_uid in params.target_uid_list:
+    for index, target_uid in enumerate(params.target_uid_list):
+        logger.info(f"{index=}, {target_uid=}")
         time.sleep(random.randint(0, 5))
         store = get_origin_data(target_uid, params.user_agent, params.cookie)
 
@@ -293,6 +300,17 @@ def get_origin_data(target_uid, user_agent, cookie):
     if not store:
         raise Exception("获取store失败")
     return store
+
+
+@app.post("/download")
+def invoke(params: UrlParams = Body(...)):
+    """下载视频"""
+    print(params)
+    result = []
+    for url in params.urls:
+        common.any_download(url=url, output_dir=os.path.join(os.getcwd(), "pdd"))
+        result.append(url)
+    return result
 
 
 if __name__ == "__main__":
