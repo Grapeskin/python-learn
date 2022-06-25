@@ -1,11 +1,17 @@
 # MySQL Innodb 存储引擎深入学习
+
 [toc]
+
 ## 概念
+
 ![内存结构](img.png)
 
 ## 命令
+
 ### 查看引擎前段时间的状态
+
 `show engine innodb status\G;`
+
 ~~~
 *************************** 1. row ***************************
   Type: InnoDB
@@ -130,7 +136,9 @@ No query specified
 ~~~
 
 ### 查看Innodb版本
+
 `show variables like 'innodb_version';`
+
 ~~~
 +----------------+--------+
 | Variable_name  | Value  |
@@ -140,7 +148,9 @@ No query specified
 ~~~
 
 ### 查看缓冲池大小
+
 `show variables like 'innodb_buffer_pool_size';`
+
 ~~~
 +-------------------------+-----------+
 | Variable_name           | Value     |
@@ -148,8 +158,11 @@ No query specified
 | innodb_buffer_pool_size | 134217728 |
 +-------------------------+-----------+
 ~~~
+
 ### 查看重做日志缓冲池大小
+
 `show variables like 'innodb_log_buffer_size';`
+
 ~~~
 +------------------------+----------+
 | Variable_name          | Value    |
@@ -157,3 +170,99 @@ No query specified
 | innodb_log_buffer_size | 16777216 |
 +------------------------+----------+
 ~~~
+
+### 数据库
+
+- 创建数据库
+
+语法：`CREATE DATABASE [IF NOT EXISTS] db_name CHARACTER SET charset_name COLLATE collation name;`
+
+示例：`create database if not exists test default character set utf8mb4 collate utf8mb4_unicode_ci;`
+
+- 修改数据库
+
+语法：`ALTER {DATABASE | SCHEMA} [db_name] alter_specification ...  `
+
+示例：`alter database test default character set utf8 collate utf8_general_ci;`
+
+- 查看数据库
+
+语法：`SHOW {DATABASES | SCHEMAS} [LIKE 'pattern']`
+
+示例1：`show databases like '%test';`
+
+示例2：`show databases;`
+
+示例3：`show create database test;`
+
+- 删除数据库
+
+语法：`DROP {DATABASE | SCHEMA} [IF EXISTS] db_name;`
+
+示例：`drop database if exists test;`
+
+### 数据库表
+
+#### 创建表
+
+语法：
+
+~~~
+CREATE TABLE tbl_name(
+字段名1 数据类型 [列级完整性约束条件][默认值],
+字段名2 数据类型 [列级完整性约束条件][默认值],
+[...]
+[, 表级完整性约束条件]
+)[ENGINE=引擎类型];
+~~~
+
+示例：
+
+~~~
+create table if not exists user
+(
+    id   int         not null auto_increment primary key comment '主键ID',
+    uid  varchar(32) not null comment '用户ID',
+    name varchar(32) null comment '用户名'
+) comment '用户表' engine = innodb
+                default charset = utf8mb4 collate utf8mb4_unicode_ci;
+~~~
+
+#### 更新表
+
+- 新增列
+
+示例：`alter table user add column age int null comment '年龄' after uid;`
+
+- 修改*列名*或*数据类型*
+
+示例：`alter table user change column name uname varchar(64) not null default '未知' comment '大名';`
+
+- 修改列*数据类型*或*顺序*
+
+示例：`alter table user modify column uname varchar(128) null after uid;`
+
+- 修改或删除列*默认值*
+
+示例：`alter table user alter column uname set default 'M';`
+
+- 删除列
+
+示例：`alter table user drop column uname;`
+
+- 查看列
+
+示例：`show full columns from user;`
+
+#### 重名表
+
+示例：`alter table user rename to user1;`
+示例：`rename table user1 to user2;`
+
+#### 删除表
+
+示例：`drop table if exists user2;`
+
+#### 查看表
+
+### 数据增删改查

@@ -42,6 +42,7 @@ class AuthorInfo(Base):
     """作者基本信息"""
 
     __tablename__ = "author_info"
+    __table_args__ = {"comment": "作者基本信息", "mysql_charset": "utf8mb4"}
     id = Column(Integer, primary_key=True, autoincrement=True, comment="主键ID")
     uid = Column(String(16), nullable=False, unique=True, comment="UID")
     uin = Column(String(32), nullable=False, unique=True, comment="UIN")
@@ -69,6 +70,7 @@ class AuthorFans(Base):
     """作者粉丝信息"""
 
     __tablename__ = "author_fans"
+    __table_args__ = {"comment": "作者粉丝信息", "mysql_charset": "utf8mb4"}
     id = Column(Integer, primary_key=True, autoincrement=True, comment="主键ID")
     uid = Column(String(16), nullable=False, comment="UID")
     fans_number = Column(Integer, nullable=False, comment="作者粉丝数")
@@ -85,6 +87,7 @@ class FeedInfo(Base):
     """资源信息"""
 
     __tablename__ = "feed_info"
+    __table_args__ = {"comment": "资源信息", "mysql_charset": "utf8mb4"}
     id = Column(Integer, primary_key=True, autoincrement=True, comment="主键ID")
     uid = Column(String(16), nullable=False, comment="UID")
     feedId = Column(String(32), nullable=False, unique=True, comment="资源ID")
@@ -110,6 +113,7 @@ class ProductAnalysis(Base):
     """商品分析信息"""
 
     __tablename__ = "product_analysis"
+    __table_args__ = {"comment": "商品分析信息", "mysql_charset": "utf8mb4"}
     id = Column(Integer, primary_key=True, autoincrement=True, comment="主键ID")
     feedId = Column(String(32), nullable=False, comment="资源ID")
 
