@@ -149,12 +149,16 @@ app = FastAPI()
 
 
 class Params(BaseModel):
+    """获取用户数据参数列表"""
+
     user_agent: str
     cookie: str
     target_uid_list: list
 
 
 class UrlParams(BaseModel):
+    """下载视频参数列表"""
+
     urls: list
 
 
@@ -246,7 +250,9 @@ def invoke(params: Params = Body(...)):
     for index, target_uid in enumerate(params.target_uid_list):
         logger.info(f"{index=}, {target_uid=}")
         time.sleep(random.randint(0, 5))
-        store = get_origin_data(target_uid, params.user_agent, params.cookie)
+        store = get_origin_data(
+            target_uid=target_uid, user_agent=params.user_agent, cookie=params.cookie
+        )
 
         author_info_bo = AuthorInfoBO(target_uid=target_uid, **store)
 
@@ -284,8 +290,13 @@ def invoke(params: Params = Body(...)):
     return {"result": "ok"}
 
 
-def get_origin_data(target_uid, user_agent, cookie):
+def get_origin_data(target_uid, cookie, user_agent=None):
     """获取原始数据"""
+    if not user_agent:
+        user_agent = (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/102.0.5005.61 Safari/537.36 "
+        )
     url = f"https://mobile.yangkeduo.com/svideo_personal.html?target_uid={target_uid}"
     res = requests.get(
         url=url,
@@ -307,14 +318,38 @@ def get_origin_data(target_uid, user_agent, cookie):
 
 
 @app.post("/download")
-def invoke(params: UrlParams = Body(...)):
+def download(params: UrlParams = Body(...)):
     """下载视频"""
     print(params)
     result = []
     for url in params.urls:
-        common.any_download(url=url, output_dir=os.path.join(os.getcwd(), "pdd"))
+        common.any_download(
+            url=url,
+            output_dir=os.path.join(
+                os.getcwd(), time.strftime("%Y%m%d", time.localtime(time.time()))
+            ),
+        )
         result.append(url)
     return result
+
+
+class DetailParams(BaseModel):
+    """获取单个用户数据参数列表"""
+
+    uid: str
+    user_agent: str
+    cookie: str
+
+
+@app.post("/detail")
+def invoke(params: DetailParams = Body(...)):
+    """下载视频"""
+    print(params)
+    result = []
+    store = get_origin_data(
+        target_uid=params.uid, cookie=params.cookie, user_agent=params.user_agent
+    )
+    return store
 
 
 if __name__ == "__main__":
