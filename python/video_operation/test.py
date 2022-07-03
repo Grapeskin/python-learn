@@ -249,7 +249,7 @@ def invoke(params: Params = Body(...)):
     print(params)
     for index, target_uid in enumerate(params.target_uid_list):
         logger.info(f"{index=}, {target_uid=}")
-        time.sleep(random.randint(0, 5))
+        time.sleep(random.randint(2, 5))
         store = get_origin_data(
             target_uid=target_uid, user_agent=params.user_agent, cookie=params.cookie
         )
@@ -290,6 +290,23 @@ def invoke(params: Params = Body(...)):
     return {"result": "ok"}
 
 
+def get_data(url: str, headers: dict, retry: int = 2):
+    result = {}
+    while retry > 0:
+        res = requests.get(
+            url=url,
+            headers=headers,
+        )
+        # print(res.text)
+        data = re.findall(re.compile('{"store".*}'), res.text)
+        if data:
+            result = data
+            break
+        retry -= 1
+
+    return result
+
+
 def get_origin_data(target_uid, cookie, user_agent=None):
     """获取原始数据"""
     if not user_agent:
@@ -298,18 +315,14 @@ def get_origin_data(target_uid, cookie, user_agent=None):
             "Chrome/102.0.5005.61 Safari/537.36 "
         )
     url = f"https://mobile.yangkeduo.com/svideo_personal.html?target_uid={target_uid}"
-    res = requests.get(
-        url=url,
-        headers={
-            "User-Agent": user_agent,
-            "Cookie": cookie,
-            "Accept": "*/*",
-        },
-    )
-    # print(res.text)
-    data = re.findall(re.compile('{"store".*}'), res.text)
+    headers = {
+        "User-Agent": user_agent,
+        "Cookie": cookie,
+        "Accept": "*/*",
+    }
+    data = get_data(url, headers)
     if not data:
-        raise Exception("获取data失败")
+        raise Exception(f"获取data失败, {target_uid=}")
     res_json = json.loads(data[0])
     store = res_json.get("store", {})
     if not store:
