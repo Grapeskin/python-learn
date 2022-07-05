@@ -6,6 +6,8 @@
 """
 import json
 
+from datetime import datetime
+from pydantic import BaseModel
 from sqlalchemy import Integer, Column, String, DateTime, func, create_engine, or_, text
 from sqlalchemy.orm import declarative_base, sessionmaker
 
@@ -54,6 +56,18 @@ class Address(Base):
     )
 
 
+class UserSchema(BaseModel):
+    id: int
+    name: str
+    age: int
+    create_time: datetime
+    update_time: datetime
+    street_num: int
+
+    class Config:
+        orm_mode = True
+
+
 if __name__ == "__main__":
     engine = create_engine(
         url="mysql+pymysql://root:123456@localhost:3306/test", echo=True
@@ -98,23 +112,36 @@ if __name__ == "__main__":
     # print(user)
 
     # 2. 根据条件动态构造查询条件，子查询
-    # name = None
-    # page = 1
-    # page_size = 10
-    # order_by = '-create_time'
-    # sub_q = session.query(User.id, func.count(Address.id).label('street_num')) \
-    #     .join(Address, User.id == Address.user_id) \
-    #     .group_by(User.id) \
-    #     .subquery()
-    # res = session.query(User.id, User.name, User.age, User.create_time, User.update_time, sub_q.c.street_num) \
-    #     .filter(User.id == sub_q.c.id) \
-    #     .filter(or_(name is None, User.name.like(f'%{name}%'))) \
-    #     .order_by(text(order_by)) \
-    #     .offset(page_size * (page - 1)) \
-    #     .limit(page_size) \
-    #     .all()
-    # for item in res:
-    #     print(dict(item))
+    name = None
+    page = 1
+    page_size = 10
+    order_by = "-create_time"
+    sub_q = (
+        session.query(User.id, func.count(Address.id).label("street_num"))
+        .outerjoin(Address, User.id == Address.user_id)
+        .group_by(User.id)
+        .subquery()
+    )
+    res = (
+        session.query(
+            User.id,
+            User.name,
+            User.age,
+            User.create_time,
+            User.update_time,
+            sub_q.c.street_num,
+        )
+        .filter(User.id == sub_q.c.id)
+        .filter(or_(name is None, User.name.like(f"%{name}%")))
+        .order_by(text(order_by))
+        .offset(page_size * (page - 1))
+        .limit(page_size)
+        .all()
+    )
+    result = []
+    for item in res:
+        result.append(UserSchema(**dict(item)))
+    print(result)
 
     # 3. 连表查询
     # res = session.query(User.id, User.name, User.age, User.create_time.label('u_time'), Address.name,
