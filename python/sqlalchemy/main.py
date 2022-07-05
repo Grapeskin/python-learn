@@ -6,7 +6,7 @@
 """
 import json
 
-from sqlalchemy import Integer, Column, String, DateTime, func, create_engine
+from sqlalchemy import Integer, Column, String, DateTime, func, create_engine, or_, text
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 Base = declarative_base()
@@ -35,6 +35,25 @@ class User(Base):
         return json.dumps({"id": self.id, "name": self.name, "age": self.age})
 
 
+class Address(Base):
+    __tablename__ = "address"
+
+    id = Column(Integer, primary_key=True, autoincrement=True, comment="主键ID")
+
+    name = Column(String(32), nullable=False, comment="地址")
+    user_id = Column(Integer, nullable=False, comment="用户ID")
+    create_time = Column(
+        DateTime(), nullable=False, server_default=func.now(), comment="创建时间"
+    )
+    update_time = Column(
+        DateTime(),
+        nullable=False,
+        server_default=func.now(),
+        onupdate=func.now(),
+        comment="更新时间",
+    )
+
+
 if __name__ == "__main__":
     engine = create_engine(
         url="mysql+pymysql://root:123456@localhost:3306/test", echo=True
@@ -52,7 +71,7 @@ if __name__ == "__main__":
         show variables like '%general_log_file%';
         show variables like '%general_log%';
     """
-    # 添加
+    """添加"""
     # user = User(**{'name': 'admin', 'age': 24})
     # user = [
     #     User(name='zhangsan', age=12),
@@ -72,12 +91,42 @@ if __name__ == "__main__":
     # session.commit()
     # print(f'post commit post user {user=}')
 
-    # 查询
+    """查询"""
+    # 1. 基本过滤条件查询
     # query对象只有在first()、all()等处理之后才会将SQL发送到数据库连接，不需要commit
-    user = session.query(User.id, User.name).filter_by(name="admin").first()
-    print(user)
+    # user = session.query(User.id, User.name).filter_by(name="admin").first()
+    # print(user)
 
-    # 修改
+    # 2. 根据条件动态构造查询条件，子查询
+    # name = None
+    # page = 1
+    # page_size = 10
+    # order_by = '-create_time'
+    # sub_q = session.query(User.id, func.count(Address.id).label('street_num')) \
+    #     .join(Address, User.id == Address.user_id) \
+    #     .group_by(User.id) \
+    #     .subquery()
+    # res = session.query(User.id, User.name, User.age, User.create_time, User.update_time, sub_q.c.street_num) \
+    #     .filter(User.id == sub_q.c.id) \
+    #     .filter(or_(name is None, User.name.like(f'%{name}%'))) \
+    #     .order_by(text(order_by)) \
+    #     .offset(page_size * (page - 1)) \
+    #     .limit(page_size) \
+    #     .all()
+    # for item in res:
+    #     print(dict(item))
+
+    # 3. 连表查询
+    # res = session.query(User.id, User.name, User.age, User.create_time.label('u_time'), Address.name,
+    #                     Address.id.label('a_id'),
+    #                     Address.create_time.label('a_time')) \
+    #     .join(Address, User.id == Address.user_id) \
+    #     .filter(User.id == 18) \
+    #     .order_by(text('-a_time')) \
+    #     .all()
+    # print(res)
+
+    """修改"""
     # 只有commit之后才会将SQL发送到数据库连接
     # user = session.query(User).filter_by(name='zhangsan').first()
     # print(f'update pre {user=}')
@@ -85,4 +134,7 @@ if __name__ == "__main__":
     # print(f'update post {user}')
     # session.commit()
 
-    # 删除
+    """删除"""
+    # 只有commit之后才会将SQL发送到数据库连接
+    # session.query(User).filter(User.id == 16).delete()
+    # session.commit()
