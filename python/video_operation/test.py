@@ -6,7 +6,6 @@
 """
 import json
 import logging
-import os
 import random
 import re
 import time
@@ -27,7 +26,6 @@ from sqlalchemy import (
     Text,
 )
 from sqlalchemy.orm import declarative_base, sessionmaker
-from you_get import common
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -149,17 +147,9 @@ app = FastAPI()
 
 
 class Params(BaseModel):
-    """获取用户数据参数列表"""
-
     user_agent: str
     cookie: str
     target_uid_list: list
-
-
-class UrlParams(BaseModel):
-    """下载视频参数列表"""
-
-    urls: list
 
 
 class AuthorInfoBO:
@@ -247,12 +237,9 @@ class ProductAnalysisBO:
 def invoke(params: Params = Body(...)):
     """触发数据抓取"""
     print(params)
-    for index, target_uid in enumerate(params.target_uid_list):
-        logger.info(f"{index=}, {target_uid=}")
-        time.sleep(random.randint(2, 5))
-        store = get_origin_data(
-            target_uid=target_uid, user_agent=params.user_agent, cookie=params.cookie
-        )
+    for target_uid in params.target_uid_list:
+        time.sleep(random.randint(0, 5))
+        store = get_origin_data(target_uid, params.user_agent, params.cookie)
 
         author_info_bo = AuthorInfoBO(target_uid=target_uid, **store)
 
@@ -290,78 +277,25 @@ def invoke(params: Params = Body(...)):
     return {"result": "ok"}
 
 
-def get_data(url: str, headers: dict, retry: int = 2):
-    result = {}
-    while retry > 0:
-        res = requests.get(
-            url=url,
-            headers=headers,
-        )
-        # print(res.text)
-        data = re.findall(re.compile('{"store".*}'), res.text)
-        if data:
-            result = data
-            break
-        retry -= 1
-
-    return result
-
-
-def get_origin_data(target_uid, cookie, user_agent=None):
+def get_origin_data(target_uid, user_agent, cookie):
     """获取原始数据"""
-    if not user_agent:
-        user_agent = (
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/102.0.5005.61 Safari/537.36 "
-        )
     url = f"https://mobile.yangkeduo.com/svideo_personal.html?target_uid={target_uid}"
-    headers = {
-        "User-Agent": user_agent,
-        "Cookie": cookie,
-        "Accept": "*/*",
-    }
-    data = get_data(url, headers)
+    res = requests.get(
+        url=url,
+        headers={
+            "User-Agent": user_agent,
+            "Cookie": cookie,
+            "Accept": "*/*",
+        },
+    )
+    # print(res.text)
+    data = re.findall(re.compile('{"store".*}'), res.text)
     if not data:
-        raise Exception(f"获取data失败, {target_uid=}")
+        raise Exception("获取data失败")
     res_json = json.loads(data[0])
     store = res_json.get("store", {})
     if not store:
         raise Exception("获取store失败")
-    return store
-
-
-@app.post("/download")
-def download(params: UrlParams = Body(...)):
-    """下载视频"""
-    print(params)
-    result = []
-    for url in params.urls:
-        common.any_download(
-            url=url,
-            output_dir=os.path.join(
-                os.getcwd(), time.strftime("%Y%m%d", time.localtime(time.time()))
-            ),
-        )
-        result.append(url)
-    return result
-
-
-class DetailParams(BaseModel):
-    """获取单个用户数据参数列表"""
-
-    uid: str
-    user_agent: str
-    cookie: str
-
-
-@app.post("/detail")
-def invoke(params: DetailParams = Body(...)):
-    """下载视频"""
-    print(params)
-    result = []
-    store = get_origin_data(
-        target_uid=params.uid, cookie=params.cookie, user_agent=params.user_agent
-    )
     return store
 
 

@@ -47,6 +47,10 @@ if __name__ == "__main__":
         SET GLOBAL log_output = "FILE"; the default.
         SET GLOBAL general_log_file = "/path/to/your/mysql.log";
         SET GLOBAL general_log = 'ON';
+
+        show variables like '%log_output%';
+        show variables like '%general_log_file%';
+        show variables like '%general_log%';
     """
     # 添加
     # user = User(**{'name': 'admin', 'age': 24})
