@@ -94,7 +94,7 @@ class FeedInfo(Base):
     publishTime = Column(TIMESTAMP(True), nullable=False, comment="视频发布时间")
     cover = Column(String(128), nullable=False, comment="视频封面")
     description = Column(Text, nullable=True, comment="视频描述")
-    h5AutoPlayUrl = Column(String(128), nullable=False, comment="视频地址")
+    h5AutoPlayUrl = Column(String(128), nullable=True, comment="视频地址")
 
     goodsId = Column(String(32), nullable=False, comment="商品ID")
     goodsName = Column(String(128), nullable=False, comment="商品名称")
@@ -151,9 +151,9 @@ app = FastAPI()
 class Params(BaseModel):
     """获取用户数据参数列表"""
 
-    user_agent: str
-    cookie: str
-    target_uid_list: list
+    user_agent: str = None
+    cookie: str = None
+    target_uid_list: list = None
 
 
 class UrlParams(BaseModel):
@@ -165,7 +165,7 @@ class UrlParams(BaseModel):
 class AuthorInfoBO:
     """作者信息业务对象"""
 
-    def __init__(self, target_uid, **kwargs):
+    def __init__(self, **kwargs):
         self.uid = str(kwargs.get("uid"))
         self.uin = str(kwargs.get("uin"))
         self.nickname = kwargs.get("nickname")
@@ -247,46 +247,56 @@ class ProductAnalysisBO:
 def invoke(params: Params = Body(...)):
     """触发数据抓取"""
     print(params)
-    for index, target_uid in enumerate(params.target_uid_list):
-        logger.info(f"{index=}, {target_uid=}")
-        time.sleep(random.randint(2, 5))
-        store = get_origin_data(
-            target_uid=target_uid, user_agent=params.user_agent, cookie=params.cookie
-        )
+    # for index, target_uid in enumerate(params.target_uid_list):
+    #     logger.info(f"{index=}, {target_uid=}")
+    #     time.sleep(random.randint(2, 5))
+    #     store = get_origin_data(
+    #         target_uid=target_uid, user_agent=params.user_agent, cookie=params.cookie
+    #     )
+    prefix = os.path.join(
+        os.getcwd(), time.strftime("%Y%m%d", time.localtime(time.time()))
+    )
+    for file_name in os.listdir(prefix):
+        if file_name.endswith(".txt"):
+            with open(os.path.join(prefix, file_name), mode="r") as f:
+                res = f.read()
+                store = re.findall(re.compile('{"store".*}'), res)
+                store = json.loads(store[0]).get("store", {})
+                author_info_bo = AuthorInfoBO(**store)
 
-        author_info_bo = AuthorInfoBO(target_uid=target_uid, **store)
-
-        print(author_info_bo.to_json())
-        print(author_info_bo.uid)
-        try:
-            user = (
-                session.query(AuthorInfo)
-                .filter(AuthorInfo.uid == author_info_bo.uid)
-                .first()
-            )
-            if not user:
-                session.add(AuthorInfo(**author_info_bo.__dict__))
-            author_fans_bo = AuthorFansBO(t_uid=author_info_bo.uid, **store)
-            print(author_fans_bo.to_json())
-            session.add(AuthorFans(**author_fans_bo.__dict__))
-            feeds_list = store.get("tabListData", {}).get("5", {}).get("feedsList", [])
-            for feed in feeds_list:
-                feed_info_bo = FeedInfoBO(author_info_bo.uid, **feed)
-                feed_info = (
-                    session.query(FeedInfo)
-                    .filter(FeedInfo.feedId == feed_info_bo.feedId)
-                    .first()
-                )
-                if not feed_info:
-                    session.add(FeedInfo(**feed_info_bo.__dict__))
-                product_analysis_bo = ProductAnalysisBO(
-                    feed_id=feed_info_bo.feedId, **feed
-                )
-                session.add(ProductAnalysis(**product_analysis_bo.__dict__))
-            session.commit()
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            session.rollback()
+                print(author_info_bo.to_json())
+                print(author_info_bo.uid)
+                try:
+                    user = (
+                        session.query(AuthorInfo)
+                        .filter(AuthorInfo.uid == author_info_bo.uid)
+                        .first()
+                    )
+                    if not user:
+                        session.add(AuthorInfo(**author_info_bo.__dict__))
+                    author_fans_bo = AuthorFansBO(t_uid=author_info_bo.uid, **store)
+                    print(author_fans_bo.to_json())
+                    session.add(AuthorFans(**author_fans_bo.__dict__))
+                    feeds_list = (
+                        store.get("tabListData", {}).get("5", {}).get("feedsList", [])
+                    )
+                    for feed in feeds_list:
+                        feed_info_bo = FeedInfoBO(author_info_bo.uid, **feed)
+                        feed_info = (
+                            session.query(FeedInfo)
+                            .filter(FeedInfo.feedId == feed_info_bo.feedId)
+                            .first()
+                        )
+                        if not feed_info:
+                            session.add(FeedInfo(**feed_info_bo.__dict__))
+                        product_analysis_bo = ProductAnalysisBO(
+                            feed_id=feed_info_bo.feedId, **feed
+                        )
+                        session.add(ProductAnalysis(**product_analysis_bo.__dict__))
+                    session.commit()
+                except Exception as e:
+                    logger.error(e, exc_info=True)
+                    session.rollback()
     return {"result": "ok"}
 
 
@@ -358,6 +368,17 @@ class DetailParams(BaseModel):
 def invoke(params: DetailParams = Body(...)):
     """下载视频"""
     print(params)
+    result = []
+    store = get_origin_data(
+        target_uid=params.uid, cookie=params.cookie, user_agent=params.user_agent
+    )
+    return store
+
+
+@app.post("/analysis")
+def invoke(path_dir: str):
+    """分析文件数据"""
+    print(path_dir)
     result = []
     store = get_origin_data(
         target_uid=params.uid, cookie=params.cookie, user_agent=params.user_agent
