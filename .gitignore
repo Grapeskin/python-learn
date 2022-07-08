@@ -130,4 +130,7 @@ dmypy.json
 
 # Idea
 .idea
-2022*/
+*.mp4
+
+test.html
+test_url.txt

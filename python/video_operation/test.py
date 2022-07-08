@@ -13,9 +13,8 @@ import time
 
 import requests
 import uvicorn
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, UploadFile, File
 from pydantic import BaseModel
-from pymysql import DataError, DatabaseError, Error
 from sqlalchemy import (
     Column,
     String,
@@ -247,57 +246,63 @@ class ProductAnalysisBO:
 def invoke(params: Params = Body(...)):
     """触发数据抓取"""
     print(params)
-    # for index, target_uid in enumerate(params.target_uid_list):
-    #     logger.info(f"{index=}, {target_uid=}")
-    #     time.sleep(random.randint(2, 5))
-    #     store = get_origin_data(
-    #         target_uid=target_uid, user_agent=params.user_agent, cookie=params.cookie
-    #     )
-    prefix = os.path.join(
-        os.getcwd(), time.strftime("%Y%m%d", time.localtime(time.time()))
-    )
-    for file_name in os.listdir(prefix):
-        if file_name.endswith(".txt"):
-            with open(os.path.join(prefix, file_name), mode="r") as f:
-                res = f.read()
-                store = re.findall(re.compile('{"store".*}'), res)
-                store = json.loads(store[0]).get("store", {})
-                author_info_bo = AuthorInfoBO(**store)
+    for index, target_uid in enumerate(params.target_uid_list):
+        logger.info(f"{index=}, {target_uid=}")
+        time.sleep(random.randint(2, 5))
+        store = get_origin_data(
+            target_uid=target_uid, user_agent=params.user_agent, cookie=params.cookie
+        )
 
-                print(author_info_bo.to_json())
-                print(author_info_bo.uid)
-                try:
-                    user = (
-                        session.query(AuthorInfo)
-                        .filter(AuthorInfo.uid == author_info_bo.uid)
-                        .first()
-                    )
-                    if not user:
-                        session.add(AuthorInfo(**author_info_bo.__dict__))
-                    author_fans_bo = AuthorFansBO(t_uid=author_info_bo.uid, **store)
-                    print(author_fans_bo.to_json())
-                    session.add(AuthorFans(**author_fans_bo.__dict__))
-                    feeds_list = (
-                        store.get("tabListData", {}).get("5", {}).get("feedsList", [])
-                    )
-                    for feed in feeds_list:
-                        feed_info_bo = FeedInfoBO(author_info_bo.uid, **feed)
-                        feed_info = (
-                            session.query(FeedInfo)
-                            .filter(FeedInfo.feedId == feed_info_bo.feedId)
-                            .first()
-                        )
-                        if not feed_info:
-                            session.add(FeedInfo(**feed_info_bo.__dict__))
-                        product_analysis_bo = ProductAnalysisBO(
-                            feed_id=feed_info_bo.feedId, **feed
-                        )
-                        session.add(ProductAnalysis(**product_analysis_bo.__dict__))
-                    session.commit()
-                except Exception as e:
-                    logger.error(e, exc_info=True)
-                    session.rollback()
+        save_data(store)
     return {"result": "ok"}
+
+
+@app.post("/parse_html")
+def invoke(file: UploadFile = File(...)):
+    """触发数据抓取"""
+
+    content = file.file.read()
+    content = json.loads(content)
+    for item in content["log"]["entries"]:
+        data = re.findall(
+            re.compile('{"store".*}'), item["response"]["content"]["text"]
+        )
+        store = json.loads(data[0]).get("store")
+        save_data(store)
+    return {"result": "ok"}
+
+
+def save_data(store):
+    author_info_bo = AuthorInfoBO(**store)
+    print(author_info_bo.to_json())
+    print(author_info_bo.uid)
+    try:
+        user = (
+            session.query(AuthorInfo)
+            .filter(AuthorInfo.uid == author_info_bo.uid)
+            .first()
+        )
+        if not user:
+            session.add(AuthorInfo(**author_info_bo.__dict__))
+        author_fans_bo = AuthorFansBO(t_uid=author_info_bo.uid, **store)
+        print(author_fans_bo.to_json())
+        session.add(AuthorFans(**author_fans_bo.__dict__))
+        feeds_list = store.get("tabListData", {}).get("5", {}).get("feedsList", [])
+        for feed in feeds_list:
+            feed_info_bo = FeedInfoBO(author_info_bo.uid, **feed)
+            feed_info = (
+                session.query(FeedInfo)
+                .filter(FeedInfo.feedId == feed_info_bo.feedId)
+                .first()
+            )
+            if not feed_info:
+                session.add(FeedInfo(**feed_info_bo.__dict__))
+            product_analysis_bo = ProductAnalysisBO(feed_id=feed_info_bo.feedId, **feed)
+            session.add(ProductAnalysis(**product_analysis_bo.__dict__))
+        session.commit()
+    except Exception as e:
+        logger.error(e, exc_info=True)
+        session.rollback()
 
 
 def get_data(url: str, headers: dict, retry: int = 2):
