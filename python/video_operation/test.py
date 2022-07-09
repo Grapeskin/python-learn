@@ -10,6 +10,7 @@ import os
 import random
 import re
 import time
+from typing import List
 
 import requests
 import uvicorn
@@ -158,7 +159,8 @@ class Params(BaseModel):
 class UrlParams(BaseModel):
     """下载视频参数列表"""
 
-    urls: list
+    dir_name: str
+    urls: List[str]
 
 
 class AuthorInfoBO:
@@ -351,12 +353,17 @@ def download(params: UrlParams = Body(...)):
     print(params)
     result = []
     for url in params.urls:
-        common.any_download(
-            url=url,
-            output_dir=os.path.join(
+        if params.dir_name:
+            output_dir = os.path.join(os.getcwd(), params.dir_name)
+        else:
+            output_dir = os.path.join(
                 os.getcwd(), time.strftime("%Y%m%d", time.localtime(time.time()))
-            ),
-        )
+            )
+        if not os.path.exists(os.path.join(output_dir, url.split("/")[-1])):
+            common.any_download(
+                url=url,
+                output_dir=output_dir,
+            )
         result.append(url)
     return result
 
@@ -373,17 +380,6 @@ class DetailParams(BaseModel):
 def invoke(params: DetailParams = Body(...)):
     """下载视频"""
     print(params)
-    result = []
-    store = get_origin_data(
-        target_uid=params.uid, cookie=params.cookie, user_agent=params.user_agent
-    )
-    return store
-
-
-@app.post("/analysis")
-def invoke(path_dir: str):
-    """分析文件数据"""
-    print(path_dir)
     result = []
     store = get_origin_data(
         target_uid=params.uid, cookie=params.cookie, user_agent=params.user_agent
