@@ -10,6 +10,7 @@ import os
 import random
 import re
 import time
+import uuid
 from typing import List
 
 import requests
@@ -160,6 +161,7 @@ class UrlParams(BaseModel):
     """下载视频参数列表"""
 
     dir_name: str
+    goods: List[str]
     urls: List[str]
 
 
@@ -352,6 +354,14 @@ def download(params: UrlParams = Body(...)):
     """下载视频"""
     print(params)
     result = []
+    for good in params.goods:
+        good_id, good_name = good.split("|")
+        url = (
+            session.query(FeedInfo.h5AutoPlayUrl)
+            .filter_by(goodsId=good_id, goodsName=good_name)
+            .first()
+        )
+        params.urls.append(url.h5AutoPlayUrl)
     for url in params.urls:
         if params.dir_name:
             output_dir = os.path.join(os.getcwd(), params.dir_name)
@@ -359,11 +369,34 @@ def download(params: UrlParams = Body(...)):
             output_dir = os.path.join(
                 os.getcwd(), time.strftime("%Y%m%d", time.localtime(time.time()))
             )
-        if not os.path.exists(os.path.join(output_dir, url.split("/")[-1])):
+        file_path = os.path.join(output_dir, url.split("/")[-1])
+        if not os.path.exists(file_path):
             common.any_download(
                 url=url,
                 output_dir=output_dir,
             )
+            # 文件名替换成链接ID_链接名称
+            obj = (
+                session.query(FeedInfo.goodsId, FeedInfo.goodsName)
+                .filter_by(h5AutoPlayUrl=url)
+                .first()
+            )
+            if obj:
+                good_name = obj.goodsName.replace("/", "")
+                r_index = good_name.rfind("】")
+                l_index = len(good_name)
+                if r_index == len(good_name) - 1:
+                    # 如果是最后一个，那就找左侧【 以前的
+                    l_index = good_name.rfind("【")
+                    r_index = good_name[0:l_index].rfind("】")
+                time.sleep(0.5)
+                os.rename(
+                    src=file_path,
+                    dst=os.path.join(
+                        output_dir,
+                        f"{obj.goodsId}_{good_name[r_index + 1:l_index]}_{str(uuid.uuid4())[0:6]}.mp4",
+                    ),
+                )
         result.append(url)
     return result
 
