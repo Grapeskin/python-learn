@@ -11,6 +11,7 @@ import random
 import re
 import time
 import uuid
+from json import JSONDecodeError
 from typing import List
 
 import requests
@@ -267,12 +268,17 @@ def invoke(file: UploadFile = File(...)):
 
     content = file.file.read()
     content = json.loads(content)
+    count = 0
     for item in content["log"]["entries"]:
         data = re.findall(
             re.compile('{"store".*}'), item["response"]["content"]["text"]
         )
-        store = json.loads(data[0]).get("store")
-        save_data(store)
+        try:
+            store = json.loads(data[0]).get("store")
+            save_data(store)
+        except JSONDecodeError as e:
+            count += 1
+    print(f"exception count is {count}.")
     return {"result": "ok"}
 
 
