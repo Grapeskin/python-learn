@@ -23,13 +23,17 @@ int main(int argc, char const *argv[])
     }
     vector<int> v1;
     v1.push_back(444);
-    for(auto item : v1) {
+    for (auto item : v1)
+    {
         cout << item << endl;
     }
-    cout << v1.size() << "," << v1.capacity()<< endl;
+    cout << v1.size() << "," << v1.capacity() << endl;
 
-    const char * c_str = str.c_str();
-    
+    const char *c_str = str.c_str();
+
     cout << strlen(c_str) << endl;
+
+    int arr[2][2] = {{1, 2}, {3, 4}};
+
     return 0;
 }
