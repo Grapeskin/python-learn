@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "hello.h"
 
 using namespace std;
 const double *f1(const double arr[], int n);
@@ -18,10 +19,7 @@ class Student
 public:
     Student();
     Student(string name, int age);
-    ~Student()
-    {
-        cout << "执行析构函数" << endl;
-    };
+    ~Student();
 
     string getName()
     {
@@ -49,4 +47,36 @@ Student::Student(string n, int a) : name(n), age(a)
     cout << name << ", " << age << endl;
     name = "wangwu";
     age = 66;
+}
+Student::~Student()
+{
+    cout << "执行析构函数" << endl;
+};
+
+class Point
+{
+public:
+    int x, y;
+    explicit Point(int x = 0, int y = 0)
+        : x(x), y(y) {}
+};
+
+void displayPoint(const Point &p)
+{
+    cout << "(" << p.x << ","
+         << p.y << ")" << endl;
+};
+
+template <typename T>
+int compare(const T &a, const T &b)
+{
+    if (a < b)
+    {
+        return -1;
+    }
+    if (a > b)
+    {
+        return 1;
+    }
+    return 0;
 }

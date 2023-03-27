@@ -4,22 +4,12 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <memory>
+#include <unordered_map>
+#include <algorithm>
+#include <random>
 #include "helloworld.h"
 using namespace std;
-
-class Point
-{
-public:
-    int x, y;
-    explicit Point(int x = 0, int y = 0)
-        : x(x), y(y) {}
-};
-
-void displayPoint(const Point &p)
-{
-    cout << "(" << p.x << ","
-         << p.y << ")" << endl;
-}
 
 int main()
 {
@@ -112,11 +102,21 @@ int main()
     // cout << p.x << "," << p.y << endl;
 
     // 12. lambda函数
-    // int a = 1, b = 2;
-    // cout << [a, b](int x, int y) -> int
-    // { return a + b + x + y; }(4, 5)
-    //      << endl;
-
+    // int a = 1, b = 2, c = 3;
+    // cout << [&](int x, int y) -> int // 使用当前函数的局部变量
+    // { return a + b + x + y + c; }(4, 5)
+    //                                  << endl;
+    // vector<int> list{1, 2, 3, 4, 5};
+    // //遍历
+    // for_each(list.begin(), list.end(), [](const int &item)
+    //          { cout << item << endl; });
+    // // 查找
+    // auto iter = std::find_if(list.begin(), list.end(), [](const int &item)
+    //                          { return item > 2; });
+    // if (iter != list.end())
+    // {
+    //     cout << *iter << endl;
+    // }
     // 13. 文件读写操作
     // 写文件
     // ofstream ostrm;
@@ -160,35 +160,35 @@ int main()
     // cout << str.substr(0, 3) << endl;
 
     // Map 集合
-    map<string, int> word_count = {{"a", 1}, {"b", 2}};
+    // map<string, int> word_count = {{"a", 1}, {"b", 2}};
     // 增
-    auto r1 = word_count.insert(pair<string, int>("c", 3));
-    auto r2 = word_count.insert(pair<string, int>("c", 4));            //重复key不会插入
-    auto r3 = word_count.insert(map<string, int>::value_type("c", 4)); //重复key不会插入
-    cout << "r1 insert result = " << r1.second << endl;
-    cout << "r2 insert result = " << r2.second << endl;
-    cout << "r3 insert result = " << r3.second << endl;
-    for (auto item : word_count)
-    {
-        cout << item.first << " " << item.second << endl;
-    }
-    // 查
-    auto f_item = word_count.find("ab");
-    if (f_item != word_count.end())
-    {
-        cout << f_item->first << f_item->second << endl;
-    }
-    else
-    {
-        cout << "not found." << endl;
-    }
-    // 改
-    auto update_res = word_count.find("a");
-    update_res->second = 999;
-    for (auto item : word_count)
-    {
-        cout << item.first << " " << item.second << endl;
-    }
+    // auto r1 = word_count.insert(pair<string, int>("c", 3));
+    // auto r2 = word_count.insert(pair<string, int>("c", 4));            //重复key不会插入
+    // auto r3 = word_count.insert(map<string, int>::value_type("c", 4)); //重复key不会插入
+    // cout << "r1 insert result = " << r1.second << endl;
+    // cout << "r2 insert result = " << r2.second << endl;
+    // cout << "r3 insert result = " << r3.second << endl;
+    // for (auto item : word_count)
+    // {
+    //     cout << item.first << " " << item.second << endl;
+    // }
+    // // 查
+    // auto f_item = word_count.find("ab");
+    // if (f_item != word_count.end())
+    // {
+    //     cout << f_item->first << f_item->second << endl;
+    // }
+    // else
+    // {
+    //     cout << "not found." << endl;
+    // }
+    // // 改
+    // auto update_res = word_count.find("a");
+    // update_res->second = 999;
+    // for (auto item : word_count)
+    // {
+    //     cout << item.first << " " << item.second << endl;
+    // }
     // 删
     // auto item_a = word_count.find("a");
     // word_count.erase(item_a);
@@ -198,6 +198,31 @@ int main()
     // for (auto item : word_count)
     // {
     //     cout << item.first << " " << item.second << endl;
+    // }
+    // unordered_map<string, int> hashmap{{"k", 1}};
+    // hashmap.insert({"k1", 2});
+    // for (auto item : hashmap)
+    // {
+    //     cout << item.first << " " << item.second << endl;
+    // }
+
+    // 15. 动态内存与智能指针
+    // auto stu = make_shared<Student>();
+    // stu->getName();
+    // // auto p(stu); // 初始化另一个对象，引用计数+1
+    // // stu = nullptr; //没有引用之后会自动析构
+    // cout << stu.use_count() << endl;
+
+    // 16. 模板
+    // cout << compare(1, 3) << "," << compare('c', 'b') << "," << compare(3.14, 3.14) << endl;
+
+    // 17. 随机数
+    // default_random_engine e;
+
+    // uniform_int_distribution<unsigned> u(0, 10);
+    // for (size_t i = 0; i < 10; i++)
+    // {
+    //     cout << u(e) << endl;
     // }
 }
 
