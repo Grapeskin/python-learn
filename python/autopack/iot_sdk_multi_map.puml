@@ -1,0 +1,136 @@
+@startuml
+participant APP
+participant Network
+participant IOT_SDK
+participant APOS_SDK
+'participant SHM
+'participant AppSweeper
+participant MapManager
+
+
+'地图：当前地图、本地多地图、云端多地图
+
+'APP -> Network: 开始清扫
+'Network --> AppSweeper: 开始清扫
+'group 实时地图
+'    MapManager -> SHM: 更新当前地图
+'    loop 3s
+'        Network -> SHM: 获取
+'        SHM --> Network: 获取
+'        Network --> Network: 对比是否更新
+'        alt 有更新
+'            Network --> Network: 美化、裁剪、协议转换
+'            Network --> APP: 更新地图
+'        end
+'    end
+'end
+'autonumber
+group 本地/云端多地图
+    IOT_SDK -> APOS_SDK: 订阅 /MapData/SegmentSucess
+    ' 保存地图
+    alt 用户主动触发
+        APP -[#red]> Network: 保存地图
+        APP -[#red]> Network: 修改房间名称
+    else 清扫完成且自动分区后保存地图
+        MapManager --> APOS_SDK: 区域更新(update)
+        APOS_SDK --> IOT_SDK: 区域更新(update)
+        IOT_SDK -[#red]-> IOT_SDK: 保存地图
+    else 算法区域更新触发(/event/map_manager -> map_segment_success)
+        MapManager --> APOS_SDK: 区域更新(merge/split)
+
+        APOS_SDK --> IOT_SDK: 区域更新
+        '判断地图存在则更新
+        alt 地图存在
+            IOT_SDK -[#red]-> IOT_SDK: 保存地图
+        end
+
+    end
+
+    Network -> IOT_SDK: 保存地图
+
+    IOT_SDK -> APOS_SDK: 获取当前地图 /MapData/SegmentSlamMapDataDirect
+    APOS_SDK --> IOT_SDK: mapId等
+    IOT_SDK -> APOS_SDK: 获取地图列表 /MapData/LocalMultiMapInfo
+    APOS_SDK --> IOT_SDK: mapId、savePath、bkmapPath、iotMapInfo等
+    alt 地图超过最大数量 & 自动更新开关打开
+
+        IOT_SDK -> APOS_SDK: 删除地图 /MapData/DeleteMulitiMap
+    else 地图超过最大数量 & 自动更新开关关闭
+        IOT_SDK --> Network: 不保存
+        Network --> APP: 返回结果
+    end
+    IOT_SDK -> APOS_SDK : 保存地图 /MapData/SaveMulitiMap
+    APOS_SDK --> IOT_SDK: savePath、bkmapPath
+    IOT_SDK -[#orange]-> IOT_SDK: 组包：地图裁剪、协议转换（地图、机器人坐标、充电桩坐标）、压缩
+    IOT_SDK -> APOS_SDK: 获取分区区域信息 /Areas/AreaJson
+    IOT_SDK --> IOT_SDK: 打包分区区域信息
+    IOT_SDK -> APOS_SDK: 获取禁区区域信息 /Areas/ForbidAreaInfo
+    IOT_SDK --> IOT_SDK: 打包禁区区域信息
+    IOT_SDK --> IOT_SDK: 比较当前地图与多地图列表
+    alt 地图已存在
+        IOT_SDK --> IOT_SDK: 更新地图，tuya_iot_map_update_files(失败重传，最大三次)
+    else 不存在
+        IOT_SDK --> IOT_SDK: 新建地图，tuya_iot_map_upload_files(失败重传，最大三次)
+    end
+    alt 上传失败
+        IOT_SDK -> APOS_SDK: 删除地图 /MapData/DeleteMulitiMap
+    else 上传成功
+'{
+'    "mapId": 123,
+'    "iot_cloud_map_info" : "{\"k\":\"v\",\"k1\":123}"
+'}
+    IOT_SDK -> APOS_SDK: 更新地图信息（云端mapId，md5，保存时间等）TODO接口待提供
+    end
+
+    alt 云端多地图
+        IOT_SDK --> IOT_SDK: 清理本地地图文件(xxx_bkmap)
+    end
+    IOT_SDK --> IOT_SDK: 清理缩略图(xxx_record)
+    IOT_SDK --> IOT_SDK: 发送DP点响应到云端（保存成功/失败）
+    IOT_SDK --> Network: 返回结果
+    Network --> APP: 返回结果
+
+    ' 删除地图
+    APP -[#red]> Network: 删除地图
+    Network -> IOT_SDK: 删除地图
+    IOT_SDK -> APOS_SDK: 获取地图列表 /MapData/LocalMultiMapInfo
+    APOS_SDK --> IOT_SDK: mapId、savePath、bkmapPath、cloudMapId
+
+    alt 云端多地图
+        IOT_SDK --> IOT_SDK: 删除地图，tuya_iot_map_delete
+    end
+    IOT_SDK -> APOS_SDK: 删除地图 /MapData/DeleteMulitiMap
+    IOT_SDK --> IOT_SDK: 发送DP点响应到云端（删除成功/失败）
+    IOT_SDK --> Network: 返回结果
+    alt 需要更新地图列表
+        Network-> IOT_SDK: 获取地图列表
+        IOT_SDK -> APOS_SDK: 获取地图列表 /MapData/LocalMultiMapInfo
+        APOS_SDK --> IOT_SDK: mapId、savePath、bkmapPath、cloudMapId
+        IOT_SDK --> Network: 地图列表
+        Network --> APP: 更新地图列表
+    end
+    Network --> APP: 返回结果
+    ' 切换地图
+    APP -[#red]> Network: 切换地图
+    Network -> IOT_SDK: 切换地图
+    alt 云端多地图
+        IOT_SDK --> IOT_SDK: 下载地图
+        IOT_SDK -> APOS_SDK: 应用路径地图 TODO接口待提供
+        IOT_SDK --> IOT_SDK: 清理临时文件
+    else 本地多地图
+        IOT_SDK -> APOS_SDK: 获取地图列表 /MapData/LocalMultiMapInfo
+        APOS_SDK --> IOT_SDK: mapId、savePath、bkmapPath、cloudMapId
+        IOT_SDK -> APOS_SDK: 应用本地地图 TODO接口待提供
+    end
+    IOT_SDK --> IOT_SDK: 发送DP点响应到云端（删除成功/失败）
+    IOT_SDK --> Network: 返回结果
+    Network --> APP: 返回结果
+    '重置当前地图
+    APP -[#red]> Network: 重置地图
+    Network -> IOT_SDK: 重置地图
+    IOT_SDK -> APOS_SDK: 重置当前地图 TODO接口待提供
+    IOT_SDK --> IOT_SDK: 上报地图到云端
+    IOT_SDK --> Network: 返回结果
+    Network --> APP: 返回结果
+end
+@enduml
