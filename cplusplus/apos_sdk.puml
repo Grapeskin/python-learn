@@ -1,0 +1,56 @@
+@startuml
+note as typedef
+    typedef std::shared_ptr<APOS_SERIALIZE_EXPORT IMessage> MessageSharePtr;
+    typedef std::shared_ptr<ISubscriber> SubscriberSharePtr;
+end note
+class AposLocal {
+    #typedef std::vector<SubscriberSharePtr> V_Subscriber;
+    #std::map<std::string, V_Subscriber> subscriber_map_;
+    #std::map<std::string, ServiceServerSharePtr> service_map_;
+
+    #bool is_running_;
+    #std::unique_ptr<MsgQueue<PublishMsgPacketSharePtr>> publish_msg_queue_;
+    #std::function<void(const std::string &, const void *, uint32_t)> publish_bridge_cb_;
+
+    +static AposLocal *Instance();
+    +void Init(uint32_t thread_num);
+    +int32_t Publish(const std::string &topic, const apos_serialize::MessageSharePtr &msg);
+    +int32_t Subscribe(const std::string &topic, const SubscriberSharePtr &subscriber);
+    +int32_t RegisterPublishBridge(std::function<void(const std::string &, const void *, uint32_t)> cb);
+    +void RegisterServer(const std::string &service, ServiceServerSharePtr &service_server);
+    +int32_t CallServer(const std::string &service_name, const void *request_data, uint32_t request_len,
+                       std::shared_ptr<void> &response_data, uint32_t &response_len);
+
+    +int32_t CallServer(const std::string &service_name, const apos_serialize::IMessage *request,
+                       apos_serialize::IMessage *response);
+
+    -AposLocal();
+    -void PublishMsgProc();
+}
+
+class PublishMsgPacket {
+    +std::string topic_;
+    +apos_serialize::MessageSharePtr msg_;
+
+    +PublishMsgPacket(std::string topic, const apos_serialize::MessageSharePtr &msg);
+}
+
+class IMessage {
+    +void Serialize(std::shared_ptr<void> &buf, uint32_t &size) const;
+    +void Unserialize(const void *buf, uint32_t size);
+    {abstract} virtual void SerializeValue(apos_serialize::SerializerValue &result) const = 0;
+    {abstract} virtual void UnserializeValue(const apos_serialize::SerializerValue &value) = 0;
+}
+
+class ISubscriber {
+    +std::string topic_;
+
+    +const std::string &GetTopic() const;
+    {abstract} virtual void Call(const apos_serialize::MessageSharePtr& msg) = 0;
+    {abstract} virtual apos_serialize::MessageSharePtr CreateMsg() = 0;
+}
+
+class Subscriber extends ISubscriber {}
+class Subscriber<void> extends ISubscriber {}
+class Subscriber extends ISubscriber {}
+@enduml

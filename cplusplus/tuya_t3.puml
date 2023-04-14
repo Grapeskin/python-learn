@@ -1,0 +1,49 @@
+@startuml
+'参与者
+participant NPApplication
+
+'业务流程
+NPApplication --> NPApplication: 设置IOT信息
+NPApplication --> NPApplication: 初始化配置参数到device_status（先从/userdata/config/configs.json取，取不到则从global_config.json取）：\
+音量、LED开关、勿扰模式开关、是否在静音模式、定制模式开关；集尘频率；充电桩类型；清扫次数、是否使用定制模式中的属性、imu校准标定状态、拖布电机开关；扫拖模式
+NPApplication --> NPApplication: 初始化清扫信息到device_status（从共享内存或/tmp/run/last_record/clean_info.json取）：\
+边刷、主刷、滤芯、传感器、地检传感器使用时常；只扫次数、只拖次数、只扫面积、只拖面积、总清扫次数（扫、拖）、总清扫面积、总清扫时间；\
+电机使用时间、电池使用时间、拖布使用时间、尘盒使用时间
+NPApplication --> NPApplication: 初始化版本信息到device_status（从firmware_info.json读）：git版本号、添加mcu版本号
+NPApplication --> NPApplication: 初始化工作模式到device_status（从共享内存读）：工作模式、清扫子模式（从共享内存中读取、填充的区域类型进行匹配具体子模式）
+NPApplication --> NPApplication: 申请地图以及清扫记录加载所需内存空间
+NPApplication --> NPApplication: 注册事件Topic及回调函数：（/event/onboard_ui、/event/base_station、/event/robot_monitor\
+/event/updater、/event/keyboard、/event/network、/event/work_status、/hardware/error、/event/map_manager、/event/timer）
+
+NPApplication --> NPApplication: 启动地图上传线程（MapService）
+NPApplication --> NPApplication: 启动路径上传线程（PathService）
+NPApplication --> NPApplication: 启动设备状态上传线程（DevStatusService）
+NPApplication --> NPApplication: 启动清扫记录上传线程（CleanRecordService）
+NPApplication --> NPApplication: 初始化区域数据
+NPApplication --> NPApplication: 同步本地时间为服务器时间
+NPApplication --> NPApplication: 初始化网络连接
+
+NPApplication --> NPApplication: 初始化事件处理并注册功能(EventHandle)
+NPApplication --> NPApplication: 初始化机器状态上传(DevStatusUploader)
+NPApplication --> NPApplication: 地图数据上报(MapUploader)
+NPApplication --> NPApplication: 路径数据上报(PathSend)
+NPApplication --> NPApplication: 清扫日志上传(PathSend)
+
+NPApplication --> NPApplication: 检查配网信息
+NPApplication --> NPApplication: 检查语音包信息
+NPApplication --> NPApplication: 开启UDP服务，接收UDP请求进行配网
+NPApplication --> NPApplication: 启动SDK线程，接收APP请求并使用SDK发送响应
+
+
+'数据流向
+'1.1 地图数据入口
+'1.2 地图数据出口（bool MapUploader::SendMapData(Json::Value &origMapJson, uint8_t *map_data, const Json::Value &clean_and_forbid_area) ）
+'地图数据=地图数据(lz4压缩后base64编码)+清扫及禁区数据+路径数据+充电桩位置信息
+
+
+'''
+
+'''
+
+
+@enduml

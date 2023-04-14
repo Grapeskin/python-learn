@@ -1,0 +1,230 @@
+@startuml
+'基类
+class LDObject {
+    +static std::map<int, LDObject *> obj_ptr_map_;
+    +static std::mutex obj_ptr_map_mutex_;
+    +static std::map<int, std::vector<int>> sub_obj_ptr_map_;
+    +static std::mutex sub_obj_ptr_map_mutex_;
+    -i_obj_id;
+
+    virtual void HandleMSG(int i_msg_id, Json::Value &json_param);
+    virtual void HandleSubscribeMSG(int i_msg_id, Json::Value json_param);
+
+    void SubscribeMSG(int i_msg_id);
+    void UnSubscribeMSG(int i_msg_id);
+
+    static void SendMSG(int i_msg_id, int i_obj_id, Json::Value &json_param);
+    static void PostMSG(int i_msg_id, Json::Value json_param = Json::Value(Json::objectValue));
+    static LDObject *GetObjPtr(int i_obj_id);
+}
+
+'子类
+'device_api
+class NPApplication {
+    i_obj_id_: API_OBJECT_ID_APPLICATION
+}
+class AreaProcess {
+    i_obj_id_: API_OBJECT_ID_AREA_PROCESS
+
+    SubscribeMSG(API_SUBSCRIBE_MSG_DEV_ATTR_UPDATE);
+
+}
+'清扫日志写入文件后会发出一个save_record_success事件，监听这个事件。将文件内容读取到内存通过SDK发到云端
+class CleanRecordLogic {
+    i_obj_id_: API_OBJECT_ID_CLEAN_RECORD
+    -std::thread save_clean_record_thread_;
+
+    +void Start();
+    +void Stop();
+
+    +bool Register(int i_id, EventIo* obj_ptr);
+    +bool UnRegister(int i_id);
+}
+'状态上报时机：1. 同步服务请求时全量上报。2. 一秒轮询一次，全量上报从共享内存获取的状态
+class DevStatusUploaderLogic {
+    i_obj_id_: API_OBJECT_ID_DEV_STATUS_LOGIC
+    -std::thread upload_thread_;
+
+    +void Start();
+    +void Stop();
+
+    +bool Register(int i_id, EventIo* obj_ptr);
+    +bool UnRegister(int i_id);
+    +bool Request(int i_id);
+}
+class CloudMulmapManager {
+    i_obj_id_: API_OBJECT_ID_CLOUD_MULTIPLE_MAP_MANAGER
+}
+
+'SendMSG(XXX, OBJECT_ID_XXX, json) -> {注册的OBJECT_ID_XXX的对象}.HandleMSG()
+'PostMSG(SUBSCRIBE_MSG_XXX, json) -> {注册在SUBSCRIBE_MSG_XXX下的所有对象}.HandleSubscribeMSG()
+
+class EventBox {
+    i_obj_id_: API_OBJECT_ID_EVENT_BOX
+    -static EventBox* instance_;
+    -std::map<int, EventIo*> map_obj_ptr_;
+
+    +void EventHandle(std::string str_event_id, Json::Value json_param) -> PostMSG(API_SUBSCRIBE_MSG_DEV_ATTR_UPDATE, dev_data.ToJson());;
+    +void IotEventHandle(TopicFrameHeader *header, std::string str_event_id, const Json::Value &json_param) -> PostMSG(API_SUBSCRIBE_MSG_DEV_ATTR_UPDATE, dev_data.ToJson());;
+    +void CPSEventHandle(std::string str_event_id, Json::Value json_param);
+    +void ErrorEventHandle(std::string str_event_id, Json::Value json_param);
+    +void MapManagerEventHandle(std::string str_event_id, Json::Value json_param) -> [
+    SendMSG(API_POINT_TO_POINT_AUTOAREA_UPDATE, API_OBJECT_ID_AREA_PROCESS, json_param);
+    SendMSG(API_POINT_TO_POINT_NEED_UPDATE_MAP, API_OBJECT_ID_MAP_UPLOADER, outJson);]
+
+    +void TimerServerEventHandle(std::string str_event_id, Json::Value json_param) -> [
+    SendMSG(API_POINT_TO_POINT_TIME_TACTICS_TRIGGER, API_OBJECT_ID_TIME_TACTICS,json_param)]
+
+    +bool Register(int i_id, EventIo* obj_ptr);
+    +bool UnRegister(int i_id);
+}
+class MapUploaderLogic {
+    i_obj_id_: API_OBJECT_ID_MAP_UPLOADER
+    -std::map<int, MapDataIo *> map_obj_ptr_;
+    -SignalQueue<int> request_signal_;
+    -uint64_t last_map_update_time_;
+
+    -std::thread map_upload_thread_;
+
+    +bool Register(int i_id, MapDataIo *obj_ptr);
+    +bool UnRegister(int i_id);
+    +bool Request(int i_id);
+
+    +void Start();
+    +void Stop();
+    +void Process();
+}
+
+class PathUploader {
+    std::thread thread_;
+
+    +void Start();
+    +void Stop();
+    +void Process();
+}
+
+class CleanUploader {
+
+}
+class CleanRecordIo {
+    i_id: OBJECT_ID_CLEAN_RECORD
+
+    bool Register();
+    bool UnRegister();
+    virtual bool HandleCleanRecord(const Json::Value &record_info, Json::Value json_info) = 0;
+    bool RegisterCleanRecordHandleCallBack(CleanRecordHandleFunc cbFunc);
+}
+
+class DevStatusUploader {
+    i_id: OBJECT_ID_DEV_STATUS_SEND
+
+    DevStatusUploader() -> [
+    SubscribeMSG(SUBSCRIBE_MSG_NET_DISCONNECT_TO_CLOUD);
+    SubscribeMSG(SUBSCRIBE_MSG_NET_CONNECT_TO_CLOUD);]
+}
+class DevStatusDataIo {
+
+    void Register();
+    void UnRegister();
+    virtual void HandlerDevStatusData(DevAttr current_dev_status_data) = 0;
+}
+
+class MapsManager {
+    i_obj_id_: API_OBJECT_ID_MULTIPLE_MAP_MANAGER
+}
+class NetDoctor {
+    i_obj_id_: API_OBJECT_ID_NET_QUALITY_HANDLE
+}
+class TimeTacticsLogic {
+    i_obj_id_: API_OBJECT_ID_TIME_TACTICS
+}
+
+LDObject <|-- NPApplication
+LDObject <|-- AreaProcess
+LDObject <|-- CleanRecordLogic
+LDObject <|-- DevStatusUploaderLogic
+LDObject <|-- CloudMulmapManager
+
+LDObject <|-- EventBox
+LDObject <|-- MapUploaderLogic
+LDObject <|-- MapsManager
+LDObject <|-- NetDoctor
+LDObject <|-- TimeTacticsLogic
+
+LDObject <|-- DevStatusUploader
+DevStatusDataIo <|-- DevStatusUploader
+
+LDObject <|-- CleanUploader
+CleanRecordIo <|-- CleanUploader
+
+class EventIo {
+    -i_id_;
+
+    +bool Register();
+    +bool UnRegister();
+
+    +virtual bool HandleEvent(std::string str_id, Json::Value json_param) = 0;
+    +virtual bool HandleIotkEvent(std::string str_id, const Json::Value &json_param, Json::Value *res_info = nullptr) = 0;
+    +virtual bool HandleCPSEvent(std::string str_id, Json::Value json_param) = 0;
+    +virtual bool HandleErrorEvent(std::string str_id, Json::Value json_param) = 0;
+    +virtual bool HandleTimerServerEvent(std::string str_id, Json::Value json_param) {return true;}
+
+}
+
+class EventHandle {
+    i_obj_id_: OBJECT_ID_EVENT_HANDLE
+    -std::map<std::string, int> event_uploader_map_;
+    -std::map<std::string, int> error_uploader_map_;
+
+    SubscribeMSG(SUBSCRIBE_MSG_LOAD_CONFIG_JSON);
+
+    bool HandleEvent(std::string str_id, Json::Value json_param) override -> [
+    SendMSG(POINT_TO_POINT_REQUEST_RESET_WIFI, OBJECT_ID_WIFI_CONFIG, tmp_json);
+    PostMSG(SUBSCRIBE_MSG_NET_CONNECT_TO_CLOUD, tmp_json);
+    PostMSG(SUBSCRIBE_MSG_NET_DISCONNECT_TO_CLOUD, tmp_json);]
+
+    bool HandleIotkEvent(std::string str_id, const Json::Value &json_param, Json::Value *res_info = nullptr)override -> [
+    SendMSG(POINT_TO_POINT_REQUEST_RESET_WIFI, OBJECT_ID_WIFI_CONFIG, tmp_json);
+    PostMSG(SUBSCRIBE_MSG_NET_CONNECT_TO_CLOUD, tmp_json);
+    PostMSG(SUBSCRIBE_MSG_NET_DISCONNECT_TO_CLOUD, tmp_json);];
+
+    bool HandleCPSEvent(std::string str_id, Json::Value json_param) override -> [
+    SendMSG(POINT_TO_POINT_REQUEST_SEND_ALL_DEV_DATA, OBJECT_ID_DEV_STATUS_SEND,tmp_json);];
+
+    bool HandleErrorEvent(std::string str_id, Json::Value json_param)override;
+}
+
+EventBox --> EventIo
+EventIo <|-- EventHandle
+LDObject <|-- EventHandle
+
+'tuya_t3
+class OTABase {
+    i_obj_id_: OBJECT_ID_OTA_LOGIC
+}
+class ProtocolIot {
+    i_obj_id_: OBJECT_ID_TUYA_PROTOCOL
+}
+class ParameterLd{
+    i_obj_id_: OBJECT_ID_LICENSE_INFO
+}
+class WifiConfig {
+    i_obj_id_: OBJECT_ID_WIFI_CONFIG
+}
+class CleanHandle {
+    i_obj_id_: OBJECT_ID_CLEAN_HANDLE
+}
+class MultiMapManager {
+    i_obj_id_: OBJECT_ID_MUTILMAP_MANAGER
+}
+class TimerTactics {
+    i_obj_id_: OBJECT_ID_TIMER_TACTICS
+}
+LDObject <|-- OTABase
+LDObject <|-- ProtocolIot
+LDObject <|-- ParameterLd
+LDObject <|-- WifiConfig
+LDObject <|-- CleanHandle
+LDObject <|-- MultiMapManager
+LDObject <|-- TimerTactics
+@enduml
