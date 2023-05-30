@@ -26,26 +26,28 @@ participant MapManager
 'end
 'autonumber
 group 本地/云端多地图
-    IOT_SDK -> APOS_SDK: 订阅 /MapData/SegmentSucess
+    IOT_SDK -> APOS_SDK: 订阅区域更新事件 /MapData/SegmentSucess
 
     ' 保存地图
     alt 用户主动触发
         APP -[#red]> Network: 保存地图(运动中不允许保存，返回错误码)运动中定义待确认
-        APP -[#red]> Network: 修改房间名称
+        APP -[#red]> Network: 区域更新(如修改房间名称)
+        Network -[#red]-> IOT_SDK: 保存地图
 '        APP -[#red]> Network: 修改地图名称
-    else 清扫完成且自动分区后保存地图
+    else 清扫完成且自动分区
         MapManager --> APOS_SDK: 区域更新(update)
         APOS_SDK --> IOT_SDK: 区域更新(update)
         IOT_SDK --> Network: 区域更新(update)
         Network -[#red]-> IOT_SDK: 保存地图
-    else 算法区域更新触发(/event/map_manager -> map_segment_success)
+    else 算法更新区域信息(/event/map_manager -> map_segment_success)
         MapManager --> APOS_SDK: 区域更新(merge/split)
         APOS_SDK --> IOT_SDK: 区域更新(merge/split)
         IOT_SDK --> Network: 区域更新(merge/split)
         '判断地图存在则更新
-        alt 当前地图是否已保存（地图达到上限不保存）
-            Network -[#red]-> IOT_SDK: 保存地图
-        end
+        Network -[#red]-> IOT_SDK: 保存地图
+'        alt 当前地图是否已保存（地图达到上限不保存）
+'            Network -[#red]-> IOT_SDK: 保存地图
+'        end
     end
 
     == 保存地图 ==
@@ -54,24 +56,25 @@ group 本地/云端多地图
     IOT_SDK -> APOS_SDK: 获取当前地图 /MapData/SegmentSlamMapDataDirect
     APOS_SDK --> IOT_SDK: mapId等
     IOT_SDK --> Network: mapId等
-    Network -> IOT_SDK: 获取地图列表
-    IOT_SDK -> APOS_SDK: 获取地图列表 /MapData/LocalMultiMapInfo
-    APOS_SDK --> IOT_SDK: mapId、savePath、bkmapPath、iotMapInfo等
-    IOT_SDK --> Network: mapId、savePath、bkmapPath、iotMapInfo等
-    alt 地图超过最大数量 & 自动更新开关打开
-
-        Network -> IOT_SDK: 删除地图
-        IOT_SDK -> APOS_SDK: 删除地图 /MapData/DeleteMulitiMap
-    else 地图超过最大数量 & 自动更新开关关闭
-        Network --> APP: 返回结果
+    Network -> IOT_SDK: 获取已保存地图列表
+    IOT_SDK -> APOS_SDK: 获取已保存地图列表 /MapData/LocalMultiMapInfo
+    APOS_SDK --> IOT_SDK: mapId、savePath、bkmapPath、iotMapInfo(如cloudMapId、md5)等
+    IOT_SDK --> Network: mapId、savePath、bkmapPath、iotMapInfo(如cloudMapId、md5)等
+    alt 本地多地图
+        alt 地图超过最大数量 & 自动更新开关打开
+            Network -> IOT_SDK: 删除地图
+            IOT_SDK -> APOS_SDK: 删除地图 /MapData/DeleteMulitiMap
+        else 地图超过最大数量 & 自动更新开关关闭
+            Network --> APP: 返回结果
+        end
     end
     Network -> IOT_SDK : 保存地图
     IOT_SDK -> APOS_SDK : 保存地图 /MapData/SaveMulitiMap
     APOS_SDK --> IOT_SDK: savePath、bkmapPath
-    IOT_SDK --> Network: savePath（是否包含区域数据，应用做）、bkmapPath
-    Network -[#orange]-> Network: 组包：地图裁剪、协议转换（地图、机器人坐标、充电桩坐标）、压缩
-    Network -> IOT_SDK: 获取全量共享内存区域信息(定制信息、区域、禁区)
-    IOT_SDK -> APOS_SDK: 获取全量共享内存区域信息 /Areas/AreaJson
+    IOT_SDK --> Network: savePath、bkmapPath
+    Network --> Network: 打包地图数据：地图裁剪、协议转换（地图、机器人坐标、充电桩坐标）、压缩
+'    Network -> IOT_SDK: 获取全量共享内存区域信息(定制信息、区域、禁区)
+'    IOT_SDK -> APOS_SDK: 获取全量共享内存区域信息 /Areas/AreaJson
     '开关、读、写
     '待讨论
 '    Network --> Network: 打包分区区域信息
@@ -94,13 +97,13 @@ group 本地/云端多地图
             '
         ' }
         Network -> IOT_SDK: 更新地图信息
-        IOT_SDK -> APOS_SDK: 更新地图信息（云端mapId，md5，保存时间等）TODO接口待提供
+        IOT_SDK -> APOS_SDK: 更新地图信息（cloudMapId、md5等）
     end
 
     alt 云端多地图
-        Network --> Network: 清理本地地图文件(xxx_bkmap)
+        Network --> Network: 清理本地地图文件(bkmapPath)
     end
-    Network --> Network: 清理缩略图(xxx_record)
+    Network --> Network: 清理缩略图(savePath)
     Network --> Network: 发送DP点响应到云端（保存成功/失败）
     Network --> APP: 返回结果
     == 删除地图 ==
@@ -148,7 +151,7 @@ group 本地/云端多地图
     '重置当前地图
     APP -[#red]> Network: 重置地图
     Network -> IOT_SDK: 重置地图
-    IOT_SDK -> APOS_SDK: 重置当前地图 TODO接口待提供
+    IOT_SDK -> APOS_SDK: 重置当前地图 /MapData/DeleteMap
     Network --> Network: 上报地图到云端
     Network --> APP: 返回结果
 end

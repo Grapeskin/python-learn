@@ -1,48 +1,121 @@
 import requests
 
+# cookies = {
+# }
+#
+# headers = {
+# }
+
 cookies = {
+    'gTyPlatLang': 'zh',
+    '_tpmGuid': 'TY-a439153cfa8f6057',
+    'locale': 'zh',
+    'tz': '8',
+    'notice_preferences': '2:',
+    'notice_gdpr_prefs': '0,1,2:',
+    'operation_guide_flag': '1',
+    'Hm_lvt_3be32b3bb5351c17025006d025cf42e7': '1670223638',
+    'projectCode': '',
+    'd41d8cd98f00b204e9800998ecf8427e': '%5B%5D',
+    '3b0beffbab3dcc336bd263560ac7939a': '%5B%22smart_menu_product_deviceLog%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_product_dev%22%2C%22smart_menu_appserviceAppList%22%2C%22smart_menu_product_deviceFirmwareManage%22%2C%22smart_menu_product_deviceDetail%22%2C%22smart_menu_cloud_develop_api_group%22%2C%22smart_menu_developer_platform_home%22%5D',
+    '9f53cc1f59328e4c644eed5fa7ff64bc': '%5B%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceMsg%22%2C%22smart_menu_i18n_product%22%2C%22smart_menu_ReportStatistics%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_product_deviceLog%22%2C%22smart_menu_ReportTest%22%5D',
+    '3759e392f25da605e49643aa75517913': '%5B%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceMsg%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_product_voice_access%22%2C%22smart_menu_i18n_product%22%2C%22smart_menu_product_deviceFirmwareManage%22%2C%22smart_menu_authorization%22%2C%22smart_menu_product_deviceLog%22%5D',
+    'fast-sid': '_DdvGmGsj3rZWzU6RPPlmuNXJove0A-m',
+    '_tpmSeqId': 'seq_id_d9e3969f86c518d0',
+    '_tpmSid': 'd9b48e296c2e2a8e718cacdda4858bd7d292953237645e1f5f15d79e6bffc264',
+    'router-prefix': '',
+    '__th_p_c': '1|1|1',
+    'navbarShowExpand': '1',
+    'e7078bd3ea5ed1f8e61b84d686fb92bf': '%5B%22smart_menu_product_deviceMsg%22%2C%22smart_menu_i18n_product%22%2C%22smart_menu_product_dev%22%5D',
+    's-sid': 's:8691d528-f58d-4cac-9528-2913dec3f176.P5lZzc5afVD2HWa8DJZ0rZQVXLun/I5s1XNnmZFIQzw',
+    'csr-test-csrf-token': 'vmzADmDA-neZhTUJ5hgkYSE6fM4Vs1OSp_-w',
+    'csrf-token': 'A45lvxg5-lK4kRpjTw5FilpXNdANNfFvP7SU',
+    'csrf-token.sig': 'HmxhYnxqZlYyKEcAkNJuo-hqjxE',
 }
 
 headers = {
+    'authority': 'iot.tuya.com',
+    'accept': 'application/json, text/plain, */*',
+    'accept-language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7,zh-TW;q=0.6',
+    'cache-control': 'no-cache',
+    'content-type': 'application/json; charset=UTF-8',
+    # Requests sorts cookies= alphabetically
+    # 'cookie': 'gTyPlatLang=zh; _tpmGuid=TY-a439153cfa8f6057; locale=zh; tz=8; notice_preferences=2:; notice_gdpr_prefs=0,1,2:; operation_guide_flag=1; Hm_lvt_3be32b3bb5351c17025006d025cf42e7=1670223638; projectCode=; d41d8cd98f00b204e9800998ecf8427e=%5B%5D; 3b0beffbab3dcc336bd263560ac7939a=%5B%22smart_menu_product_deviceLog%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_product_dev%22%2C%22smart_menu_appserviceAppList%22%2C%22smart_menu_product_deviceFirmwareManage%22%2C%22smart_menu_product_deviceDetail%22%2C%22smart_menu_cloud_develop_api_group%22%2C%22smart_menu_developer_platform_home%22%5D; 9f53cc1f59328e4c644eed5fa7ff64bc=%5B%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceMsg%22%2C%22smart_menu_i18n_product%22%2C%22smart_menu_ReportStatistics%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_product_deviceLog%22%2C%22smart_menu_ReportTest%22%5D; 3759e392f25da605e49643aa75517913=%5B%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceMsg%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_product_voice_access%22%2C%22smart_menu_i18n_product%22%2C%22smart_menu_product_deviceFirmwareManage%22%2C%22smart_menu_authorization%22%2C%22smart_menu_product_deviceLog%22%5D; fast-sid=_DdvGmGsj3rZWzU6RPPlmuNXJove0A-m; _tpmSeqId=seq_id_d9e3969f86c518d0; _tpmSid=d9b48e296c2e2a8e718cacdda4858bd7d292953237645e1f5f15d79e6bffc264; router-prefix=; __th_p_c=1|1|1; navbarShowExpand=1; e7078bd3ea5ed1f8e61b84d686fb92bf=%5B%22smart_menu_product_deviceMsg%22%2C%22smart_menu_i18n_product%22%2C%22smart_menu_product_dev%22%5D; s-sid=s:8691d528-f58d-4cac-9528-2913dec3f176.P5lZzc5afVD2HWa8DJZ0rZQVXLun/I5s1XNnmZFIQzw; csr-test-csrf-token=vmzADmDA-neZhTUJ5hgkYSE6fM4Vs1OSp_-w; csrf-token=A45lvxg5-lK4kRpjTw5FilpXNdANNfFvP7SU; csrf-token.sig=HmxhYnxqZlYyKEcAkNJuo-hqjxE',
+    'csrf-token': 'vmzADmDA-neZhTUJ5hgkYSE6fM4Vs1OSp_-w',
+    'origin': 'https://iot.tuya.com',
+    'pragma': 'no-cache',
+    'referer': 'https://iot.tuya.com/device/equipment',
+    'sec-ch-ua': '"Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'same-origin',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36',
+    'x-requested-with': 'XMLHttpRequest',
 }
+
 # 32
+# event_notify_code = {
+#     "time_total_clean_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_total_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_total_clean_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_cur_point_clean_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_cur_point_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_cur_point_clean_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_point_clean_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_point_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_point_clean_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_area_clean_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_area_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_area_clean_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_auto_area_clean_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_auto_area_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_auto_area_clean_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_edge_clean_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_edge_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "time_edge_clean_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
+#     "charge_ok_resume_clean": {"msg": {"cn": "充电完毕，继续清扫", "en": "Charging is completed, continue to clean"}, "code": 2},
+#     "low_battery_find_charger": {"msg": {"cn": "电量不足，开始回充", "en": "Low Battery. Heading Home."}, "code": 3},
+#     "back_charger_fail": {"msg": {"cn": "找不到回充座，停止回充", "en": "Unable to find charging base. Stop heading home"},
+#                           "code": 4},
+#     "cannot_upgrade": {"msg": {"cn": "请将机器放到充电座充电，并确保电量大于20%再升级",
+#                                "en": "Please put the robot into the charging base for charging and make sure the battery is more than 20%."},
+#                        "code": 5},
+#     "clean_finish": {"msg": {"cn": "清扫结束，开始回充", "en": "Finished Cleaning. Heading Home."}, "code": 6},
+#     "firmware_upgrade_fail": {"msg": {"cn": "升级失败，请重试", "en": "Upgrading failed. Please try again"}, "code": 7},
+#     "firmware_upgrade_done": {"msg": {"cn": "升级成功", "en": "Successfully upgraded"}, "code": 8},
+#     "collect_dust_full": {"msg": {"cn": "请及时清理尘袋", "en": "Please clean the dust bag in time "}, "code": 9},
+#     "time_task_disable_in_silent_mode": {
+#         "msg": {"cn": "勿扰时间段内，预约清扫未执行", "en": "Do Not Disturb time, schedule not implemented."}, "code": 11},
+#     "collect_dust_start": {"msg": {"cn": "集尘中", "en": "Dust collecting"}, "code": 13},
+#     "low_bat_need_poweroff": {"msg": {"cn": "电量不足，自动关机", "en": "Low Battery, Shutting Down"}, "code": 14},
+#     "opt_during_upgrade": {"msg": {"cn": "系统升级中，请耐心等待", "en": "Please wait patiently while upgrading"}, "code": 17},
+#     "mop_out": {"msg": {"cn": "拖布支架已取下，退出拖地模式", "en": "The mop support has been removed"}, "code": 25},
+#     "mop_in": {"msg": {"cn": "拖布支架已安装，进入拖地模式", "en": "The mop support has been installed"}, "code": 26}
+# }
 event_notify_code = {
-    "time_total_clean_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_total_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_total_clean_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_cur_point_clean_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_cur_point_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_cur_point_clean_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_point_clean_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_point_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_point_clean_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_area_clean_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_area_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_area_clean_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_auto_area_clean_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_auto_area_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_auto_area_clean_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_edge_clean_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_edge_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "time_edge_clean_mop_start": {"msg": {"cn": "开始预约清扫", "en": "Start Scheduled Cleaning"}, "code": 1},
-    "charge_ok_resume_clean": {"msg": {"cn": "充电完毕，继续清扫", "en": "Charging is completed, continue to clean"}, "code": 2},
-    "low_battery_find_charger": {"msg": {"cn": "电量不足，开始回充", "en": "Low Battery. Heading Home."}, "code": 3},
-    "back_charger_fail": {"msg": {"cn": "找不到回充座，停止回充", "en": "Unable to find charging base. Stop heading home"},
-                          "code": 4},
-    "cannot_upgrade": {"msg": {"cn": "请将机器放到充电座充电，并确保电量大于20%再升级",
-                               "en": "Please put the robot into the charging base for charging and make sure the battery is more than 20%."},
-                       "code": 5},
-    "clean_finish": {"msg": {"cn": "清扫结束，开始回充", "en": "Finished Cleaning. Heading Home."}, "code": 6},
-    "firmware_upgrade_fail": {"msg": {"cn": "升级失败，请重试", "en": "Upgrading failed. Please try again"}, "code": 7},
-    "firmware_upgrade_done": {"msg": {"cn": "升级成功", "en": "Successfully upgraded"}, "code": 8},
-    "collect_dust_full": {"msg": {"cn": "请及时清理尘袋", "en": "Please clean the dust bag in time "}, "code": 9},
-    "time_task_disable_in_silent_mode": {
-        "msg": {"cn": "勿扰时间段内，预约清扫未执行", "en": "Do Not Disturb time, schedule not implemented."}, "code": 11},
-    "collect_dust_start": {"msg": {"cn": "集尘中", "en": "Dust collecting"}, "code": 13},
-    "low_bat_need_poweroff": {"msg": {"cn": "电量不足，自动关机", "en": "Low Battery, Shutting Down"}, "code": 14},
-    "opt_during_upgrade": {"msg": {"cn": "系统升级中，请耐心等待", "en": "Please wait patiently while upgrading"}, "code": 17},
-    "mop_out": {"msg": {"cn": "拖布支架已取下，退出拖地模式", "en": "The mop support has been removed"}, "code": 25},
-    "mop_in": {"msg": {"cn": "拖布支架已安装，进入拖地模式", "en": "The mop support has been installed"}, "code": 26}
+    "low_battery_to_clean": {"msg": {"cn": "低电清扫", "en": "clean cannot arrive"}, "code": 1},
+    "restart_work_and_build_map": {"msg": {"cn": "定位失败,重新建图", "en": "restart work and build map"}, "code": 2},
+    "try_poweroff_on_charger": {"msg": {"cn": "充电桩上无法关机", "en": "try power off on charger"}, "code": 3},
+    "enter_silent_mode": {"msg": {"cn": "进入勿扰模式", "en": "enter silent mode"}, "code": 4},
+    "time_to_work_start": {"msg": {"cn": "预约清扫开始", "en": "time to work start"}, "code": 5},
+    "clean_finish": {"msg": {"cn": "清扫完成", "en": "clean finish"}, "code": 6},
+    "back_charger_lost_pose": {"msg": {"cn": "回充定位失败", "en": "back charger lost pose"}, "code": 7},
+    "charge_ok_resume_clean": {"msg": {"cn": "充电已完成继续清扫", "en": "charge ok resume clean"}, "code": 8},
+    "time_task_disable": {"msg": {"cn": "当前有清扫任务预约启动失败", "en": "time task disable"}, "code": 9},
+    "clean_lost_pose": {"msg": {"cn": "清扫定位失败", "en": "clean lost pose"}, "code": 10},
+    "low_bat_need_recharge": {"msg": {"cn": "低电需要回充", "en": "low bat need recharge"}, "code": 11},
+    "clean_cannot_arrive": {"msg": {"cn": "清扫区域无法到达", "en": "clean cannot arrive"}, "code": 12},
+    "collect_dust_full": {"msg": {"cn": "工作站尘袋已满", "en": "collect dust full"}, "code": 14},
+    "collect_dust_no_bag": {"msg": {"cn": "工作站未安装尘袋", "en": "collect dust no bag"}, "code": 15},
+    "time_task_disable_in_silent_mode": {"msg": {"cn": "勿扰模式下定时任务不执行", "en": "time task disable in silent mode"},
+                                         "code": 16},
+    "collect_dust_no_fan": {"msg": {"cn": "工作站风机异常", "en": "collect dust no fan"}, "code": 18},
+    "mop_out": {"msg": {"cn": "拖布移除事件", "en": "mop out"}, "code": 19},
+    "collect_dust_done": {"msg": {"cn": "集尘完成", "en": "collect dust done"}, "code": 20},
+    "pressure_too_high": {"msg": {"cn": "基站压力过高", "en": "pressure too high"}, "code": 21},
+    "pressure_too_low": {"msg": {"cn": "基站压力过低", "en": "pressure too low"}, "code": 22},
 }
 
 #23
@@ -314,7 +387,8 @@ if __name__ == '__main__':
     3. 新增故障、消息推送
     4. 新增故障、消息文案多语言
     """
-    product_key = "testoizjibugnumjjkd0"
-    # message_report()
+    product_key = "z8arz33rah6vwq8b"
+
+    message_report()
     # error_report()
-    update_fault_dp_content()
+    # update_fault_dp_content()

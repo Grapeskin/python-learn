@@ -16,50 +16,66 @@
 
 participant Network
 participant PropertyManager
+queue SignalQueue
 participant APOS_SDK
 participant Protocol_Interface
 participant AppSweeper
 
 autonumber
 Network -> Network: 进程启动
-APOS_SDK -> Protocol_Interface: 订阅数据更新主题
-AppSweeper -> Protocol_Interface: 订阅数据更新主题
+Network -> PropertyManager: 初始化
+PropertyManager -> APOS_SDK: 初始化
+PropertyManager --> PropertyManager: 开启生产快数据线程T1
+PropertyManager --> PropertyManager: 开启生产慢数据线程T2
+PropertyManager --> PropertyManager: 开启消费数据线程T3
+PropertyManager -> APOS_SDK: 订阅数据更新主题 /FileChange/FileAttrChange
+APOS_SDK -> Protocol_Interface: 订阅数据更新主题 /event/config_file_change -> config_file_attribute_change
+AppSweeper -> Protocol_Interface: 订阅数据更新主题 /event/config_file_change -> config_file_attribute_change
 
-PropertyManager -> PropertyManager: 开启线程1，轮询配置文件数据状态
-PropertyManager -> APOS_SDK: 订阅数据更新主题
-APOS_SDK -> Protocol_Interface: 订阅数据更新主题
-    loop 每5s
-        PropertyManager -> APOS_SDK: 获取/userdata/config/configs.json、/tmp/run/last_record/clean_info.json
+'PropertyManager -> PropertyManager: 开启线程1，轮询配置文件数据状态
+'PropertyManager -> APOS_SDK: 订阅数据更新主题
+'APOS_SDK -> Protocol_Interface: 订阅数据更新主题
+
+group 生产线程T1
+    loop 每300ms
+        PropertyManager -> APOS_SDK: 获取/KeyMop/IsExisted、/Areas/GoodsInfo
         PropertyManager <-- APOS_SDK: 结果
         PropertyManager -> PropertyManager: 对比是否变化
-        alt 有变化
-            PropertyManager -[#red]-> Network: 上报
+        alt 有变化 || 强制上报
             PropertyManager --> PropertyManager: 更新
-        end
-
-        alt IOT变更
-            Network -> PropertyManager: 指令下发
-            PropertyManager -> APOS_SDK: 指令下发
-            APOS_SDK -> Protocol_Interface: 指令下发
-            Protocol_Interface -> Protocol_Interface: 属性变更
-            Protocol_Interface --> APOS_SDK: 属性变更
-            APOS_SDK --> PropertyManager: 属性变更
-            PropertyManager -[#red]-> Network: 立即上报
-        else 应用层变更
-            AppSweeper -> Protocol_Interface: 指令下发
-            Protocol_Interface -> Protocol_Interface: 属性变更
-            Protocol_Interface --> APOS_SDK: 属性变更
-            APOS_SDK --> PropertyManager: 属性变更
-            PropertyManager -[#red]-> Network: 立即上报
+            PropertyManager [#red]-> SignalQueue: Push
         end
     end
-PropertyManager -> PropertyManager: 开启线程2，轮询内存数据状态
-    loop 每300ms
-        PropertyManager -> APOS_SDK: 获取SHM_GOODS_JSON、common_node_attr、task_manager_attr
+end
+group 生产线程T2
+    loop 每5s
+        PropertyManager -> APOS_SDK: 获取/ParamManager/AllParamJson
         PropertyManager <-- APOS_SDK: 结果
-        alt 有变化
-            PropertyManager -[#red]-> Network: 上报
+        PropertyManager -> PropertyManager: 对比是否变化
+        alt 有变化 || 强制上报
             PropertyManager --> PropertyManager: 更新
+            PropertyManager [#red]-> SignalQueue: Push
         end
     end
+end
+group 消费线程T3
+    PropertyManager <[#red]-- SignalQueue: Pull
+    alt 返回值 >= 0
+        PropertyManager [#red]-> Network: 上报
+    end
+end
+
+alt APP下发变更属性指令
+    Network -> PropertyManager: 属性变更
+    PropertyManager -> APOS_SDK: 属性变更
+    alt 变更成功
+        PropertyManager [#red]-> SignalQueue: Push
+    end
+else 应用层变更属性
+    AppSweeper -> Protocol_Interface: 属性变更
+    Protocol_Interface --> APOS_SDK: 属性变更
+    APOS_SDK --> PropertyManager: 属性变更
+    PropertyManager [#red]-> SignalQueue: Push
+end
+
 @enduml
