@@ -1,0 +1,63 @@
+@startuml
+participant Network
+box IOT_SDK
+participant AposSdkIot
+participant EventManager
+queue SignalQueue
+participant ServerManager
+participant ServiceManager
+endbox
+participant APOS_SDK
+
+'autonumber
+==初始化==
+Network --> Network: 节点启动
+Network -> AposSdkIot: 初始化SDK
+AposSdkIot -> APOS_SDK: 初始化
+AposSdkIot <-- APOS_SDK: 初始化成功
+AposSdkIot -> EventManager: 初始化
+
+EventManager -[#blue]> APOS_SDK: 订阅主题，egg: /WorkStatus/Idle
+EventManager --> EventManager: 启动消费消息线程T1
+group 线程T1
+    loop
+        EventManager <-[#red]- SignalQueue: Pull(5s timeout)
+        alt 有事件处理
+            EventManager --> EventManager: 匹配Network注册主题
+            alt 匹配成功
+                Network <-[#orange]- EventManager: 执行回调函数
+            end
+        end
+    end
+end
+AposSdkIot <-- EventManager: 初始化成功
+AposSdkIot -> ServiceManager: 初始化
+ServiceManager --> ServiceManager: 注册服务、初始化
+ServiceManager -[#deeppink]-> EventManager: 注册事件回调
+ServiceManager <-- EventManager: 注册成功
+ServiceManager -[#green]-> ServerManager: 注册请求回调
+ServiceManager <-- ServerManager: 注册成功
+AposSdkIot <-- ServiceManager: 初始化成功
+Network <-- AposSdkIot: 初始化成功
+Network -[#orange]> AposSdkIot: 注册事件回调 egg: \n/Sweep/DevStatus(业务型)\n/Common/TimeNtpUpdate(透传型)
+
+==请求执行==
+Network -[#green]> AposSdkIot: 执行指令，egg: /Sweep/Volume
+AposSdkIot -[#green]> ServerManager: 执行指令
+ServerManager -> APOS_SDK: 执行指令
+ServerManager <-- APOS_SDK: 执行结果
+AposSdkIot <-- ServerManager: 执行结果
+Network <-- AposSdkIot: 执行结果
+==事件上报==
+APOS_SDK -[#blue]> EventManager: 事件触发
+EventManager --> EventManager: 匹配回调
+alt 匹配Network
+    EventManager -[#orange]-> Network: 执行回调函数
+else 匹配ServiceManager
+    EventManager -[#deeppink]-> ServiceManager: 执行回调函数
+    ServiceManager -[#red]-> EventManager: 发布到Network
+    EventManager -[#red]-> SignalQueue: Push
+else 匹配失败
+
+end
+@enduml
