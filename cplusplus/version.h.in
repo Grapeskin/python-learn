@@ -1,0 +1,2 @@
+#define version "1.0"
+#cmakedefine USE_SUPER_PRINT

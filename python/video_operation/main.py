@@ -188,48 +188,48 @@ def download_ks_user_all(user_id: str, cookies: str):
 
         print(url)
         common.any_download(url=url, output_dir=os.path.join(os.getcwd(), "ks"))
-        os.rename(
-            os.path.join(current_dir, src_file_name),
-            os.path.join(current_dir, dst_file_name),
-        )
+        # os.rename(
+        #     os.path.join(current_dir, src_file_name),
+        #     os.path.join(current_dir, dst_file_name),
+        # )
 
 
-def download_pdd_share_urls():
+def download_pdd_share_urls(res):
     """下载拼多多视频链接"""
-    for video in get_pdd_videos():
+    for video in res:
         try:
             print(
                 common.any_download(
                     url=video.get("url"), output_dir=os.path.join(os.getcwd(), "pdd")
                 )
             )
-            cursor.execute(
-                f"update pdd_video set status = 1 where id = {video.get('id')}"
-            )
-            db.commit()
+            # cursor.execute(
+            #     f"update pdd_video set status = 1 where id = {video.get('id')}"
+            # )
+            # db.commit()
         except Exception as e:
-            db.rollback()
-
+            # db.rollback()
+            pass
 
 def get_pdd_videos():
     """获取拼多多视频链接"""
-    cursor.execute("select * from pdd_video where status = 0")
-    res = cursor.fetchall()
+    # cursor.execute("select * from pdd_video where status = 0")
+    # res = cursor.fetchall()
     return [{"url": item.get("url"), "id": item.get("id")} for item in res]
 
 
 if __name__ == "__main__":
     # download_ks_share_urls(
-    #     cookies="did=web_cbf2e4e8bc694e56a30fd5295ce28ea8; didv=1652011511000; clientid=3; client_key=65890b29; userId=1680869379",
+    #     cookies="did=web_cbf2e4e8bc694e56a30fd5295ce28ea8; didv=1652011511000; kpf=PC_WEB; kpn=KUAISHOU_VISION; clientid=3; client_key=65890b29; userId=1680869379; kuaishou.server.web_st=ChZrdWFpc2hvdS5zZXJ2ZXIud2ViLnN0EqABdY1aTrRGovdedIuXlP_IkYGjfg_B924npP9FIH_BFWtRyIspxL5hWPX5sroz2vbSoL_AytO4SWMoMrlscb7rbQzZKZQ_21KXsQgRHWPJnqTOCyF_vFn75VScYjmWhhgejnndil2VYoEy7fwWFL53fa3yRtvlXCbNpdfFzOtVWEmkayWDL1awXLEpRAAG1_Py3sLzfo4Itvv5HmvAl3IcoRoS5Uf6LooXNTrpm4StA9DDXaoVIiCUSSi7zicMw_zQDTwVi5Ku9g2_g40DxqAiyKYgpGBvHSgFMAE; kuaishou.server.web_ph=08d6302e9b986a2d2b54fea807715bd5635a",
     #     urls=["https://v.kuaishou.com/k0BAhi", "https://v.kuaishou.com/jzcuGY"]
     # )
-    # download_ks_user_all(user_id='3x27q2f82gnxn4e',
-    #                      cookies='did=web_cbf2e4e8bc694e56a30fd5295ce28ea8; didv=1652011511000; kpf=PC_WEB; kpn=KUAISHOU_VISION; clientid=3; client_key=65890b29; userId=1680869379; kuaishou.server.web_st=ChZrdWFpc2hvdS5zZXJ2ZXIud2ViLnN0EqABGqjH4Zoode2cqHDOgkOVTI0thsHle8sbkhbxvWIYKDyLXwKYQR_V7ZhrKqEGw8hxQ_G5GdI_rqM9leZ7qtmlVRpc0ngJuiQr7IU0ZBitBDM0FsUY00iHFir9JvsgVbfJsbOyhglx1rSAkjUw0es06yxRQznGdM5xRFa9v6m8JHEp8vGlG1X8qTMXWR_LRlEau_rKPfJEJd5JQneqSqolIRoSf061Kc3w5Nem7YdpVBmH39ceIiDRS2IjqOnmroiJUIqSM5fz008E82LBx95QhLVvNukJWygFMAE; kuaishou.server.web_ph=e97f70cd95a53fa09bdce7dada843f19936f')
-    # download_pdd_share_urls([
-    #     'https://mobile.yangkeduo.com/fyxmkief.html?refer_share_id=fcHutf63jqxPyRKjWRYkDLUBdGYMJMnf&refer_share_channel=message&refer_share_uid=8647772212739&_x_share_id=fWZTaXA566E5XsdIT9wA2SUbCVIOXyDr&_wvx=10&_x_source_feed_id=4569916880722973607&share_uid=8647772212739&share_uin=3LS2542HF32COXS3ZR5VDK5EJA_GEXDA&page_from=602100&feed_id=4628849246568566060&refer_share_uin=3LS2542HF32COXS3ZR5VDK5EJA_GEXDA&needs_login=1&shared_time=1653311024255&shared_sign=a653b53db3e2f8a1353d58effac76d42&_wv=41729&goods_id=330659862161'
-    # ])
-    db = pymysql.connect(
-        host="localhost", port=3306, user="root", password="123456", database="test"
-    )
-    cursor = db.cursor(cursor=SSDictCursor)
-    download_pdd_share_urls()
+    # download_ks_user_all(user_id='3x7eraehru72ky4',
+    #                      cookies='did=web_cbf2e4e8bc694e56a30fd5295ce28ea8; didv=1652011511000; kpf=PC_WEB; kpn=KUAISHOU_VISION; clientid=3; client_key=65890b29; userId=1680869379; kuaishou.server.web_st=ChZrdWFpc2hvdS5zZXJ2ZXIud2ViLnN0EqABdY1aTrRGovdedIuXlP_IkYGjfg_B924npP9FIH_BFWtRyIspxL5hWPX5sroz2vbSoL_AytO4SWMoMrlscb7rbQzZKZQ_21KXsQgRHWPJnqTOCyF_vFn75VScYjmWhhgejnndil2VYoEy7fwWFL53fa3yRtvlXCbNpdfFzOtVWEmkayWDL1awXLEpRAAG1_Py3sLzfo4Itvv5HmvAl3IcoRoS5Uf6LooXNTrpm4StA9DDXaoVIiCUSSi7zicMw_zQDTwVi5Ku9g2_g40DxqAiyKYgpGBvHSgFMAE; kuaishou.server.web_ph=08d6302e9b986a2d2b54fea807715bd5635a')
+    download_pdd_share_urls([
+        {"url": 'https://mobile.yangkeduo.com/fyxmkief.html?refer_share_id=a49FeeO4lLboLtJhVy0AJlnzNZuoj4jO&refer_share_channel=qq&_wvx=10&channel=2&_wv=41729&page_from=602100&feed_id=6111547885169477478&refer_share_uin=5QERZT3OESIUNRURREVL5VQDDY_GEXDA&needs_login=1&shared_time=1683454390604&shared_sign=3c213a6f50a11dfce689520443d1275f&goods_id=469644045270'}
+    ])
+    # db = pymysql.connect(
+    #     host="localhost", port=3306, user="root", password="123456", database="test"
+    # )
+    # cursor = db.cursor(cursor=SSDictCursor)
+    # download_pdd_share_urls()
