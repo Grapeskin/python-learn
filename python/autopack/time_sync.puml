@@ -1,0 +1,96 @@
+@startuml
+
+participant Phone
+participant APP
+participant Network
+participant IotSdkV1
+participant TUYA_SDK
+participant TIME_CONFIG_JSON
+participant USERDATA_CONFIG_JSON
+participant Timer
+
+group 开机获取
+    Timer -> TIME_CONFIG_JSON: 读取定时配置
+    Timer <-- TIME_CONFIG_JSON: 定时配置(定时时间、时区)
+end
+APP -> Phone: 1. 获取系统时区
+APP <-- Phone: 系统时区
+
+APP -> Network: 2. 配网
+Network -> TUYA_SDK: 配网
+TUYA_SDK-->TUYA_SDK: 设置时区
+APP <-- TUYA_SDK: 配网成功
+
+alt 设备在线
+    loop 每小时
+    Network -> TUYA_SDK: 调用uni_local_time_get接口获取当地时间(含冬夏令时)
+    Network <-- TUYA_SDK: 时区
+    alt 返回码非 0
+        Network-->Network: 一分钟后重试，检测设备是否在线
+    else
+        Network-->Network: 使用UTC时间与当地时间计算相差时区 Zone1
+        Network-> TIME_CONFIG_JSON: 获取当前时区
+        Network<-- TIME_CONFIG_JSON: 当前时区 Zone2
+        alt 当前不存在设置过的时区
+            Network -> IotSdkV1: 初始化时区
+            IotSdkV1 -> TIME_CONFIG_JSON: 写入时区
+            IotSdkV1 --> IotSdkV1: 设置本地时间为GMT
+            Network <-- IotSdkV1: 设置本地时间结果result
+            alt result == -2
+                Network --> Network: 镜像不支持设置本地GMT写入环境变量
+            end
+            Network -> Timer: 初始化时区
+            Timer --> Timer: 初始化时区
+        else 配置文件中时区Zone2(如 -5) != 获取到的当前时区Zone1(如 -4)
+            Network -> IotSdkV1: 初始化时区
+            IotSdkV1 -> TIME_CONFIG_JSON: 写入时区
+            IotSdkV1 --> IotSdkV1: 设置本地时间为GMT
+            Network <-- IotSdkV1: 设置本地时间结果result
+            alt result == -2
+                Network --> Network: 镜像不支持设置本地GMT写入环境变量
+            end
+
+            Network -> Timer: 更新时区
+            Timer --> Timer: 更新时区
+        end
+    end
+end
+else 设备不在线
+    Network-->Network: 一分钟后重试，检测设备是否在线
+end
+
+
+
+APP -> Network: 3. 设置定时任务
+Network-> TIME_CONFIG_JSON: 获取当前时区
+Network -> TIME_CONFIG_JSON: 写配置文件(定时时间、时区)
+Network -> Timer: 更新配置文件(定时时间、时区)
+APP <-- Network: 设置成功
+
+alt 到达定时时间
+    Timer --> Network: 执行预约任务
+end
+
+APP -> Network: 4. 设置勿扰时间
+Network -> IotSdkV1: 设置勿扰
+IotSdkV1 --> IotSdkV1: 解析勿扰参数
+alt time_zone == 0x7F
+    IotSdkV1 -> TIME_CONFIG_JSON: 写入勿扰时间
+else time_zone != 0x7F
+    IotSdkV1 -> TIME_CONFIG_JSON: 写入勿扰时间、时区
+    IotSdkV1 --> IotSdkV1: 设置本地时间为GMT
+end
+APP <-- Network: 设置成功
+
+alt 到达/退出勿扰时间
+    Timer --> USERDATA_CONFIG_JSON: 更新勿扰配置
+    loop
+        Network -> USERDATA_CONFIG_JSON: 轮训勿扰配置
+        Network <-- USERDATA_CONFIG_JSON: 勿扰状态
+        alt 状态变更
+            Network --> APP: 处于勿扰
+        end
+    end
+end
+
+@enduml

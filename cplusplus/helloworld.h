@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "hello.h"
 
 using namespace std;
 const double *f1(const double arr[], int n);
