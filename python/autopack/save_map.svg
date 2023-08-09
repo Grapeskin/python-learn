@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1286.6px" preserveAspectRatio="none" style="width:1075px;height:1286px;background:#FFFFFF;" version="1.1" viewBox="0 0 1075 1286" width="1075.9px" zoomAndPan="magnify"><defs/><g><rect height="1209.2244" style="stroke:#000000;stroke-width:1.0499999999999998;fill:none;" width="1057" x="7" y="39.2841"/><rect height="305.8292" style="stroke:#000000;stroke-width:1.0499999999999998;fill:none;" width="1043" x="14" y="80.2402"/><rect height="36.0722" style="stroke:#000000;stroke-width:1.0499999999999998;fill:none;" width="390.25" x="264.95" y="345.0973"/><rect height="92.4444" style="stroke:#000000;stroke-width:1.0499999999999998;fill:none;" width="936.25" x="14" y="605.7222"/><rect height="88.4164" style="stroke:#000000;stroke-width:1.0499999999999998;fill:none;" width="292.6" x="264.95" y="890.8631"/><rect height="114.6725" style="stroke:#000000;stroke-width:1.0499999999999998;fill:none;" width="685.3" x="264.95" y="989.0795"/><rect height="45.1722" style="stroke:#000000;stroke-width:1.0499999999999998;fill:none;" width="167.3" x="264.95" y="1113.552"/><line style="stroke:#181818;stroke-width:0.3499999999999999;fill:none;stroke-dasharray:5.0,5.0;" x1="35" x2="35" y1="27.3841" y2="1260.4084"/><line style="stroke:#181818;stroke-width:0.3499999999999999;fill:none;stroke-dasharray:5.0,5.0;" x1="294.35" x2="294.35" y1="27.3841" y2="1260.4084"/><line style="stroke:#181818;stroke-width:0.3499999999999999;fill:none;stroke-dasharray:5.0,5.0;" x1="622.3" x2="622.3" y1="27.3841" y2="1260.4084"/><line style="stroke:#181818;stroke-width:0.3499999999999999;fill:none;stroke-dasharray:5.0,5.0;" x1="912.45" x2="912.45" y1="27.3841" y2="1260.4084"/><line style="stroke:#181818;stroke-width:0.3499999999999999;fill:none;stroke-dasharray:5.0,5.0;" x1="1015.7" x2="1015.7" y1="27.3841" y2="1260.4084"/><rect fill="#E2E2F0" height="23.1841" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="28.7" x="21" y="3.5"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="18.9" x="25.9" y="19.6308">APP</text><rect fill="#E2E2F0" height="23.1841" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="28.7" x="21" y="1259.7084"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="18.9" x="25.9" y="1275.8392">APP</text><rect fill="#E2E2F0" height="23.1841" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="44.8" x="271.95" y="3.5"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="35" x="276.85" y="19.6308">Network</text><rect fill="#E2E2F0" height="23.1841" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="44.8" x="271.95" y="1259.7084"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="35" x="276.85" y="1275.8392">Network</text><rect fill="#E2E2F0" height="23.1841" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="51.1" x="597.1" y="3.5"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="41.3" x="602" y="19.6308">IOT_SDK</text><rect fill="#E2E2F0" height="23.1841" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="51.1" x="597.1" y="1259.7084"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="41.3" x="602" y="1275.8392">IOT_SDK</text><rect fill="#E2E2F0" height="23.1841" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="61.6" x="881.65" y="3.5"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="51.8" x="886.55" y="19.6308">APOS_SDK</text><rect fill="#E2E2F0" height="23.1841" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="61.6" x="881.65" y="1259.7084"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="51.8" x="886.55" y="1275.8392">APOS_SDK</text><rect fill="#E2E2F0" height="23.1841" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="67.9" x="982.1" y="3.5"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="58.1" x="987" y="19.6308">MapManager</text><rect fill="#E2E2F0" height="23.1841" rx="1.75" ry="1.75" style="stroke:#181818;stroke-width:0.3499999999999999;" width="67.9" x="982.1" y="1259.7084"/><text fill="#000000" font-family="sans-serif" font-size="9.8" lengthAdjust="spacing" textLength="58.1" x="987" y="1275.8392">MapManager</text><path d="M7,39.2841 L105,39.2841 L105,46.1122 L98,53.1122 L7,53.1122 L7,39.2841 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0499999999999998;"/><rect fill="none" height="1209.2244" style="stroke:#000000;stroke-width:1.0499999999999998;" width="1057" x="7" y="39.2841"/><text fill="#000000" font-family="sans-serif" font-size="9.1" font-weight="bold" lengthAdjust="spacing" textLength="66.5" x="17.5" y="50.4126">本地/云端多地图</text><polygon fill="#181818" points="904.05,66.9402,911.05,69.7402,904.05,72.5402,906.85,69.7402" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="622.65" x2="908.25" y1="69.7402" y2="69.7402"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="184.8" x="627.55" y="66.3407">订阅区域更新事件 /MapData/SegmentSucess</text><path d="M14,80.2402 L56.7,80.2402 L56.7,87.0683 L49.7,94.0683 L14,94.0683 L14,80.2402 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0499999999999998;"/><rect fill="none" height="305.8292" style="stroke:#000000;stroke-width:1.0499999999999998;" width="1043" x="14" y="80.2402"/><text fill="#000000" font-family="sans-serif" font-size="9.1" font-weight="bold" lengthAdjust="spacing" textLength="11.2" x="24.5" y="91.3688">alt</text><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacing" textLength="51.8" x="67.2" y="90.4644">[用户主动触发]</text><polygon fill="#FF0000" points="285.95,107.9125,292.95,110.7125,285.95,113.5125,288.75,110.7125" style="stroke:#FF0000;stroke-width:0.6999999999999998;"/><line style="stroke:#FF0000;stroke-width:0.6999999999999998;" x1="35.35" x2="290.15" y1="110.7125" y2="110.7125"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="242.2" x="40.25" y="107.3129">保存地图(运动中不允许保存，返回错误码)运动中定义待确认</text><polygon fill="#FF0000" points="285.95,130.1405,292.95,132.9405,285.95,135.7405,288.75,132.9405" style="stroke:#FF0000;stroke-width:0.6999999999999998;"/><line style="stroke:#FF0000;stroke-width:0.6999999999999998;" x1="35.35" x2="290.15" y1="132.9405" y2="132.9405"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="105.7" x="40.25" y="129.541">区域更新(如修改房间名称)</text><polygon fill="#FF0000" points="614.25,152.3686,621.25,155.1686,614.25,157.9686,617.05,155.1686" style="stroke:#FF0000;stroke-width:0.6999999999999998;"/><line style="stroke:#FF0000;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="294.35" x2="618.45" y1="155.1686" y2="155.1686"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="36.4" x="299.25" y="151.7691">保存地图</text><line style="stroke:#000000;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="14" x2="1057" y1="161.4686" y2="161.4686"/><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacing" textLength="74.9" x="17.5" y="170.2928">[清扫完成且自动分区]</text><polygon fill="#181818" points="920.15,186.5127,913.15,189.3127,920.15,192.1127,917.35,189.3127" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="915.95" x2="1015.35" y1="189.3127" y2="189.3127"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="69.3" x="924.35" y="185.9132">区域更新(update)</text><polygon fill="#181818" points="630.35,208.7408,623.35,211.5408,630.35,214.3408,627.55,211.5408" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="626.15" x2="911.75" y1="211.5408" y2="211.5408"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="69.3" x="634.55" y="208.1413">区域更新(update)</text><polygon fill="#181818" points="302.05,230.9689,295.05,233.7689,302.05,236.5689,299.25,233.7689" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="297.85" x2="621.95" y1="233.7689" y2="233.7689"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="69.3" x="306.25" y="230.3694">区域更新(update)</text><polygon fill="#FF0000" points="614.25,253.197,621.25,255.997,614.25,258.797,617.05,255.997" style="stroke:#FF0000;stroke-width:0.6999999999999998;"/><line style="stroke:#FF0000;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="294.35" x2="618.45" y1="255.997" y2="255.997"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="36.4" x="299.25" y="252.5975">保存地图</text><line style="stroke:#000000;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="14" x2="1057" y1="262.297" y2="262.297"/><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacing" textLength="258.3" x="17.5" y="271.1211">[算法更新区域信息(/event/map_manager -&gt; map_segment_success)]</text><polygon fill="#181818" points="920.15,287.3411,913.15,290.1411,920.15,292.9411,917.35,290.1411" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="915.95" x2="1015.35" y1="290.1411" y2="290.1411"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="86.8" x="924.35" y="286.7416">区域更新(merge/split)</text><polygon fill="#181818" points="630.35,309.5692,623.35,312.3692,630.35,315.1692,627.55,312.3692" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="626.15" x2="911.75" y1="312.3692" y2="312.3692"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="86.8" x="634.55" y="308.9697">区域更新(merge/split)</text><polygon fill="#181818" points="302.05,331.7973,295.05,334.5973,302.05,337.3973,299.25,334.5973" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="297.85" x2="621.95" y1="334.5973" y2="334.5973"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="86.8" x="306.25" y="331.1978">区域更新(merge/split)</text><path d="M264.95,345.0973 L307.65,345.0973 L307.65,351.9253 L300.65,358.9253 L264.95,358.9253 L264.95,345.0973 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0499999999999998;"/><rect fill="none" height="36.0722" style="stroke:#000000;stroke-width:1.0499999999999998;" width="390.25" x="264.95" y="345.0973"/><text fill="#000000" font-family="sans-serif" font-size="9.1" font-weight="bold" lengthAdjust="spacing" textLength="11.2" x="275.45" y="356.2258">alt</text><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacing" textLength="159.6" x="318.15" y="355.3214">[当前地图是否已保存（地图达到上限不保存）]</text><polygon fill="#FF0000" points="614.25,372.7695,621.25,375.5695,614.25,378.3695,617.05,375.5695" style="stroke:#FF0000;stroke-width:0.6999999999999998;"/><line style="stroke:#FF0000;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="294.35" x2="618.45" y1="375.5695" y2="375.5695"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="36.4" x="299.25" y="372.17">保存地图</text><rect fill="#EEEEEE" height="2.1" style="stroke:#EEEEEE;stroke-width:0.6999999999999998;" width="1071" x="0" y="406.2835"/><line style="stroke:#000000;stroke-width:0.6999999999999998;" x1="0" x2="1071" y1="406.2835" y2="406.2835"/><line style="stroke:#000000;stroke-width:0.6999999999999998;" x1="0" x2="1071" y1="408.3835" y2="408.3835"/><rect fill="#EEEEEE" height="18.0281" style="stroke:#000000;stroke-width:1.3999999999999997;" width="49" x="511" y="397.9695"/><text fill="#000000" font-family="sans-serif" font-size="9.1" font-weight="bold" lengthAdjust="spacing" textLength="36.4" x="515.2" y="411.198">保存地图</text><polygon fill="#181818" points="614.25,436.8256,621.25,439.6256,614.25,442.4256,617.05,439.6256" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="294.35" x2="618.45" y1="439.6256" y2="439.6256"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="54.6" x="299.25" y="436.2261">获取当前地图</text><polygon fill="#181818" points="904.05,459.0537,911.05,461.8537,904.05,464.6537,906.85,461.8537" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="622.65" x2="908.25" y1="461.8537" y2="461.8537"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="217" x="627.55" y="458.4542">获取当前地图 /MapData/SegmentSlamMapDataDirect</text><polygon fill="#181818" points="630.35,481.2818,623.35,484.0818,630.35,486.8818,627.55,484.0818" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="626.15" x2="911.75" y1="484.0818" y2="484.0818"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="33.6" x="634.55" y="480.6823">mapId等</text><polygon fill="#181818" points="302.05,503.5099,295.05,506.3099,302.05,509.1099,299.25,506.3099" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="297.85" x2="621.95" y1="506.3099" y2="506.3099"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="33.6" x="306.25" y="502.9104">mapId等</text><polygon fill="#181818" points="614.25,525.7379,621.25,528.5379,614.25,531.3379,617.05,528.5379" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="294.35" x2="618.45" y1="528.5379" y2="528.5379"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="81.9" x="299.25" y="525.1384">获取已保存地图列表</text><polygon fill="#181818" points="904.05,547.966,911.05,550.766,904.05,553.566,906.85,550.766" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="622.65" x2="908.25" y1="550.766" y2="550.766"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="199.5" x="627.55" y="547.3665">获取已保存地图列表 /MapData/LocalMultiMapInfo</text><polygon fill="#181818" points="630.35,570.1941,623.35,572.9941,630.35,575.7941,627.55,572.9941" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="626.15" x2="911.75" y1="572.9941" y2="572.9941"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="273" x="634.55" y="569.5946">mapId、savePath、bkmapPath、iotMapInfo(如cloudMapId、md5)等</text><polygon fill="#181818" points="302.05,592.4222,295.05,595.2222,302.05,598.0222,299.25,595.2222" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="297.85" x2="621.95" y1="595.2222" y2="595.2222"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="273" x="306.25" y="591.8227">mapId、savePath、bkmapPath、iotMapInfo(如cloudMapId、md5)等</text><path d="M14,605.7222 L56.7,605.7222 L56.7,612.5502 L49.7,619.5502 L14,619.5502 L14,605.7222 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0499999999999998;"/><rect fill="none" height="92.4444" style="stroke:#000000;stroke-width:1.0499999999999998;" width="936.25" x="14" y="605.7222"/><text fill="#000000" font-family="sans-serif" font-size="9.1" font-weight="bold" lengthAdjust="spacing" textLength="11.2" x="24.5" y="616.8507">alt</text><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacing" textLength="138.6" x="67.2" y="615.9463">[地图超过最大数量 &amp; 自动更新开关打开]</text><polygon fill="#181818" points="614.25,633.3944,621.25,636.1944,614.25,638.9944,617.05,636.1944" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="294.35" x2="618.45" y1="636.1944" y2="636.1944"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="36.4" x="299.25" y="632.7949">删除地图</text><polygon fill="#181818" points="904.05,655.6225,911.05,658.4225,904.05,661.2225,906.85,658.4225" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="622.65" x2="908.25" y1="658.4225" y2="658.4225"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="146.3" x="627.55" y="655.0229">删除地图 /MapData/DeleteMulitiMap</text><line style="stroke:#000000;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="14" x2="950.25" y1="664.7225" y2="664.7225"/><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacing" textLength="138.6" x="17.5" y="673.5466">[地图超过最大数量 &amp; 自动更新开关关闭]</text><polygon fill="#181818" points="43.05,689.7666,36.05,692.5666,43.05,695.3666,40.25,692.5666" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="38.85" x2="293.65" y1="692.5666" y2="692.5666"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="36.4" x="47.25" y="689.1671">返回结果</text><polygon fill="#181818" points="614.25,716.8947,621.25,719.6947,614.25,722.4947,617.05,719.6947" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="294.35" x2="618.45" y1="719.6947" y2="719.6947"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="36.4" x="299.25" y="716.2952">保存地图</text><polygon fill="#181818" points="904.05,739.1228,911.05,741.9228,904.05,744.7228,906.85,741.9228" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="622.65" x2="908.25" y1="741.9228" y2="741.9228"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="140" x="627.55" y="738.5232">保存地图 /MapData/SaveMulitiMap</text><polygon fill="#181818" points="630.35,761.3508,623.35,764.1508,630.35,766.9508,627.55,764.1508" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="626.15" x2="911.75" y1="764.1508" y2="764.1508"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="92.4" x="634.55" y="760.7513">savePath、bkmapPath</text><polygon fill="#181818" points="302.05,783.5789,295.05,786.3789,302.05,789.1789,299.25,786.3789" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="297.85" x2="621.95" y1="786.3789" y2="786.3789"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="92.4" x="306.25" y="782.9794">savePath、bkmapPath</text><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="294.35" x2="323.75" y1="808.607" y2="808.607"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="323.75" x2="323.75" y1="808.607" y2="817.707"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="295.05" x2="323.75" y1="817.707" y2="817.707"/><polygon fill="#181818" points="302.05,814.907,295.05,817.707,302.05,820.507,299.25,817.707" style="stroke:#181818;stroke-width:0.6999999999999998;"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="318.5" x="299.25" y="805.2075">打包地图数据：地图裁剪、协议转换（地图、机器人坐标、充电桩坐标）、压缩</text><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="294.35" x2="323.75" y1="839.9351" y2="839.9351"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="323.75" x2="323.75" y1="839.9351" y2="849.0351"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="295.05" x2="323.75" y1="849.0351" y2="849.0351"/><polygon fill="#181818" points="302.05,846.2351,295.05,849.0351,302.05,851.8351,299.25,849.0351" style="stroke:#181818;stroke-width:0.6999999999999998;"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="54.6" x="299.25" y="836.5355">打包区域信息</text><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="294.35" x2="323.75" y1="871.2631" y2="871.2631"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="323.75" x2="323.75" y1="871.2631" y2="880.3631"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="295.05" x2="323.75" y1="880.3631" y2="880.3631"/><polygon fill="#181818" points="302.05,877.5631,295.05,880.3631,302.05,883.1631,299.25,880.3631" style="stroke:#181818;stroke-width:0.6999999999999998;"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="200.2" x="299.25" y="867.8636">比较当前地图与多地图列表（判断新增还是更新）</text><path d="M264.95,890.8631 L307.65,890.8631 L307.65,897.6912 L300.65,904.6912 L264.95,904.6912 L264.95,890.8631 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0499999999999998;"/><rect fill="none" height="88.4164" style="stroke:#000000;stroke-width:1.0499999999999998;" width="292.6" x="264.95" y="890.8631"/><text fill="#000000" font-family="sans-serif" font-size="9.1" font-weight="bold" lengthAdjust="spacing" textLength="11.2" x="275.45" y="901.9917">alt</text><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacing" textLength="44.1" x="318.15" y="901.0873">[地图已存在]</text><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="294.35" x2="323.75" y1="921.3354" y2="921.3354"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="323.75" x2="323.75" y1="921.3354" y2="930.4354"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="295.05" x2="323.75" y1="930.4354" y2="930.4354"/><polygon fill="#181818" points="302.05,927.6354,295.05,930.4354,302.05,933.2354,299.25,930.4354" style="stroke:#181818;stroke-width:0.6999999999999998;"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="249.9" x="299.25" y="917.9358">更新地图，如tuya_iot_map_update_files(失败重传，最大三次)</text><line style="stroke:#000000;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="264.95" x2="557.55" y1="936.7354" y2="936.7354"/><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacing" textLength="28.7" x="268.45" y="945.5595">[不存在]</text><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="294.35" x2="323.75" y1="964.5795" y2="964.5795"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="323.75" x2="323.75" y1="964.5795" y2="973.6795"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="295.05" x2="323.75" y1="973.6795" y2="973.6795"/><polygon fill="#181818" points="302.05,970.8795,295.05,973.6795,302.05,976.4795,299.25,973.6795" style="stroke:#181818;stroke-width:0.6999999999999998;"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="249.2" x="299.25" y="961.18">新建地图，如tuya_iot_map_upload_files(失败重传，最大三次)</text><path d="M264.95,989.0795 L307.65,989.0795 L307.65,995.9076 L300.65,1002.9076 L264.95,1002.9076 L264.95,989.0795 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0499999999999998;"/><rect fill="none" height="114.6725" style="stroke:#000000;stroke-width:1.0499999999999998;" width="685.3" x="264.95" y="989.0795"/><text fill="#000000" font-family="sans-serif" font-size="9.1" font-weight="bold" lengthAdjust="spacing" textLength="11.2" x="275.45" y="1000.2081">alt</text><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacing" textLength="36.4" x="318.15" y="999.3037">[上传失败]</text><polygon fill="#181818" points="614.25,1016.7517,621.25,1019.5517,614.25,1022.3517,617.05,1019.5517" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="294.35" x2="618.45" y1="1019.5517" y2="1019.5517"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="36.4" x="299.25" y="1016.1522">删除地图</text><polygon fill="#181818" points="904.05,1038.9798,911.05,1041.7798,904.05,1044.5798,906.85,1041.7798" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="622.65" x2="908.25" y1="1041.7798" y2="1041.7798"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="146.3" x="627.55" y="1038.3803">删除地图 /MapData/DeleteMulitiMap</text><line style="stroke:#000000;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="264.95" x2="950.25" y1="1048.0798" y2="1048.0798"/><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacing" textLength="36.4" x="268.45" y="1056.904">[上传成功]</text><polygon fill="#181818" points="614.25,1073.1239,621.25,1075.9239,614.25,1078.7239,617.05,1075.9239" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="294.35" x2="618.45" y1="1075.9239" y2="1075.9239"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="54.6" x="299.25" y="1072.5244">更新地图信息</text><polygon fill="#181818" points="904.05,1095.352,911.05,1098.152,904.05,1100.952,906.85,1098.152" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;" x1="622.65" x2="908.25" y1="1098.152" y2="1098.152"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="200.2" x="627.55" y="1094.7525">更新地图信息（cloudMapId，md5，保存时间等）</text><path d="M264.95,1113.552 L307.65,1113.552 L307.65,1120.3801 L300.65,1127.3801 L264.95,1127.3801 L264.95,1113.552 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0499999999999998;"/><rect fill="none" height="45.1722" style="stroke:#000000;stroke-width:1.0499999999999998;" width="167.3" x="264.95" y="1113.552"/><text fill="#000000" font-family="sans-serif" font-size="9.1" font-weight="bold" lengthAdjust="spacing" textLength="11.2" x="275.45" y="1124.6806">alt</text><text fill="#000000" font-family="sans-serif" font-size="7.7" font-weight="bold" lengthAdjust="spacing" textLength="44.1" x="318.15" y="1123.7762">[云端多地图]</text><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="294.35" x2="323.75" y1="1144.0242" y2="1144.0242"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="323.75" x2="323.75" y1="1144.0242" y2="1153.1242"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="295.05" x2="323.75" y1="1153.1242" y2="1153.1242"/><polygon fill="#181818" points="302.05,1150.3242,295.05,1153.1242,302.05,1155.9242,299.25,1153.1242" style="stroke:#181818;stroke-width:0.6999999999999998;"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="124.6" x="299.25" y="1140.6247">清理本地地图文件(bkmapPath)</text><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="294.35" x2="323.75" y1="1180.2523" y2="1180.2523"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="323.75" x2="323.75" y1="1180.2523" y2="1189.3523"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="295.05" x2="323.75" y1="1189.3523" y2="1189.3523"/><polygon fill="#181818" points="302.05,1186.5523,295.05,1189.3523,302.05,1192.1523,299.25,1189.3523" style="stroke:#181818;stroke-width:0.6999999999999998;"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="88.2" x="299.25" y="1176.8528">清理缩略图(savePath)</text><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="294.35" x2="323.75" y1="1211.5804" y2="1211.5804"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="323.75" x2="323.75" y1="1211.5804" y2="1220.6804"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="295.05" x2="323.75" y1="1220.6804" y2="1220.6804"/><polygon fill="#181818" points="302.05,1217.8804,295.05,1220.6804,302.05,1223.4804,299.25,1220.6804" style="stroke:#181818;stroke-width:0.6999999999999998;"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="161" x="299.25" y="1208.1809">发送DP点响应到云端（保存成功/失败）</text><polygon fill="#181818" points="43.05,1240.1084,36.05,1242.9084,43.05,1245.7084,40.25,1242.9084" style="stroke:#181818;stroke-width:0.6999999999999998;"/><line style="stroke:#181818;stroke-width:0.6999999999999998;stroke-dasharray:2.0,2.0;" x1="38.85" x2="293.65" y1="1242.9084" y2="1242.9084"/><text fill="#000000" font-family="sans-serif" font-size="9.1" lengthAdjust="spacing" textLength="36.4" x="47.25" y="1239.5089">返回结果</text><!--MD5=[8e0a7588a499f6a9a839a648498d79df]
+@startuml
+participant APP
+participant Network
+participant IOT_SDK
+participant APOS_SDK
+'participant SHM
+'participant AppSweeper
+participant MapManager
+
+
+'地图：当前地图、本地多地图、云端多地图
+
+'APP -> Network: 开始清扫
+'Network - -> AppSweeper: 开始清扫
+'group 实时地图
+'    MapManager -> SHM: 更新当前地图
+'    loop 3s
+'        Network -> SHM: 获取
+'        SHM - -> Network: 获取
+'        Network - -> Network: 对比是否更新
+'        alt 有更新
+'            Network - -> Network: 美化、裁剪、协议转换
+'            Network - -> APP: 更新地图
+'        end
+'    end
+'end
+'autonumber
+group 本地/云端多地图
+    IOT_SDK -> APOS_SDK: 订阅区域更新事件 /MapData/SegmentSucess
+
+    ' 保存地图
+    alt 用户主动触发
+        APP -[#red]> Network: 保存地图(运动中不允许保存，返回错误码)运动中定义待确认
+        APP -[#red]> Network: 区域更新(如修改房间名称)
+        Network -[#red]-> IOT_SDK: 保存地图
+'        APP -[#red]> Network: 修改地图名称
+    else 清扫完成且自动分区
+        MapManager - -> APOS_SDK: 区域更新(update)
+        APOS_SDK - -> IOT_SDK: 区域更新(update)
+        IOT_SDK - -> Network: 区域更新(update)
+        Network -[#red]-> IOT_SDK: 保存地图
+    else 算法更新区域信息(/event/map_manager -> map_segment_success)
+        MapManager - -> APOS_SDK: 区域更新(merge/split)
+        APOS_SDK - -> IOT_SDK: 区域更新(merge/split)
+        IOT_SDK - -> Network: 区域更新(merge/split)
+        '判断地图存在则更新
+        alt 当前地图是否已保存（地图达到上限不保存）
+            Network -[#red]-> IOT_SDK: 保存地图
+        end
+    end
+
+    == 保存地图 ==
+    Network -> IOT_SDK: 获取当前地图
+
+    IOT_SDK -> APOS_SDK: 获取当前地图 /MapData/SegmentSlamMapDataDirect
+    APOS_SDK - -> IOT_SDK: mapId等
+    IOT_SDK - -> Network: mapId等
+    Network -> IOT_SDK: 获取已保存地图列表
+    IOT_SDK -> APOS_SDK: 获取已保存地图列表 /MapData/LocalMultiMapInfo
+    APOS_SDK - -> IOT_SDK: mapId、savePath、bkmapPath、iotMapInfo(如cloudMapId、md5)等
+    IOT_SDK - -> Network: mapId、savePath、bkmapPath、iotMapInfo(如cloudMapId、md5)等
+    alt 地图超过最大数量 & 自动更新开关打开
+        Network -> IOT_SDK: 删除地图
+        IOT_SDK -> APOS_SDK: 删除地图 /MapData/DeleteMulitiMap
+    else 地图超过最大数量 & 自动更新开关关闭
+        Network - -> APP: 返回结果
+    end
+    Network -> IOT_SDK : 保存地图
+    IOT_SDK -> APOS_SDK : 保存地图 /MapData/SaveMulitiMap
+    APOS_SDK - -> IOT_SDK: savePath、bkmapPath
+    IOT_SDK - -> Network: savePath、bkmapPath
+    Network - -> Network: 打包地图数据：地图裁剪、协议转换（地图、机器人坐标、充电桩坐标）、压缩
+'    Network -> IOT_SDK: 获取全量共享内存区域信息(定制信息、区域、禁区)
+'    IOT_SDK -> APOS_SDK: 获取全量共享内存区域信息 /Areas/AreaJson
+    '开关、读、写
+    '待讨论
+'    Network - -> Network: 打包分区区域信息
+'    Network -> IOT_SDK: 获取禁区区域信息
+'    IOT_SDK -> APOS_SDK: 获取禁区区域信息 /Areas/ForbidAreaInfo
+    Network - -> Network: 打包区域信息
+    Network - -> Network: 比较当前地图与多地图列表（判断新增还是更新）
+    alt 地图已存在
+        Network - -> Network: 更新地图，如tuya_iot_map_update_files(失败重传，最大三次)
+    else 不存在
+        Network - -> Network: 新建地图，如tuya_iot_map_upload_files(失败重传，最大三次)
+    end
+    alt 上传失败
+        Network -> IOT_SDK: 删除地图
+        IOT_SDK -> APOS_SDK: 删除地图 /MapData/DeleteMulitiMap
+    else 上传成功
+        '{
+            '    "mapId": 123,
+            '    "iot_cloud_map_info" : "{\"k\":\"v\",\"k1\":123}"
+            '
+        ' }
+        Network -> IOT_SDK: 更新地图信息
+        IOT_SDK -> APOS_SDK: 更新地图信息（cloudMapId，md5，保存时间等）
+    end
+
+    alt 云端多地图
+        Network - -> Network: 清理本地地图文件(bkmapPath)
+    end
+    Network - -> Network: 清理缩略图(savePath)
+    Network - -> Network: 发送DP点响应到云端（保存成功/失败）
+    Network - -> APP: 返回结果
+'    == 删除地图 ==
+'    ' 删除地图
+'    APP -[#red]> Network: 删除地图
+'    Network -> IOT_SDK: 获取地图列表
+'    IOT_SDK -> APOS_SDK: 获取地图列表 /MapData/LocalMultiMapInfo
+'    APOS_SDK - -> IOT_SDK: mapId、savePath、bkmapPath、cloudMapId
+'    IOT_SDK - -> Network: mapId、savePath、bkmapPath、cloudMapId
+'
+'    alt 云端多地图
+'        Network - -> Network: 删除地图，如tuya_iot_map_delete
+'    end
+'    Network -> IOT_SDK: 删除地图
+'    IOT_SDK -> APOS_SDK: 删除地图 /MapData/DeleteMulitiMap
+'    Network - -> Network: 发送DP点响应到云端（删除成功/失败）
+'
+'    alt 需要更新地图列表（涂鸦的不需要）
+'        Network-> IOT_SDK: 获取地图列表
+'        IOT_SDK -> APOS_SDK: 获取地图列表 /MapData/LocalMultiMapInfo
+'        APOS_SDK - -> IOT_SDK: mapId、savePath、bkmapPath、cloudMapId
+'        IOT_SDK - -> Network: mapId、savePath、bkmapPath、cloudMapId
+'        Network - -> Network: 更新地图列表到云端
+'    end
+'    Network - -> APP: 返回结果
+'    == 切换地图 ==
+'    ' 切换地图
+'    APP -[#red]> Network: 切换地图
+'    alt 云端多地图
+'        Network - -> Network: 下载地图-与保存的地图的md5校验
+'        Network -> IOT_SDK: 应用路径地图
+'        IOT_SDK -> APOS_SDK: 应用路径地图 TODO接口待提供
+'        Network - -> Network: 清理临时文件
+'    else 本地多地图
+'        Network -> IOT_SDK: 获取地图列表
+'        IOT_SDK -> APOS_SDK: 获取地图列表 /MapData/LocalMultiMapInfo
+'        APOS_SDK - -> IOT_SDK: mapId、savePath、bkmapPath、cloudMapId
+'        IOT_SDK - -> Network: mapId、savePath、bkmapPath、cloudMapId
+'        Network -> IOT_SDK: 应用本地地图
+'        IOT_SDK -> APOS_SDK: 应用本地地图 TODO接口待提供
+'    end
+'    Network - -> Network: 发送DP点响应到云端（删除成功/失败）
+'    Network - -> APP: 返回结果
+'    == 重置当前地图 ==
+'    '重置当前地图
+'    APP -[#red]> Network: 重置地图
+'    Network -> IOT_SDK: 重置地图
+'    IOT_SDK -> APOS_SDK: 重置当前地图 TODO接口待提供
+'    Network - -> Network: 上报地图到云端
+'    Network - -> APP: 返回结果
+end
+
+'
+'multi_map.cpp 硬编码字段宏定义，响应封装，协议类型字段封账，208删掉
+
+
+'
+@enduml
+
+@startuml
+participant APP
+participant Network
+participant IOT_SDK
+participant APOS_SDK
+participant MapManager
+
+
+
+group 本地/云端多地图
+    IOT_SDK -> APOS_SDK: 订阅区域更新事件 /MapData/SegmentSucess
+
+    alt 用户主动触发
+        APP -[#red]> Network: 保存地图(运动中不允许保存，返回错误码)运动中定义待确认
+        APP -[#red]> Network: 区域更新(如修改房间名称)
+        Network -[#red]-> IOT_SDK: 保存地图
+    else 清扫完成且自动分区
+        MapManager - -> APOS_SDK: 区域更新(update)
+        APOS_SDK - -> IOT_SDK: 区域更新(update)
+        IOT_SDK - -> Network: 区域更新(update)
+        Network -[#red]-> IOT_SDK: 保存地图
+    else 算法更新区域信息(/event/map_manager -> map_segment_success)
+        MapManager - -> APOS_SDK: 区域更新(merge/split)
+        APOS_SDK - -> IOT_SDK: 区域更新(merge/split)
+        IOT_SDK - -> Network: 区域更新(merge/split)
+        alt 当前地图是否已保存（地图达到上限不保存）
+            Network -[#red]-> IOT_SDK: 保存地图
+        end
+    end
+
+    == 保存地图 ==
+    Network -> IOT_SDK: 获取当前地图
+
+    IOT_SDK -> APOS_SDK: 获取当前地图 /MapData/SegmentSlamMapDataDirect
+    APOS_SDK - -> IOT_SDK: mapId等
+    IOT_SDK - -> Network: mapId等
+    Network -> IOT_SDK: 获取已保存地图列表
+    IOT_SDK -> APOS_SDK: 获取已保存地图列表 /MapData/LocalMultiMapInfo
+    APOS_SDK - -> IOT_SDK: mapId、savePath、bkmapPath、iotMapInfo(如cloudMapId、md5)等
+    IOT_SDK - -> Network: mapId、savePath、bkmapPath、iotMapInfo(如cloudMapId、md5)等
+    alt 地图超过最大数量 & 自动更新开关打开
+        Network -> IOT_SDK: 删除地图
+        IOT_SDK -> APOS_SDK: 删除地图 /MapData/DeleteMulitiMap
+    else 地图超过最大数量 & 自动更新开关关闭
+        Network - -> APP: 返回结果
+    end
+    Network -> IOT_SDK : 保存地图
+    IOT_SDK -> APOS_SDK : 保存地图 /MapData/SaveMulitiMap
+    APOS_SDK - -> IOT_SDK: savePath、bkmapPath
+    IOT_SDK - -> Network: savePath、bkmapPath
+    Network - -> Network: 打包地图数据：地图裁剪、协议转换（地图、机器人坐标、充电桩坐标）、压缩
+    Network - -> Network: 打包区域信息
+    Network - -> Network: 比较当前地图与多地图列表（判断新增还是更新）
+    alt 地图已存在
+        Network - -> Network: 更新地图，如tuya_iot_map_update_files(失败重传，最大三次)
+    else 不存在
+        Network - -> Network: 新建地图，如tuya_iot_map_upload_files(失败重传，最大三次)
+    end
+    alt 上传失败
+        Network -> IOT_SDK: 删除地图
+        IOT_SDK -> APOS_SDK: 删除地图 /MapData/DeleteMulitiMap
+    else 上传成功
+        Network -> IOT_SDK: 更新地图信息
+        IOT_SDK -> APOS_SDK: 更新地图信息（cloudMapId，md5，保存时间等）
+    end
+
+    alt 云端多地图
+        Network - -> Network: 清理本地地图文件(bkmapPath)
+    end
+    Network - -> Network: 清理缩略图(savePath)
+    Network - -> Network: 发送DP点响应到云端（保存成功/失败）
+    Network - -> APP: 返回结果
+end
+
+
+
+@enduml
+
+PlantUML version 1.2022.5(Sat Apr 30 18:55:52 CST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

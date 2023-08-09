@@ -1,0 +1,23 @@
+@startuml
+actor User
+participant OnBoard
+participant Network
+'participant AppSweeper
+
+User -> OnBoard: 按键配网
+OnBoard --> OnBoard: 配网灯显、语音
+OnBoard --> Network: 开始配网事件(network_config)
+Network --> Network: 进程重启、进入AP模式
+group 检测连接AP设备
+    Network --> Network: 开启线程
+    loop 当前处于配网AP模式
+        Network --> Network: 检测当前连接AP设备(iw dev p2p0 station dump)
+        alt 有新设备
+            Network -> OnBoard: 播报手机与扫地机连接成功语音
+        end
+    end
+    Network --> Network: 结束线程
+end
+Network --> Network: 切换STA模式进行配网
+
+@enduml

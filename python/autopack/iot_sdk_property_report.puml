@@ -21,16 +21,15 @@ participant APOS_SDK
 participant Protocol_Interface
 participant AppSweeper
 
-autonumber
+'autonumber
 Network -> Network: 进程启动
 Network -> PropertyManager: 初始化
 PropertyManager -> APOS_SDK: 初始化
 PropertyManager --> PropertyManager: 开启生产快数据线程T1
 PropertyManager --> PropertyManager: 开启生产慢数据线程T2
-PropertyManager --> PropertyManager: 开启消费数据线程T3
-PropertyManager -> APOS_SDK: 订阅数据更新主题 /FileChange/FileAttrChange
-APOS_SDK -> Protocol_Interface: 订阅数据更新主题 /event/config_file_change -> config_file_attribute_change
-AppSweeper -> Protocol_Interface: 订阅数据更新主题 /event/config_file_change -> config_file_attribute_change
+PropertyManager -> APOS_SDK: 订阅数据更新主题/FileChange/FileAttrChange
+APOS_SDK -> Protocol_Interface: 订阅数据更新主题\n /event/config_file_change -> \nconfig_file_attribute_change
+AppSweeper -> Protocol_Interface: 订阅数据更新主题\n /event/config_file_change -> \nconfig_file_attribute_change
 
 'PropertyManager -> PropertyManager: 开启线程1，轮询配置文件数据状态
 'PropertyManager -> APOS_SDK: 订阅数据更新主题
