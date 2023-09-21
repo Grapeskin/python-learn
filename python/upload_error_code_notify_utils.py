@@ -22,15 +22,17 @@ cookies = {
     'fast-sid': '40apeiVpewKnSJv0poTEUKKBfLnXvpgr',
     '3b0beffbab3dcc336bd263560ac7939a': '%5B%22smart_menu_product_deviceMsg%22%2C%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceMsgCtrl%22%2C%22smart_menu_product_deviceLog%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_appserviceAppList%22%2C%22smart_menu_product_deviceFirmwareManage%22%2C%22smart_menu_product_deviceDetail%22%5D',
     'navbarShowExpand': '1',
-    '_tpmSeqId': 'seq_id_993b047459489ede',
     'router-prefix': '',
-    '3759e392f25da605e49643aa75517913': '%5B%22smart_menu_i18n_product%22%2C%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceFirmwareManage%22%2C%22smart_menu_product_deviceMsg%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_appui_list%22%2C%22smart_menu_ReportStatistics%22%2C%22smart_menu_product_deviceLog%22%5D',
-    '_tpmSid': 'd9b48e296c2e2a8e718cacdda4858bd7d292953237645e1f5f15d79e6bffc264',
-    's-sid': 's:510f23ed-510c-473d-86cb-8e66243dbc26.nX7WgRrJjxQZ4ldvRQIKe59P/VALlsnSvBj4ka6OGY4',
-    'csr-test-csrf-token': 'uyrMziyo-0Vw-rhtFQBOGmCXX4vRdNJSNR4I',
-    'e7078bd3ea5ed1f8e61b84d686fb92bf': '%5B%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceMsg%22%2C%22smart_menu_i18n_product%22%5D',
-    'csrf-token': 'YQzmsrUD-FT1e_TDxTzJkEUcbk4ym5vHPU1I',
-    'csrf-token.sig': 'uPD2cybe3IqtueQYP-d-aHTDYbo',
+    'e7078bd3ea5ed1f8e61b84d686fb92bf': '%5B%22smart_menu_product_deviceMsg%22%2C%22smart_menu_product_dev%22%2C%22smart_menu_i18n_product%22%5D',
+    '3fd2fb499694a20ff69bb874ff51ba6a': '%5B%22smart_menu_i18n_product%22%2C%22smart_page_exp_intro%22%2C%22smart_menu_product_dev%22%5D',
+    '9b1a6dd057338832b7c1452c9614ea87': '%5B%22smart_menu_product_dev%22%5D',
+    '_tpmSeqId': 'seq_id_9f000751877e873b',
+    '_tpmSid': 'a01c9214d2190eae6f0a218b2970671ae0d7aebd2c5799d056e7cc70d74f3a27',
+    's-sid': 's:9965a899-31f9-4e96-98e6-3b870481bf65.MpDHxu2NGQaTQcGozM9e/1Rrl6W2SC4II/SmmkXCXk4',
+    'csr-test-csrf-token': 'OfBQ4kwK-hI4deRyNT4S61zw9NLmBg3sDwRE',
+    '3759e392f25da605e49643aa75517913': '%5B%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceLog%22%2C%22smart_page_exp_intro%22%2C%22smart_menu_account%22%2C%22smart_menu_i18n_product%22%2C%22smart_menu_product_deviceMsg%22%2C%22smart_menu_developer_platform_home%22%2C%22smart_menu_cloud_develop_data_message%22%5D',
+    'csrf-token': 'G1guddi4-_c1uYJqltN0CC-5hzaYuM87Pk7A',
+    'csrf-token.sig': 'n00dIVyxk8eC-6Jj47949NYkyvE',
 }
 
 headers = {
@@ -40,11 +42,11 @@ headers = {
     'cache-control': 'no-cache',
     'content-type': 'application/json; charset=UTF-8',
     # Requests sorts cookies= alphabetically
-    # 'cookie': 'gTyPlatLang=zh; _tpmGuid=TY-a439153cfa8f6057; locale=zh; tz=8; notice_preferences=2:; notice_gdpr_prefs=0,1,2:; operation_guide_flag=1; Hm_lvt_3be32b3bb5351c17025006d025cf42e7=1670223638; projectCode=; d41d8cd98f00b204e9800998ecf8427e=%5B%5D; 9f53cc1f59328e4c644eed5fa7ff64bc=%5B%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceMsg%22%2C%22smart_menu_i18n_product%22%2C%22smart_menu_ReportStatistics%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_product_deviceLog%22%2C%22smart_menu_ReportTest%22%5D; fast-sid=40apeiVpewKnSJv0poTEUKKBfLnXvpgr; 3b0beffbab3dcc336bd263560ac7939a=%5B%22smart_menu_product_deviceMsg%22%2C%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceMsgCtrl%22%2C%22smart_menu_product_deviceLog%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_appserviceAppList%22%2C%22smart_menu_product_deviceFirmwareManage%22%2C%22smart_menu_product_deviceDetail%22%5D; navbarShowExpand=1; _tpmSeqId=seq_id_993b047459489ede; router-prefix=; 3759e392f25da605e49643aa75517913=%5B%22smart_menu_i18n_product%22%2C%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceFirmwareManage%22%2C%22smart_menu_product_deviceMsg%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_appui_list%22%2C%22smart_menu_ReportStatistics%22%2C%22smart_menu_product_deviceLog%22%5D; _tpmSid=d9b48e296c2e2a8e718cacdda4858bd7d292953237645e1f5f15d79e6bffc264; s-sid=s:510f23ed-510c-473d-86cb-8e66243dbc26.nX7WgRrJjxQZ4ldvRQIKe59P/VALlsnSvBj4ka6OGY4; csr-test-csrf-token=uyrMziyo-0Vw-rhtFQBOGmCXX4vRdNJSNR4I; e7078bd3ea5ed1f8e61b84d686fb92bf=%5B%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceMsg%22%2C%22smart_menu_i18n_product%22%5D; csrf-token=YQzmsrUD-FT1e_TDxTzJkEUcbk4ym5vHPU1I; csrf-token.sig=uPD2cybe3IqtueQYP-d-aHTDYbo',
-    'csrf-token': 'Wbw1XzQ8-zT5iTwsUw1CZMdSX-0GLeqtbU3M',
+    # 'cookie': 'gTyPlatLang=zh; _tpmGuid=TY-a439153cfa8f6057; locale=zh; tz=8; notice_preferences=2:; notice_gdpr_prefs=0,1,2:; operation_guide_flag=1; Hm_lvt_3be32b3bb5351c17025006d025cf42e7=1670223638; projectCode=; d41d8cd98f00b204e9800998ecf8427e=%5B%5D; 9f53cc1f59328e4c644eed5fa7ff64bc=%5B%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceMsg%22%2C%22smart_menu_i18n_product%22%2C%22smart_menu_ReportStatistics%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_product_deviceLog%22%2C%22smart_menu_ReportTest%22%5D; fast-sid=40apeiVpewKnSJv0poTEUKKBfLnXvpgr; 3b0beffbab3dcc336bd263560ac7939a=%5B%22smart_menu_product_deviceMsg%22%2C%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceMsgCtrl%22%2C%22smart_menu_product_deviceLog%22%2C%22smart_menu_product_deviceDebugging%22%2C%22smart_menu_appserviceAppList%22%2C%22smart_menu_product_deviceFirmwareManage%22%2C%22smart_menu_product_deviceDetail%22%5D; navbarShowExpand=1; router-prefix=; e7078bd3ea5ed1f8e61b84d686fb92bf=%5B%22smart_menu_product_deviceMsg%22%2C%22smart_menu_product_dev%22%2C%22smart_menu_i18n_product%22%5D; 3fd2fb499694a20ff69bb874ff51ba6a=%5B%22smart_menu_i18n_product%22%2C%22smart_page_exp_intro%22%2C%22smart_menu_product_dev%22%5D; 9b1a6dd057338832b7c1452c9614ea87=%5B%22smart_menu_product_dev%22%5D; _tpmSeqId=seq_id_9f000751877e873b; _tpmSid=a01c9214d2190eae6f0a218b2970671ae0d7aebd2c5799d056e7cc70d74f3a27; s-sid=s:9965a899-31f9-4e96-98e6-3b870481bf65.MpDHxu2NGQaTQcGozM9e/1Rrl6W2SC4II/SmmkXCXk4; csr-test-csrf-token=OfBQ4kwK-hI4deRyNT4S61zw9NLmBg3sDwRE; 3759e392f25da605e49643aa75517913=%5B%22smart_menu_product_dev%22%2C%22smart_menu_product_deviceLog%22%2C%22smart_page_exp_intro%22%2C%22smart_menu_account%22%2C%22smart_menu_i18n_product%22%2C%22smart_menu_product_deviceMsg%22%2C%22smart_menu_developer_platform_home%22%2C%22smart_menu_cloud_develop_data_message%22%5D; csrf-token=G1guddi4-_c1uYJqltN0CC-5hzaYuM87Pk7A; csrf-token.sig=n00dIVyxk8eC-6Jj47949NYkyvE',
+    'csrf-token': 'S7TiC7Oc-Ywfrmaw33jY0czNrJwu62gGNJgs',
     'origin': 'https://iot.tuya.com',
     'pragma': 'no-cache',
-    'referer': 'https://iot.tuya.com/pmg/list',
+    'referer': 'https://iot.tuya.com/pmg/step?id=rctih3aredueiuea',
     'sec-ch-ua': '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': '"Windows"',
@@ -460,6 +462,17 @@ def update_fault_dp_content(dp_id: int = 28):
 ./event_tool -p -t /event/robot_monitor -e mop_out -d {}
 ./event_tool -p -t /event/robot_monitor -e mop_in -d {}
 """
+
+def get_protocol_list():
+    json_data = {
+        'productId': 'rctih3aredueiuea',
+    }
+
+    response = requests.post('https://iot.tuya.com/micro-app/pmg/api/product/schemaGetStd/V2', cookies=cookies,
+                             headers=headers, json=json_data)
+
+
+
 if __name__ == '__main__':
     """
     0. 更新请求header、cookies
@@ -469,15 +482,17 @@ if __name__ == '__main__':
     4. 新增故障、消息文案多语言
     """
     product_key = "ayvpa76vrvcpqm4r"
-    # error_dp_id = 156
-    error_dp_id = 28
-    # error_dp_id = 101
-    is_extend = True
-    # 消息推送128
-    message_report()
-    # 扩展故障101
-    update_fault_dp_content(101)
-    error_report(101, True)
-    # 普通故障28
-    # update_fault_dp_content(28)
-    error_report(28, False)
+    # # error_dp_id = 156
+    # error_dp_id = 28
+    # # error_dp_id = 101
+    # is_extend = True
+    # # 消息推送128
+    # message_report()
+    # # 扩展故障101
+    # update_fault_dp_content(101)
+    # error_report(101, True)
+    # # 普通故障28
+    # # update_fault_dp_content(28)
+    # error_report(28, False)
+
+    

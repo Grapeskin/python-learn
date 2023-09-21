@@ -1,0 +1,50 @@
+@startuml
+
+participant APP
+participant Cloud
+participant NP
+participant Ota_Thread
+participant TaskManager
+participant Updater
+
+autonumber
+NP --> NP: 启动
+NP --> Ota_Thread: 启动OTA线程 T1
+group OTA线程
+    alt 非配网状态 && 有网络 && 非OTA状态
+        Ota_Thread --> Ota_Thread: 获取升级成功标志位 /data/cfg/update_complete
+        alt 存在
+            Ota_Thread -[#red]-> Cloud: 升级成功(/v1/ota/status/update)
+        end
+        Ota_Thread -[#red]-> Cloud: 获取是否有升级版本(/v1/ota/version/check)
+        Ota_Thread <-- Cloud: 是否有升级版本
+        alt 存在
+            Ota_Thread --> Ota_Thread: 新版本是否已经下载
+            alt 未下载 || 文件不对
+                Ota_Thread --> Ota_Thread: 下载新版本固件
+                Ota_Thread -[#red]-> Cloud: 固件已下载(/v1/ota/status/update)
+            end
+        else 不存在
+            Ota_Thread -[#red]-> Cloud: 上报当前版本(/v1/ota/status/update)
+        end
+    end
+    Ota_Thread --> Ota_Thread: 休眠10s
+end
+
+loop
+    APP -> Cloud: 拉取新版本
+    APP <-- Cloud: 是否有已下载的新版本
+end
+
+APP ->NP: 开始升级
+NP -> TaskManager: 开始升级
+TaskManager -> Updater: 开始升级
+Updater --> Updater: 开始升级
+alt 升级失败
+    Updater --> NP: 升级失败
+    NP -[#red]-> Cloud: 升级失败(/v1/ota/status/update)
+else 升级成功
+    Updater --> Updater: 写入升级成功标志位(/data/cfg/update_complete
+    NP --> NP: 机器重启，进程重启
+end
+@enduml
