@@ -135,5 +135,5 @@ dmypy.json
 test.html
 test_url.txt
 
-.vscode
+/.vscode
 vcpkg
